@@ -1,0 +1,16 @@
+{
+  "name": "deriv-api-developers-cypress",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@xstate/test": "^0.5.0",
+    "cypress": "^9.0.0",
+    "cypress-audit": "^1.1.0",
+    "cypress-image-snapshot": "^4.0.1",
+    "xstate": "^4.26.0"
+  }
+}
