@@ -171,6 +171,9 @@ CookieStorage.prototype = {
     },
 };
 
+const appId = () => window.localStorage.getItem("config.app_id") || 11780;
+
+
 const loginUrl = ({ language }) => {
     const server_url = LocalStore.get('config.server_url');
     const signup_device_cookie = new CookieStorage('signup_device');
@@ -181,22 +184,33 @@ const loginUrl = ({ language }) => {
         date_first_contact ? `&date_first_contact=${date_first_contact}` : ''
     }`;
     const getOAuthUrl = () => {
-        return `https://oauth.deriv.com/oauth2/authorize?app_id=${getAppId()}&l=${language}${marketing_queries}&brand=deriv`;
+        return `https://oauth.deriv.com/oauth2/authorize?app_id=${appId()}&l=${language}${marketing_queries}&brand=deriv`;
     };
 
     if (server_url && /qa/.test(server_url)) {
-        return `https://${server_url}/oauth2/authorize?app_id=${getAppId()}&l=${language}${marketing_queries}&brand=deriv`;
+        return `https://${server_url}/oauth2/authorize?app_id=${appId()}&l=${language}${marketing_queries}&brand=deriv`;
     }
 
-    if (getAppId() === 11780) {
+if (window.localStorage.getItem("config.app_id") === 11780) {
         return getOAuthUrl();
     }
     return new URL(getOAuthUrl()).href;
 };
 
 const registerLoginButton = document.getElementById('registerLogin');
+// if (registerLoginButton) {
+//     registerLoginButton.addEventListener('click', () => {
+//         redirectToLogin(false, 'EN');
+//     });
+// };
+
+// add temporary moveToMailDummy function that redirects to /mail-dummy
+const moveToMailDummy = () => {
+    window.location.href = `http://${window.location.host}/mail-dummy`;
+};
+
 if (registerLoginButton) {
     registerLoginButton.addEventListener('click', () => {
-        redirectToLogin(false, 'EN');
+        moveToMailDummy();
     });
-};
+}
