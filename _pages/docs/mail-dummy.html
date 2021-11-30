@@ -66,6 +66,7 @@ permalink: mail-dummy/
 	position:absolute;
 	left:821.25px;
 	top:641.25px;
+	z-index: 99999;
 }
 .343_4929 { 
 	border:1.125px solid rgba(150.9600019454956, 150.9600019454956, 150.9600019454956, 1);
@@ -83,12 +84,22 @@ permalink: mail-dummy/
     .preview > * {
       
     }
-    </style></head><body><div class="e343_4923">
+    </style></head><body><div onclick="moveToAppRegistration()" class="e343_4923">
   <div class="e343_4924"></div>
   <div class="e343_4925"></div>
   <div class="e343_4926"></div>
   <div class="e343_4927"></div>
   <div class="e343_4928"></div>
-  <div role="link" href="/docs/app-registration/" class="e343_4929"></div>
-</div></body></html>
+  <div class="e343_4929"></div>
+</div>
+<script>	
+const moveToAppRegistration = () => {
+	const link = document.querySelector('.e343_4923');
+	link.addEventListener('click', (e) => {
+		e.preventDefault();
+		window.location.href = '/docs/app-registration/';
+	});
+}
+</script>
+</body></html>
 {% endraw %}
