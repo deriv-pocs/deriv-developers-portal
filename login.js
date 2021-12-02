@@ -171,7 +171,7 @@ CookieStorage.prototype = {
     },
 };
 
-const appId = () => window.localStorage.getItem("config.app_id") || 11780;
+const appId = () => window.localStorage.getItem("config.app_id");
 
 
 const loginUrl = ({ language }) => {
@@ -198,19 +198,41 @@ if (window.localStorage.getItem("config.app_id") === 11780) {
 };
 
 const registerLoginButton = document.getElementById('registerLogin');
-// if (registerLoginButton) {
-//     registerLoginButton.addEventListener('click', () => {
-//         redirectToLogin(false, 'EN');
-//     });
-// };
-
-// add temporary moveToMailDummy function that redirects to /mail-dummy
-const moveToMailDummy = () => {
-    window.location.href = `http://${window.location.host}/mail-dummy`;
-};
-
 if (registerLoginButton) {
     registerLoginButton.addEventListener('click', () => {
-        moveToMailDummy();
+        redirectToLogin(false, 'EN');
     });
-}
+};
+
+
+const getSocketURL = () => {
+    let active_loginid_from_url;
+    const search = window.location.search;
+    if (search) {
+        const params = new URLSearchParams(document.location.search.substring(1));
+        active_loginid_from_url = params.get('acct1');
+    }
+
+    const loginid = window.localStorage.getItem('active_loginid') || active_loginid_from_url;
+    const is_real = loginid && !/^VRT/.test(loginid);
+    const server = is_real ? 'green' : 'blue';
+    const server_url = `${server}.binaryws.com`;
+    return server_url;
+};
+
+
+const generateDerivApiInstance = () => {
+    const socket_url = `wss://${getSocketURL()}/websockets/v3?app_id=1021&l=en&brand=deriv`;
+    const deriv_socket = new WebSocket(socket_url);
+    const deriv_api = new DerivAPIBasic({
+        connection: deriv_socket,
+    });
+    return deriv_api;
+};
+
+// console.log(getSocketURL());
+
+const myapi = generateDerivApiInstance();
+console.log({myapi});
+// const basic = myapi.basic;
+// basic.ping().then(console.log);
