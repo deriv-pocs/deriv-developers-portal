@@ -214,7 +214,7 @@ const getSocketURL = () => {
 
 
 const generateDerivApiInstance = () => {
-    const socket_url = `wss://${getSocketURL()}/websockets/v3?app_id=1021&l=en&brand=deriv`;
+    const socket_url = `wss://${getSocketURL()}/websockets/v3?app_id=1027&l=en&brand=deriv`;
     const deriv_socket = new WebSocket(socket_url);
     const deriv_api = new DerivAPIBasic({
         connection: deriv_socket,
