@@ -197,14 +197,6 @@ if (window.localStorage.getItem("config.app_id") === 11780) {
     return new URL(getOAuthUrl()).href;
 };
 
-const registerLoginButton = document.getElementById('registerLogin');
-if (registerLoginButton) {
-    registerLoginButton.addEventListener('click', () => {
-        redirectToLogin(false, 'EN');
-    });
-};
-
-
 const getSocketURL = () => {
     let active_loginid_from_url;
     const search = window.location.search;
@@ -229,10 +221,45 @@ const generateDerivApiInstance = () => {
     });
     return deriv_api;
 };
-
-// console.log(getSocketURL());
-
 const myapi = generateDerivApiInstance();
-console.log({myapi});
-// const basic = myapi.basic;
-// basic.ping().then(console.log);
+const { createMachine, actions, interpret } = XState;
+const appRegistrationMachine = createMachine({
+    id: 'login',
+    initial: 'loggedOut',
+    states: {
+        loggedOut: {
+            on: {
+                LOGIN: 'loggedIn'
+            }
+        },
+        loggedIn: {
+            on: {
+                LOGOUT: 'loggedOut'
+            }
+        }
+    }
+});
+let sessionState = sessionStorage.getItem('app_registration_state') || 'loggedOut';
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token1');
+if (token) {
+    sessionStorage.setItem('token1', token);
+    sessionStorage.setItem('app_registration_state', 'loggedIn');
+    sessionState = 'loggedIn';
+}
+function activate(state) {
+  const joinedState = state.toStrings().join(' ');
+  const elApp = document.getElementById('app-registration-machine');
+  if (elApp) elApp.dataset.state = joinedState;
+}
+const interpreter = XState
+  .interpret(appRegistrationMachine)
+  .onTransition(activate)
+  .start(sessionState);
+const { send } = interpreter;
+const registerLoginButton = document.getElementById('registerLogin');
+if (registerLoginButton) {
+    registerLoginButton.addEventListener('click', () => {
+    redirectToLogin(false, 'EN');
+    });
+};
