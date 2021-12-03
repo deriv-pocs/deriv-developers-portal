@@ -2,8 +2,7 @@
 layout: documentation
 permalink: docs/app-registration/
 ---
-
-<div class=login-container>
+<div id="app-registration-machine" class=login-container>
     <div class=login-image>
         <img src="{{ branch }}/img/login.svg" width="128px" height="128px"/>
     </div>
@@ -44,3 +43,42 @@ permalink: docs/app-registration/
         }
     }
 </style>
+
+<script>
+    const { createMachine, actions, interpret } = XState;
+
+const appRegistrationMachine = createMachine({
+    id: 'login',
+    initial: 'loggedOut',
+    states: {
+        loggedOut: {
+            on: {
+                LOGIN: 'loggedIn'
+            }
+        },
+        loggedIn: {
+            on: {
+                LOGOUT: 'loggedOut'
+            }
+        }
+    }
+});
+
+// set data state html attribute to div with id app-registration
+const state = appRegistrationMachine.initialState;
+console.log(state.value);
+const elApp = document.getElementById('app-registration-machine');
+function activate(state) {
+  elApp.dataset.state = state.toStrings().join(' ');
+
+  document.querySelectorAll("[data-active]").forEach(el => {
+    el.removeAttribute("data-active");
+  });
+
+  document.querySelectorAll(`[data-show~="${state.value}"]`).forEach(el => {
+    el.setAttribute("data-active", true);
+  });
+}
+activate(state);
+console.log(elApp);
+</script>
