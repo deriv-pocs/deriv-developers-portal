@@ -133,7 +133,7 @@ permalink: docs/app-registration/
                             </div>
                         </fieldset>
                         <div>
-                            <input id="use_oauth" type="checkbox" />
+                            <input id="expand_form" type="checkbox" />
                             <label for="admin-scope">I'd like to use OAuth or monetise my app</label>
                         </div>
                         <div class="expandable_form">
@@ -211,22 +211,22 @@ permalink: docs/app-registration/
         display: none;
     }
 
-    [data-state="formUnfolded"] .expandable_form {
+    [data-state~="logged_in.unfolded_form"] .expandable_form {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    [data-state="formFolded"] .expandable_form {
+    [data-state~="logged_in.folded_form"] .expandable_form {
         display: none;
     }
 
-    #expandableForm {
+    .expandable_form {
         display: none;
     }
 
-    [data-state="logged_out"] .app-registration-login {
+    [data-state~="logged_out"] .app-registration-login {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -237,7 +237,7 @@ permalink: docs/app-registration/
         display: none;
     }
 
-    [data-state="logged_in"] .app-registration-logged-in {
+    [data-state~="logged_in"] .app-registration-logged-in {
         display: flex;
         flex-direction: column;
         align-items: center;

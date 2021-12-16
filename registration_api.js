@@ -236,6 +236,7 @@ const appRegistrationMachine = createMachine({
             id: "logged_in",
             on: {
                 LOGOUT: "#logged_out",
+                TOGGLE_FORM: "#unfolded_form",
             },
             states: {
                 history: {
@@ -271,7 +272,10 @@ if (token) {
 function activate(state) {
     const joinedState = state.toStrings().join(' ');
     const elApp = document.getElementById('app-registration-machine');
-    if (elApp) elApp.dataset.state = joinedState;
+    if (elApp) {
+        elApp.dataset.state = joinedState;
+        elApp.setAttribute("data-state", joinedState);
+    }
 }
 
 const interpreter = XState
@@ -279,31 +283,17 @@ const interpreter = XState
     .onTransition(activate)
     .start(sessionState);
 
-// const toggleFormInterpreter = XState
-//   .interpret(toggleFormMachine)
-//   .onTransition(activate)
-//   .start('folded_form');
-
 const { send } = interpreter;
 
-// const { sendToggleForm } = toggleFormInterpreter;
-
-// console.log(document.getElementById('frmNewApplication'));
-
-// const validateFormField = () => {
-//     const form_fields = document.querySelectorAll("[id^='application-']");
-//     const form_fields_array = Object.values(form_fields);
-//     console.log(form_fields_array);
-//     form_fields_array.forEach(field => {
-//         field.addEventListener('blur', () => {
-//             console.log(field.id);
-//         });
-//     })
-
-//     //const form_elements_array = Object.values(registerForm);
-// }
-
-// validateFormField()
+const unfolded_form_checkbox = document.getElementById('expand_form');
+if (unfolded_form_checkbox) {
+    unfolded_form_checkbox.addEventListener('change', () => {
+        send({
+            "type": "TOGGLE_FORM"
+          });
+    });
+    // unfolded_form_checkbox.removeEventListener('click', toggleForm());
+}
 
 const registerLoginButton = document.getElementById('registerLogin');
 if (registerLoginButton) {
