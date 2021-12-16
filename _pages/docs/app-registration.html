@@ -24,74 +24,6 @@ permalink: docs/app-registration/
             </div>
         </fieldset>
         <div class="horizontal-separator-grey"></div>
-        <!-- <form id="frmNewApplication">
-            <div class="form-content">
-                <fieldset>
-                    <h2 id="form-title" class="doc-sub-title">Register your app</h2>
-                    <div class="input-wrapper first">
-                        <p class="helper-label">Name (Required)</p>
-                        <input id="application-name" type="text" maxlength="48" placeholder="Name (Required)" />
-                    </div>
-                    <div class="input-wrapper">
-                        <p class="helper-label">Redirect URL (Required)</p>
-                        <input id="application-redirect_uri" type="text" maxlength="255"
-                            placeholder="Redirect URL (Required)" />
-                    </div>
-                    <div class="input-wrapper">
-                        <p class="helper-label">Verification URL</p>
-                        <input id="application-verification_uri" type="text" maxlength="255"
-                            placeholder="Verification URL" />
-                    </div>
-                    <div class="input-wrapper">
-                        <p class="helper-label">Homepage URL</p>
-                        <input id="application-homepage" type="text" maxlength="255" placeholder="Homepage URL" />
-                    </div>
-                    <div class="input-wrapper">
-                        <p class="helper-label">Github URL</p>
-                        <input id="application-github" type="text" maxlength="255" placeholder="Github URL" />
-                    </div>
-                    <div class="input-wrapper">
-                        <p class="helper-label">Appstore URL</p>
-                        <input id="application-appstore" type="text" maxlength="255" placeholder="Appstore URL" />
-                    </div>
-                    <div class="input-wrapper">
-                        <p class="helper-label">Google Play URL</p>
-                        <input id="application-googleplay" type="text" maxlength="255" placeholder="Google Play URL" />
-                    </div>
-                    <div class="input-wrapper">
-                        <p class="helper-label">Markup Percentage</p>
-                        <input id="application-app_markup_percentage" type="text" maxlength="5"
-                            placeholder="Markup percentage" class="last" />
-                        <p class="helper-text">minimum 0.00 and maximum 5.00</p>
-                    </div>
-                </fieldset>
-                <div class="scopes">
-                    <p class="bold scopes-field">Scopes:</p>
-                    <div class="scopes-field">
-                        <input id="read-scope" type="checkbox" value="read" />
-                        <label for="read-scope">Read: View account activity</label>
-                    </div>
-                    <div class="scopes-field">
-                        <input id="trade-scope" type="checkbox" value="trade" />
-                        <label for="trade-scope">Trade: Buy and sell contracts</label>
-                    </div>
-                    <div class="scopes-field">
-                        <input id="trading_information-scope" type="checkbox" value="trading_information" />
-                        <label for="trading_information-scope">Trading Information: View trading and balance
-                            information</label>
-                    </div>
-                    <div class="scopes-field">
-                        <input id="payments-scope" type="checkbox" value="payments" />
-                        <label for="payments-scope">Payments: Cashier (Deposit, Withdraw)</label>
-                    </div>
-                    <div class="scopes-field mb-0">
-                        <input id="admin-scope" type="checkbox" value="admin" />
-                        <label for="admin-scope">Admin: API token management, application management</label>
-                    </div>
-                </div>
-                <button class="primary-btn-submit" id="btnRegister">Register</button>
-            </div>
-        </form> -->
         <div class="horizontal-separator-grey"></div>
         <div class="request-container">
             <div class="table-wrapper">
@@ -127,9 +59,14 @@ permalink: docs/app-registration/
                     <div class="form-content">
                         <fieldset>
                             <h2 id="form-title" class="doc-sub-title">Register your app</h2>
-                            <div class="input-wrapper first">
-                                <p class="helper-label">Name (Required)</p>
-                                <input id="application-name" type="text" maxlength="48" placeholder="Name (Required)" />
+                            <div class="api-token-wrapper">
+                                <input type="text" id="api-token-input" placeholder="API Token" />
+                                <p class="helper-text">max. 50 characters</p>
+                                <div class="api-token-warning">
+                            </div>
+                            <div class="first">
+                                <input type="text" id="app_name" name="app_name" placeholder="Name"
+                                    pattern="^[\w\s-]{1,48}$" required />
                             </div>
                         </fieldset>
                         <div>
@@ -138,37 +75,43 @@ permalink: docs/app-registration/
                         </div>
                         <div class="expandable_form">
                             <fieldset>
-                                <div class="input-wrapper">
-                                    <p class="helper-label">Redirect URL (Required)</p>
-                                    <input id="application-redirect_uri" type="text" maxlength="255"
-                                        placeholder="Redirect URL (Required)" />
+                                <div class="input-container form-header-container">
+                                    <div>
+                                        <h4 class="register-form-header">Markup</h4>
+                                        <img src="{{ branch }}/img/info-icon.svg" class="info-icon" />
+                                    </div>
                                 </div>
-                                <div class="input-wrapper">
-                                    <p class="helper-label">Verification URL</p>
+                                <div class="input-container">
+                                    <div>
+                                        <input id="application-app_markup_percentage" type="text" maxlength="5"
+                                            placeholder="Markup percentage" class="last" />
+                                        <p class="helper-text">minimum 0.00 and maximum 5.00</p>
+                                    </div>
+                                </div>
+                                <div class="form-header-container">
+                                    <h4 class="register-form-header">Authorisation</h4>
+                                    <img src="{{ branch }}/img/info-icon.svg" class="info-icon" />
+                                </div>
+                                <div class="input-container" >
+                                    <input id="application-redirect_uri" type="text" maxlength="255"
+                                        placeholder="Website URL" />
+                                    <p class="helper-text">*Please note that this URL will be used as the OAuth redirect URL for the OAuth authorisation</p>
+                                </div>
+                                <div class="input-container" >
                                     <input id="application-verification_uri" type="text" maxlength="255"
                                         placeholder="Verification URL" />
                                 </div>
-                                <div class="input-wrapper">
-                                    <p class="helper-label">Homepage URL</p>
+                                <div class="input-container" >
                                     <input id="application-homepage" type="text" maxlength="255" placeholder="Homepage URL" />
                                 </div>
-                                <div class="input-wrapper">
-                                    <p class="helper-label">Github URL</p>
+                                <div class="input-container" >
                                     <input id="application-github" type="text" maxlength="255" placeholder="Github URL" />
                                 </div>
-                                <div class="input-wrapper">
-                                    <p class="helper-label">Appstore URL</p>
+                                <div class="input-container" >
                                     <input id="application-appstore" type="text" maxlength="255" placeholder="Appstore URL" />
                                 </div>
-                                <div class="input-wrapper">
-                                    <p class="helper-label">Google Play URL</p>
+                                <div class="input-container">
                                     <input id="application-googleplay" type="text" maxlength="255" placeholder="Google Play URL" />
-                                </div>
-                                <div class="input-wrapper">
-                                    <p class="helper-label">Markup Percentage</p>
-                                    <input id="application-app_markup_percentage" type="text" maxlength="5"
-                                        placeholder="Markup percentage" class="last" />
-                                    <p class="helper-text">minimum 0.00 and maximum 5.00</p>
                                 </div>
                             </fieldset>
                             <div class="scopes">
@@ -226,6 +169,17 @@ permalink: docs/app-registration/
         display: none;
     }
 
+    .form-header-container {
+        display: flex;
+        padding: 10px 0;
+    }
+
+    .register-form-header {
+        font-size: 14px;
+        margin-right: 5px;
+        line-height: 20px
+    }
+
     [data-state~="logged_out"] .app-registration-login {
         display: flex;
         flex-direction: column;
@@ -242,6 +196,10 @@ permalink: docs/app-registration/
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .input-container {
+        display: flex;
     }
 
     .login-image {
@@ -270,6 +228,10 @@ permalink: docs/app-registration/
         .login-title {
             font-size: 20px;
             margin-bottom: 24px;
+        }
+
+        .register-form-header {
+            font-size: 16px;
         }
     }
 </style>
