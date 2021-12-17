@@ -229,7 +229,7 @@ const appRegistrationMachine = createMachine({
         logged_out: {
             id: "logged_out",
             on: {
-                LOGIN: "#folded_form",
+                LOGIN: "#logged_in",
             },
         },
         logged_in: {
@@ -237,12 +237,12 @@ const appRegistrationMachine = createMachine({
             initial: "register_tab",
             on: {
                 LOGOUT: "#logged_out",
-                TOGGLE_FORM: "#unfolded_form",
                 MANAGE_TOGGLE_TAB: "#manage_tab",
             },
             states: {
                 register_tab: {
                     id: "register_tab",
+                    initial: "folded_form",
                     on: {
                         LOGOUT: "#logged_out",
                         TOGGLE_FORM: "#unfolded_form",
@@ -289,6 +289,14 @@ function activate(state) {
         elApp.dataset.state = joinedState;
         elApp.setAttribute("data-state", joinedState);
     }
+    // get expand_form id element
+    const elExpandForm = document.getElementById('expand_form');
+    // set checked input elExpandForm when state is folded_form
+    if (elExpandForm) {
+        // elExpandForm.checked = state.matches('app_registration.register_tab.folded_form');
+        //set checked input elExpandForm when state is unfolded_form
+        elExpandForm.setAttribute('checked', state.matches('logged_in.register_tab.unfolded_form'));
+    };
 }
 
 const interpreter = XState
