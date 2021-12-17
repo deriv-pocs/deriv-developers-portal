@@ -237,6 +237,7 @@ const appRegistrationMachine = createMachine({
             on: {
                 LOGOUT: "#logged_out",
                 TOGGLE_FORM: "#unfolded_form",
+                MANAGE_TOGGLE_TAB: "#manage_tab",
             },
             states: {
                 history: {
@@ -256,9 +257,21 @@ const appRegistrationMachine = createMachine({
                         TOGGLE_FORM: "#folded_form",
                     },
                 },
+                register_tab: {
+                    id: "register_tab",
+                    on: {
+                        MANAGE_TOGGLE_TAB: "#manage_tab",
+                    },
+                },
+                manage_tab: {
+                    id: "manage_tab",
+                    on: {
+                        REGISTER_TOGGLE_TAB: "#register_tab",
+                    },
+                },
             },
         },
-    },
+    }
 });
 
 let sessionState = sessionStorage.getItem('app_registration_state') || 'logged_out';
@@ -290,7 +303,7 @@ if (unfolded_form_checkbox) {
     unfolded_form_checkbox.addEventListener('change', () => {
         send({
             "type": "TOGGLE_FORM"
-          });
+        });
     });
     // unfolded_form_checkbox.removeEventListener('click', toggleForm());
 }
