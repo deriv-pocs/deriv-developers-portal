@@ -229,7 +229,7 @@ const appRegistrationMachine = createMachine({
         logged_out: {
             id: "logged_out",
             on: {
-                LOGIN: "#history",
+                LOGIN: "#folded_form",
             },
         },
         logged_in: {
@@ -240,11 +240,6 @@ const appRegistrationMachine = createMachine({
                 MANAGE_TOGGLE_TAB: "#manage_tab",
             },
             states: {
-                history: {
-                    id: "history",
-                    type: "history",
-                    target: "#folded_form",
-                },
                 folded_form: {
                     id: "folded_form",
                     on: {
