@@ -14,10 +14,10 @@ permalink: docs/app-registration/
     </div>
     <div class=app-registration-logged-in>
         <div class="registered-apps-tabs">
-            <button class="register-button">
+            <button id="register_button" class="register-button">
                 Register your application
             </button>
-            <button class="manage-button">
+            <button id="manage_button" class="manage-button">
                 Manage existing applications
             </button>
         </div>
@@ -117,7 +117,8 @@ permalink: docs/app-registration/
 <style>
     /* introduce css variables */
     :root {
-        --app-registration-tab-active: #333333;
+        --app-registration-tab-active-font: #333333;
+        --app-registration-tab-active-underline: #ff444f;
         --app-registration-tab-secondary: #999999;
     }
     .page-content {
@@ -127,14 +128,14 @@ permalink: docs/app-registration/
         display: none;
     }
 
-    [data-state~="logged_in.unfolded_form"] .expandable_form {
+    [data-state~="logged_in.register_tab.unfolded_form"] .expandable_form {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    [data-state~="logged_in.folded_form"] .expandable_form {
+    [data-state~="logged_in.register_tab.folded_form"] .expandable_form {
         display: none;
     }
 
@@ -145,6 +146,10 @@ permalink: docs/app-registration/
     .form-header-container {
         display: flex;
         padding: 10px 0;
+    }
+
+    #frmNewApplication {
+        display: none;
     }
 
     .registered-apps-tabs {
@@ -159,9 +164,11 @@ permalink: docs/app-registration/
         padding: 10px 20px;
     }
 
+    [data-state~="logged_in.manage_tab"] .manage-button,
     [data-state~="logged_in.register_tab"] .register-button {
         font-weight: bold;
-        color: var(--app-registration-tab-active);
+        color: var(--app-registration-tab-active-font);
+        border-bottom: 3px solid var(--app-registration-tab-active-underline);
     }
 
     .register-form-header {
