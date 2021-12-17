@@ -13,6 +13,14 @@ permalink: docs/app-registration/
         <a id="registerLogin" class="register-login-button main-register-btn">Log in to my Deriv account</a>
     </div>
     <div class=app-registration-logged-in>
+        <div class="registered-apps-tabs">
+            <button class="register-button">
+                Register your application
+            </button>
+            <button class="manage-button">
+                Manage existing applications
+            </button>
+        </div>
         <div>
             <div>
                 <form id="frmNewApplication">
@@ -107,6 +115,11 @@ permalink: docs/app-registration/
     </div>
 </div>
 <style>
+    /* introduce css variables */
+    :root {
+        --app-registration-tab-active: #333333;
+        --app-registration-tab-secondary: #999999;
+    }
     .page-content {
         display:none;
     }
@@ -132,6 +145,23 @@ permalink: docs/app-registration/
     .form-header-container {
         display: flex;
         padding: 10px 0;
+    }
+
+    .registered-apps-tabs {
+        display: flex;
+    }
+
+    .registered-apps-tabs button {
+        border: none;
+        background-color: transparent;
+        color: var(--app-registration-tab-secondary);;
+        border-bottom: 1px solid var(--app-registration-tab-secondary);
+        padding: 10px 20px;
+    }
+
+    [data-state~="logged_in.register_tab"] .register-button {
+        font-weight: bold;
+        color: var(--app-registration-tab-active);
     }
 
     .register-form-header {

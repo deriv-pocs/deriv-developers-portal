@@ -234,28 +234,33 @@ const appRegistrationMachine = createMachine({
         },
         logged_in: {
             id: "logged_in",
+            initial: "register_tab",
             on: {
                 LOGOUT: "#logged_out",
                 TOGGLE_FORM: "#unfolded_form",
                 MANAGE_TOGGLE_TAB: "#manage_tab",
             },
             states: {
-                folded_form: {
-                    id: "folded_form",
-                    on: {
-                        TOGGLE_FORM: "#unfolded_form",
-                    },
-                },
-                unfolded_form: {
-                    id: "unfolded_form",
-                    on: {
-                        TOGGLE_FORM: "#folded_form",
-                    },
-                },
                 register_tab: {
                     id: "register_tab",
                     on: {
+                        LOGOUT: "#logged_out",
+                        TOGGLE_FORM: "#unfolded_form",
                         MANAGE_TOGGLE_TAB: "#manage_tab",
+                    },
+                    states: {
+                      folded_form: {
+                          id: "folded_form",
+                          on: {
+                              TOGGLE_FORM: "#unfolded_form",
+                          },
+                      },
+                      unfolded_form: {
+                          id: "unfolded_form",
+                          on: {
+                              TOGGLE_FORM: "#folded_form",
+                          },
+                      },
                     },
                 },
                 manage_tab: {
