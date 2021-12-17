@@ -249,18 +249,18 @@ const appRegistrationMachine = createMachine({
                         MANAGE_TOGGLE_TAB: "#manage_tab",
                     },
                     states: {
-                      folded_form: {
-                          id: "folded_form",
-                          on: {
-                              TOGGLE_FORM: "#unfolded_form",
-                          },
-                      },
-                      unfolded_form: {
-                          id: "unfolded_form",
-                          on: {
-                              TOGGLE_FORM: "#folded_form",
-                          },
-                      },
+                        folded_form: {
+                            id: "folded_form",
+                            on: {
+                                TOGGLE_FORM: "#unfolded_form",
+                            },
+                        },
+                        unfolded_form: {
+                            id: "unfolded_form",
+                            on: {
+                                TOGGLE_FORM: "#folded_form",
+                            },
+                        },
                     },
                 },
                 manage_tab: {
@@ -306,6 +306,35 @@ if (unfolded_form_checkbox) {
         });
     });
     // unfolded_form_checkbox.removeEventListener('click', toggleForm());
+}
+
+// get register_button and send event "MANAGE_TOGGLE_TAB"
+const register_button = document.getElementById('register_button');
+if (register_button) {
+    register_button.addEventListener('click', () => {
+        send({
+            "type": "REGISTER_TOGGLE_TAB"
+        });
+    });
+}
+
+// get manage_button and send event "REGISTER_TOGGLE_TAB"
+const manage_button = document.getElementById('manage_button');
+if (manage_button) {
+    manage_button.addEventListener('click', () => {
+        send({
+            "type": "MANAGE_TOGGLE_TAB"
+        });
+    });
+}
+
+const logout_button = document.getElementById('logout_button');
+if (logout_button) {
+    logout_button.addEventListener('click', () => {
+        send({
+            "type": "LOGOUT"
+        });
+    });
 }
 
 const registerLoginButton = document.getElementById('registerLogin');
