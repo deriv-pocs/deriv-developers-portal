@@ -3,46 +3,6 @@ layout: documentation
 permalink: docs/app-registration/
 ---
 <div id="app-registration-machine">
-    <div class="page-content">
-        <h1 class="doc-main-title">App registration</h1>
-        <div class="subheader">
-            Authenticate your API token before using it in your app.
-        </div>
-        <div class="cta">
-            <h3>Looking for your API token?</h3>
-            <a target="tokeninput" href="https://app.deriv.com/account/api-token">
-                <div class="cta-button">Get your API token</div>
-            </a>
-        </div>
-        <fieldset id="api-token-fieldset">
-            <div class="api-token-wrapper">
-                <p class="helper-label">API Token</p>
-                <input type="text" id="api-token" placeholder="API Token" />
-                <button id="send-auth-manually-btn" class="btn-authenticate bold">
-                    Authenticate
-                </button>
-            </div>
-        </fieldset>
-        <div class="horizontal-separator-grey"></div>
-        <div class="horizontal-separator-grey"></div>
-        <div class="request-container">
-            <div class="table-wrapper">
-                <table class="flex-table" id="applications-table" style="display: none">
-                    <thead>
-                        <tr class="flex-tr">
-                            <th class="flex-tr-child name">Name</th>
-                            <th class="flex-tr-child app_id">Application ID</th>
-                            <th class="flex-tr-child scopes">Scopes</th>
-                            <th class="flex-tr-child redirect_url">Redirect URL</th>
-                            <th colspan="2" class="flex-tr-child actions">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            {% include api-playground-field.html %}
-        </div>
-    </div>
     <div class=app-registration-login>
         <div class=login-image>
             <img src="{{ branch }}/img/login.svg" width="128px" height="128px" />
