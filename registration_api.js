@@ -221,7 +221,11 @@ const generateDerivApiInstance = () => {
     return deriv_api;
 };
 const myapi = generateDerivApiInstance();
-const { createMachine, actions, interpret } = XState;
+const { createMachine, actions, interpret, assign } = XState;
+const getApps = () => {
+    const url = `https://random-data-api.com/api/coffee/random_coffee`;
+    return fetch(url).then(response => response.json());
+};
 const appRegistrationMachine = createMachine({
     id: "register_api",
     initial: "logged_out",
@@ -267,11 +271,47 @@ const appRegistrationMachine = createMachine({
                     id: "manage_tab",
                     on: {
                         REGISTER_TOGGLE_TAB: "#register_tab",
+                        // FETCH_DATA: "#loading",
+                    },
+                    initial: 'loading',
+                    states: {
+                        loading: {
+                            id: "loading",
+                            invoke: {
+                                id: "getApps",
+                                src: async () => await getApps(),
+                                onDone: {
+                                    target: "success",
+                                    actions: () => {
+                                        console.log('success');
+                                        assign({
+                                            apps: (_, event) => event.data,
+                                        })
+                                    },
+                                },
+                                onError: {
+                                    target: "failure",
+                                    actions: () => {
+                                        console.log('failure');
+                                        assign({ error: (_, event) => event.data })
+                                    },
+                                },
+                            },
+                        },
+                        success: {
+                            id: "success",
+                        },
+                        failure: {
+                            id: "failure",
+                            on: {
+                                RETRY: "#loading",
+                            },
+                        },
                     },
                 },
             },
         },
-    }
+    },
 });
 
 let sessionState = sessionStorage.getItem('app_registration_state') || 'logged_out';
