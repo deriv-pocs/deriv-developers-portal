@@ -31,11 +31,11 @@ permalink: docs/app-registration/
                                 <input type="text" id="api-token-input" placeholder="API Token" />
                                 <p class="helper-text">max. 50 characters</p>
                                 <div class="api-token-warning">
-                            </div>
-                            <div class="first">
-                                <input type="text" id="app_name" name="app_name" placeholder="Name"
-                                    pattern="^[\w\s-]{1,48}$" required />
-                            </div>
+                                </div>
+                                <div class="first">
+                                    <input type="text" id="app_name" name="app_name" placeholder="Name"
+                                        pattern="^[\w\s-]{1,48}$" required />
+                                </div>
                         </fieldset>
                         <div>
                             <input id="expand_form" type="checkbox" autocomplete="off" />
@@ -64,26 +64,31 @@ permalink: docs/app-registration/
                                         <img src="{{ branch }}/img/info-icon.svg" />
                                     </div>
                                 </div>
-                                <div class="input-container" >
+                                <div class="input-container">
                                     <input id="application-redirect_uri" type="text" maxlength="255"
                                         placeholder="Website URL" />
-                                    <p class="helper-text">*Please note that this URL will be used as the OAuth redirect URL for the OAuth authorisation</p>
+                                    <p class="helper-text">*Please note that this URL will be used as the OAuth redirect
+                                        URL for the OAuth authorisation</p>
                                 </div>
-                                <div class="input-container" >
+                                <div class="input-container">
                                     <input id="application-verification_uri" type="text" maxlength="255"
                                         placeholder="Verification URL" />
                                 </div>
-                                <div class="input-container" >
-                                    <input id="application-homepage" type="text" maxlength="255" placeholder="Homepage URL" />
-                                </div>
-                                <div class="input-container" >
-                                    <input id="application-github" type="text" maxlength="255" placeholder="Github URL" />
-                                </div>
-                                <div class="input-container" >
-                                    <input id="application-appstore" type="text" maxlength="255" placeholder="Appstore URL" />
+                                <div class="input-container">
+                                    <input id="application-homepage" type="text" maxlength="255"
+                                        placeholder="Homepage URL" />
                                 </div>
                                 <div class="input-container">
-                                    <input id="application-googleplay" type="text" maxlength="255" placeholder="Google Play URL" />
+                                    <input id="application-github" type="text" maxlength="255"
+                                        placeholder="Github URL" />
+                                </div>
+                                <div class="input-container">
+                                    <input id="application-appstore" type="text" maxlength="255"
+                                        placeholder="Appstore URL" />
+                                </div>
+                                <div class="input-container">
+                                    <input id="application-googleplay" type="text" maxlength="255"
+                                        placeholder="Google Play URL" />
                                 </div>
                             </fieldset>
                             <div class="scopes">
@@ -126,9 +131,11 @@ permalink: docs/app-registration/
         --app-registration-tab-secondary: #999999;
         --app-registration-tab-tooltip-background: #D6DADB;
     }
+
     .page-content {
-        display:none;
+        display: none;
     }
+
     .app-registration-login {
         display: none;
     }
@@ -178,9 +185,9 @@ permalink: docs/app-registration/
         line-height: 18px;
         padding: 8px;
         position: absolute;
-        top: -45px;
-        transform: translate(-50%, -50%);
         width: 280px;
+        top: -47px;
+        transform: translate(-10%, -50%);
     }
 
     .info-icon-tooltip:hover:before {
@@ -215,7 +222,7 @@ permalink: docs/app-registration/
     .registered-apps-tabs button {
         border: none;
         background-color: transparent;
-        color: var(--app-registration-tab-secondary);;
+        color: var(--app-registration-tab-secondary);
         border-bottom: 1px solid var(--app-registration-tab-secondary);
         padding: 10px 20px;
     }
@@ -285,6 +292,14 @@ permalink: docs/app-registration/
 
         .register-form-header {
             font-size: 16px;
+        }
+
+        .info-icon-tooltip {
+            position: relative;
+        }
+
+        .info-icon-tooltip:hover:after {
+            transform: translate(-50%, -50%);
         }
     }
 </style>
