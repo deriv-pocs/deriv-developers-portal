@@ -46,7 +46,8 @@ permalink: docs/app-registration/
                                 <div class="input-container form-header-container">
                                     <div>
                                         <h4 class="register-form-header">Markup</h4>
-                                        <div class='info-icon-tooltip tooltip-markup'>
+                                        <div class='info-icon'>
+                                            <div class='tooltip'>For each trade performed on your app, you will receive a commission. Set a markup percentage below to determine the commission you will make.</div>
                                             <img src="{{ branch }}/img/info-icon.svg" />
                                         </div>
                                     </div>
@@ -60,7 +61,8 @@ permalink: docs/app-registration/
                                 </div>
                                 <div class="form-header-container">
                                     <h4 class="register-form-header">Authorisation</h4>
-                                    <div class='info-icon-tooltip tooltip-authorisation'>
+                                    <div class='info-icon'>
+                                        <div class='tooltip'>To use OAuth, please fill out the following fields. These details can be changed later using the app_update API call.</div>
                                         <img src="{{ branch }}/img/info-icon.svg" />
                                     </div>
                                 </div>
@@ -175,44 +177,40 @@ permalink: docs/app-registration/
         position: relative;
     }
 
-    .info-icon-tooltip:hover:after {
+    .info-icon {
+        position: relative;
+    }
+
+    .tooltip {
+        display: none;
+    }
+
+    .info-icon:hover .tooltip {
         background-color: var(--app-registration-tab-tooltip-background);
         border-radius: 4px;
-        content: ' ';
         color: var(--app-registration-tab-active-font);
         font-size: 12px;
         left: 50%;
         line-height: 18px;
         padding: 8px;
         position: absolute;
-        width: 280px;
-        top: -47px;
-        transform: translate(-10%, -50%);
+        display: inline-block;
+        width: 140px;
+        top: -65px;
+        transform: translate(-19%, -50%);
     }
 
-    .info-icon-tooltip:hover:before {
+    .info-icon:hover .tooltip:before {
         content: ' ';
         width: 0;
         height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         border-top: 8px solid var(--app-registration-tab-tooltip-background);
-        left: 50%;
+        left: 30px;
         transform: translateX(-50%);
         position: absolute;
-        top: -15px;
-    }
-
-    .info-icon-tooltip:hover.tooltip-markup:after {
-        content: 'For each trade performed on your app, you will receive a commission. Set a markup percentage below to determine the commission you will make.';
-    }
-
-    .info-icon-tooltip:hover.tooltip-authorisation:after {
-        content: 'To use OAuth, please fill out the following fields. These details can be changed later using the app_update API call.';
-    }
-
-    .info-icon-tooltip:hover.tooltip-oauth:after {
-        content: 'Please select the level of access you would like clients to give to your app.';
+        bottom: -5px;
     }
 
     .registered-apps-tabs {
@@ -295,11 +293,13 @@ permalink: docs/app-registration/
             font-size: 16px;
         }
 
-        .info-icon-tooltip {
-            position: relative;
+        .info-icon:hover .tooltip:before {
+            left: 50%;
         }
 
-        .info-icon-tooltip:hover:after {
+        .info-icon:hover .tooltip {
+            width: 280px;
+            top: -47px;
             transform: translate(-50%, -50%);
         }
     }
