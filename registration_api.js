@@ -312,7 +312,6 @@ if (unfolded_form_checkbox) {
             "type": "TOGGLE_FORM"
         });
     });
-    // unfolded_form_checkbox.removeEventListener('click', toggleForm());
 }
 
 // get register_button and send event "MANAGE_TOGGLE_TAB"
