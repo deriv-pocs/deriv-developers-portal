@@ -285,18 +285,17 @@ if (token) {
 function activate(state) {
     const joinedState = state.toStrings().join(' ');
     const elApp = document.getElementById('app-registration-machine');
+    const form_checkbox = document.getElementById('expand_form');
+    const is_folded_state = joinedState === 'logged_in logged_in.register_tab logged_in.register_tab.folded_form';
     if (elApp) {
         elApp.dataset.state = joinedState;
         elApp.setAttribute("data-state", joinedState);
     }
-    // get expand_form id element
-    const elExpandForm = document.getElementById('expand_form');
-    // set checked input elExpandForm when state is folded_form
-    if (elExpandForm) {
-        // elExpandForm.checked = state.matches('app_registration.register_tab.folded_form');
-        //set checked input elExpandForm when state is unfolded_form
-        elExpandForm.setAttribute('checked', state.matches('logged_in.register_tab.unfolded_form'));
-    };
+    if (is_folded_state) {
+        form_checkbox.checked = false;
+    } else {
+        form_checkbox.checked = true;
+    }
 }
 
 const interpreter = XState
