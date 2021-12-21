@@ -325,9 +325,9 @@ function activate(state) {
         elApp.setAttribute("data-state", joinedState);
     }
     if (is_folded_state) {
-        form_checkbox.checked = false;
+        if (form_checkbox) form_checkbox.checked = false;
     } else {
-        form_checkbox.checked = true;
+        if (form_checkbox) form_checkbox.checked = true;
     }
 }
 
@@ -400,8 +400,11 @@ const getAppList = async () => {
                         <td>${app.scopes.join(', ')}</td>
                         <td>${app.redirect_uri}</td>
                         <td>
-                            <button class="app-remove-btn" onclick="removeApp(${app.app_id})">Remove</button>
-                        </td>`;
+                            <button class="app-remove-btn" onclick="open_delete_dialog(${app.app_id})">Remove</button>
+                        </td>
+                            <button class="app-update-btn" onclick="open_update_dialog()">Update</button>
+                        </td>
+                        `;
         app_list_body.appendChild(tr);
     });
 }
@@ -413,4 +416,64 @@ const removeApp = async (app_id) => {
     await api.authorize(token1);
     await api.appDelete(app_id);
     send({ type: 'FETCH_APP_LIST' });
+}
+
+// add appUpdate sync function
+const appUpdate = async (app_id, name, redirect_uri, scopes) => {
+    const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
+    const token1 = sessionStorage.getItem('token1');
+    await api.authorize(token1);
+    await api.appUpdate(app_id, name, redirect_uri, scopes);
+    send({ type: 'FETCH_APP_LIST' });
+};
+// add open dialog function
+const open_delete_dialog = (app_id) => {
+    const dialog = document.getElementById('delete_app_dialog');
+    dialog.showModal();
+    const delete_app_button = document.getElementById('delete_app_button');
+    delete_app_button.addEventListener('click', () => {
+        removeApp(app_id);
+        dialog.close();
+    });
+}
+
+// add open update dialog function
+const open_update_dialog = (ourargs) => {
+    console.log(ourargs)
+    const dialog = document.getElementById('update_app_dialog');
+    dialog.showModal();
+    // WIP
+    // const update_app_button = document.getElementById('update_app_button');
+    // update_app_button.addEventListener('click', () => {
+    //     const name_input = document.getElementById('name_input');
+    //     // set value of name_input to name
+    //     name_input.value = name;
+    //     const redirect_uri_input = document.getElementById('redirect_uri_input');
+    //     // set value of redirect_uri_input to redirect_uri
+    //     redirect_uri_input.value = redirect_uri;
+    //     const scopes_input = document.getElementById('scopes_input');
+    //     // set value of scopes_input to scopes
+    //     scopes_input.value = scopes.join(', ');
+    //     const new_name = name_input.value;
+    //     const new_redirect_uri = redirect_uri_input.value;
+    //     const new_scopes = scopes_input.value.split(',');
+    //     appUpdate(app_id, new_name, new_redirect_uri, new_scopes);
+    //     dialog.close();
+    // });
+}
+
+const dialog = document.getElementById('delete_app_dialog');
+const dialog_button = document.getElementById('dialog_button');
+if (dialog_button) {
+    dialog_button.addEventListener('click', () => {
+        dialog.showModal();
+    });
+}
+// add update dialog
+const update_dialog = document.getElementById('update_app_dialog');
+const update_dialog_button = document.getElementById('update_dialog_button');
+if (update_dialog_button) {
+    update_dialog_button.addEventListener('click', () => {
+        update_dialog.showModal();
+    });
 }
