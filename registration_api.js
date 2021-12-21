@@ -211,16 +211,6 @@ const getSocketURL = () => {
     return server_url;
 };
 
-
-const generateDerivApiInstance = () => {
-    const socket_url = `wss://${getSocketURL()}/websockets/v3?app_id=1023&l=en&brand=deriv`;
-    const deriv_socket = new WebSocket(socket_url);
-    const deriv_api = new DerivAPIBasic({
-        connection: deriv_socket,
-    });
-    return deriv_api;
-};
-const myapi = generateDerivApiInstance();
 const { createMachine, actions, interpret, assign } = XState;
 const getApps = () => {
     const url = `https://random-data-api.com/api/coffee/random_coffee`;
@@ -228,7 +218,11 @@ const getApps = () => {
 };
 const appRegistrationMachine = createMachine({
     id: "register_api",
-    initial: "logged_out",
+    initial: "logged_in",
+    // context: {
+    //     apps: [],
+    //     error: null,
+    // },
     states: {
         logged_out: {
             id: "logged_out",
@@ -269,40 +263,39 @@ const appRegistrationMachine = createMachine({
                 },
                 manage_tab: {
                     id: "manage_tab",
+                    initial: "loading",
                     on: {
                         REGISTER_TOGGLE_TAB: "#register_tab",
                         // FETCH_DATA: "#loading",
+                        FETCH_APP_LIST: "#loading",
                     },
-                    initial: 'loading',
                     states: {
                         loading: {
                             id: "loading",
                             invoke: {
-                                id: "getApps",
-                                src: async () => await getApps(),
+                                src: async () => await getAppList(),
                                 onDone: {
-                                    target: "success",
-                                    actions: () => {
-                                        console.log('success');
-                                        assign({
-                                            apps: (_, event) => event.data,
-                                        })
-                                    },
+                                    target: "#success",
+                                    // actions: assign({
+                                    //     apps: (_, event) => event.data,
+                                    // }),
                                 },
                                 onError: {
-                                    target: "failure",
-                                    actions: () => {
-                                        console.log('failure');
-                                        assign({ error: (_, event) => event.data })
-                                    },
+                                    target: "#error",
+                                    // actions: assign({
+                                    //     error: (_, event) => event.data,
+                                    // }),
                                 },
                             },
                         },
                         success: {
                             id: "success",
+                            on: {
+                                REFETCH: "#loading",
+                            },
                         },
-                        failure: {
-                            id: "failure",
+                        error: {
+                            id: "error",
                             on: {
                                 RETRY: "#loading",
                             },
@@ -389,3 +382,23 @@ if (registerLoginButton) {
         redirectToLogin(false, 'EN');
     });
 };
+
+const getAppList = async () => {
+    const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
+    const token1 = sessionStorage.getItem('token1');
+    await api.authorize(token1);
+    const get_data = await api.appList();
+    const app_list = get_data.app_list;
+    const tbody = document.getElementById('app_list');
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+    app_list.forEach((app) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${app.name}</td>
+                        <td>${app.app_id}</td>
+                        <td>${app.scopes.join(', ')}</td>
+                        <td>${app.redirect_uri}</td>`;
+        tbody.appendChild(tr);
+    });
+}

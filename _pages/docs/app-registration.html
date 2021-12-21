@@ -12,7 +12,7 @@ permalink: docs/app-registration/
         </div>
         <a id="registerLogin" class="register-login-button main-register-btn">Log in to my Deriv account</a>
     </div>
-    <div class=app-registration-logged-in>
+    <div class="app-registration-logged-in">
         <div class="registered-apps-tabs">
             <button id="register_button" class="register-button">
                 Register your application
@@ -21,107 +21,120 @@ permalink: docs/app-registration/
                 Manage existing applications
             </button>
         </div>
-        <div>
-            <div>
-                <form id="frmNewApplication">
-                    <div class="form-content">
+        <div class="register-app">
+            <form id="frmNewApplication">
+                <div class="form-content">
+                    <fieldset>
+                        <h2 id="form-title" class="doc-sub-title">Register your app</h2>
+                        <div class="api-token-wrapper">
+                            <input type="text" id="api-token-input" placeholder="API Token" />
+                            <p class="helper-text">max. 50 characters</p>
+                            <div class="api-token-warning">
+                            </div>
+                            <div class="first">
+                                <input type="text" id="app_name" name="app_name" placeholder="Name"
+                                    pattern="^[\w\s-]{1,48}$" required />
+                            </div>
+                    </fieldset>
+                    <div>
+                        <input id="expand_form" type="checkbox" autocomplete="off" />
+                        <label for="admin-scope">I'd like to use OAuth or monetise my app</label>
+                    </div>
+                    <div class="expandable_form">
                         <fieldset>
-                            <h2 id="form-title" class="doc-sub-title">Register your app</h2>
-                            <div class="api-token-wrapper">
-                                <input type="text" id="api-token-input" placeholder="API Token" />
-                                <p class="helper-text">max. 50 characters</p>
-                                <div class="api-token-warning">
-                                </div>
-                                <div class="first">
-                                    <input type="text" id="app_name" name="app_name" placeholder="Name"
-                                        pattern="^[\w\s-]{1,48}$" required />
-                                </div>
-                        </fieldset>
-                        <div>
-                            <input id="expand_form" type="checkbox" autocomplete="off" />
-                            <label for="admin-scope">I'd like to use OAuth or monetise my app</label>
-                        </div>
-                        <div class="expandable_form">
-                            <fieldset>
-                                <div class="input-container form-header-container">
-                                    <div>
-                                        <h4 class="register-form-header">Markup</h4>
-                                        <div class='info-icon'>
-                                            <div class='tooltip'>For each trade performed on your app, you will receive a commission. Set a markup percentage below to determine the commission you will make.</div>
-                                            <img src="{{ branch }}/img/info-icon.svg" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-container">
-                                    <div>
-                                        <input id="application-app_markup_percentage" type="text" maxlength="5"
-                                            placeholder="Markup percentage" class="last" />
-                                        <p class="helper-text">minimum 0.00 and maximum 5.00</p>
-                                    </div>
-                                </div>
-                                <div class="form-header-container">
-                                    <h4 class="register-form-header">Authorisation</h4>
+                            <div class="input-container form-header-container">
+                                <div>
+                                    <h4 class="register-form-header">Markup</h4>
                                     <div class='info-icon'>
-                                        <div class='tooltip'>To use OAuth, please fill out the following fields. These details can be changed later using the app_update API call.</div>
+                                        <div class='tooltip'>For each trade performed on your app, you will receive a commission. Set a markup percentage below to determine the commission you will make.</div>
                                         <img src="{{ branch }}/img/info-icon.svg" />
                                     </div>
                                 </div>
-                                <div class="input-container">
-                                    <input id="application-redirect_uri" type="text" maxlength="255"
-                                        placeholder="Website URL" />
-                                    <p class="helper-text">*Please note that this URL will be used as the OAuth redirect
-                                        URL for the OAuth authorisation</p>
-                                </div>
-                                <div class="input-container">
-                                    <input id="application-verification_uri" type="text" maxlength="255"
-                                        placeholder="Verification URL" />
-                                </div>
-                                <div class="input-container">
-                                    <input id="application-homepage" type="text" maxlength="255"
-                                        placeholder="Homepage URL" />
-                                </div>
-                                <div class="input-container">
-                                    <input id="application-github" type="text" maxlength="255"
-                                        placeholder="Github URL" />
-                                </div>
-                                <div class="input-container">
-                                    <input id="application-appstore" type="text" maxlength="255"
-                                        placeholder="Appstore URL" />
-                                </div>
-                                <div class="input-container">
-                                    <input id="application-googleplay" type="text" maxlength="255"
-                                        placeholder="Google Play URL" />
-                                </div>
-                            </fieldset>
-                            <div class="scopes">
-                                <p class="bold scopes-field">Scopes:</p>
-                                <div class="scopes-field">
-                                    <input id="read-scope" type="checkbox" value="read" />
-                                    <label for="read-scope">Read: View account activity</label>
-                                </div>
-                                <div class="scopes-field">
-                                    <input id="trade-scope" type="checkbox" value="trade" />
-                                    <label for="trade-scope">Trade: Buy and sell contracts</label>
-                                </div>
-                                <div class="scopes-field">
-                                    <input id="trading_information-scope" type="checkbox" value="trading_information" />
-                                    <label for="trading_information-scope">Trading Information: View trading and balance
-                                        information</label>
-                                </div>
-                                <div class="scopes-field">
-                                    <input id="payments-scope" type="checkbox" value="payments" />
-                                    <label for="payments-scope">Payments: Cashier (Deposit, Withdraw)</label>
-                                </div>
-                                <div class="scopes-field mb-0">
-                                    <input id="admin-scope" type="checkbox" value="admin" />
-                                    <label for="admin-scope">Admin: API token management, application management</label>
+                            </div>
+                            <div class="input-container">
+                                <div>
+                                    <input id="application-app_markup_percentage" type="text" maxlength="5"
+                                        placeholder="Markup percentage" class="last" />
+                                    <p class="helper-text">minimum 0.00 and maximum 5.00</p>
                                 </div>
                             </div>
-                            <button class="primary-btn-submit" id="btnRegister">Register</button>
+                            <div class="form-header-container">
+                                <h4 class="register-form-header">Authorisation</h4>
+                                <div class='info-icon'>
+                                    <div class='tooltip'>To use OAuth, please fill out the following fields. These details can be changed later using the app_update API call.</div>
+                                    <img src="{{ branch }}/img/info-icon.svg" />
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <input id="application-redirect_uri" type="text" maxlength="255"
+                                    placeholder="Website URL" />
+                                <p class="helper-text">*Please note that this URL will be used as the OAuth redirect
+                                    URL for the OAuth authorisation</p>
+                            </div>
+                            <div class="input-container">
+                                <input id="application-verification_uri" type="text" maxlength="255"
+                                    placeholder="Verification URL" />
+                            </div>
+                            <div class="input-container">
+                                <input id="application-homepage" type="text" maxlength="255"
+                                    placeholder="Homepage URL" />
+                            </div>
+                            <div class="input-container">
+                                <input id="application-github" type="text" maxlength="255"
+                                    placeholder="Github URL" />
+                            </div>
+                            <div class="input-container">
+                                <input id="application-appstore" type="text" maxlength="255"
+                                    placeholder="Appstore URL" />
+                            </div>
+                            <div class="input-container">
+                                <input id="application-googleplay" type="text" maxlength="255"
+                                    placeholder="Google Play URL" />
+                            </div>
+                        </fieldset>
+                        <div class="scopes">
+                            <p class="bold scopes-field">Scopes:</p>
+                            <div class="scopes-field">
+                                <input id="read-scope" type="checkbox" value="read" />
+                                <label for="read-scope">Read: View account activity</label>
+                            </div>
+                            <div class="scopes-field">
+                                <input id="trade-scope" type="checkbox" value="trade" />
+                                <label for="trade-scope">Trade: Buy and sell contracts</label>
+                            </div>
+                            <div class="scopes-field">
+                                <input id="trading_information-scope" type="checkbox" value="trading_information" />
+                                <label for="trading_information-scope">Trading Information: View trading and balance
+                                    information</label>
+                            </div>
+                            <div class="scopes-field">
+                                <input id="payments-scope" type="checkbox" value="payments" />
+                                <label for="payments-scope">Payments: Cashier (Deposit, Withdraw)</label>
+                            </div>
+                            <div class="scopes-field mb-0">
+                                <input id="admin-scope" type="checkbox" value="admin" />
+                                <label for="admin-scope">Admin: API token management, application management</label>
+                            </div>
                         </div>
+                        <button class="primary-btn-submit" id="btnRegister">Register</button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
+        <div class="manage-apps">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Users</th>
+                        <th>Application ID</th>
+                        <th>Scopes</th>
+                        <th>Redirect URL</th>
+                    </tr>
+                </thead>
+                <tbody id="app_list">
+                    <!-- populate table with data from API -->
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -162,14 +175,25 @@ permalink: docs/app-registration/
         padding: 10px 0;
     }
 
-    [data-state~="logged_in.register_tab"] #frmNewApplication {
+    [data-state~="logged_in.register_tab"] .register-app {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    #frmNewApplication {
+    [data-state~="logged_in.manage_tab"] .manage-apps {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .manage-apps {
+        display: none;
+    }
+
+    .register-app {
         display: none;
     }
 
