@@ -256,6 +256,12 @@ permalink: docs/app-registration/
         border-bottom: 3px solid var(--app-registration-tab-active-underline);
     }
 
+    /* make app-remove-btn disabled when data-state logged_in.manage_tab.loading */
+    [data-state~="logged_in.manage_tab.loading"] .app-remove-btn {
+        pointer-events: none;
+        display: none;
+    }
+
     .register-form-header {
         font-size: 14px;
         margin-right: 5px;

@@ -389,16 +389,28 @@ const getAppList = async () => {
     await api.authorize(token1);
     const get_data = await api.appList();
     const app_list = get_data.app_list;
-    const tbody = document.getElementById('app_list');
-    while (tbody.firstChild) {
-        tbody.removeChild(tbody.firstChild);
+    const app_list_body = document.getElementById('app_list');
+    while (app_list_body.firstChild) {
+        app_list_body.removeChild(app_list_body.firstChild);
     }
     app_list.forEach((app) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td>${app.name}</td>
                         <td>${app.app_id}</td>
                         <td>${app.scopes.join(', ')}</td>
-                        <td>${app.redirect_uri}</td>`;
-        tbody.appendChild(tr);
+                        <td>${app.redirect_uri}</td>
+                        <td>
+                            <button class="app-remove-btn" onclick="removeApp(${app.app_id})">Remove</button>
+                        </td>`;
+        app_list_body.appendChild(tr);
     });
+}
+
+const removeApp = async (app_id) => {
+    console.log(app_id);
+    const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
+    const token1 = sessionStorage.getItem('token1');
+    await api.authorize(token1);
+    await api.appDelete(app_id);
+    send({ type: 'FETCH_APP_LIST' });
 }
