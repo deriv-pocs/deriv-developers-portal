@@ -13,6 +13,8 @@ permalink: docs/app-registration/
         <a id="registerLogin" class="register-login-button main-register-btn">Log in to my Deriv account</a>
     </div>
     <div class="app-registration-logged-in">
+        <h2 id="form-title" class="doc-sub-title">Your apps</h2>
+        <h4 class="form-subtitle">Register your app to get an app ID and start using Deriv API for personal or business purposes</h4>
         <div class="registered-apps-tabs">
             <button id="register_button" class="register-button">
                 Register your application
@@ -25,16 +27,22 @@ permalink: docs/app-registration/
             <form id="frmNewApplication">
                 <div class="form-content">
                     <fieldset>
-                        <h2 id="form-title" class="doc-sub-title">Register your app</h2>
+                        <div class="form-header-container">
+                            <h4 class="register-form-header">General information</h4>
+                            <div class='info-icon'>
+                                <div class='tooltip'>No information provided yet.</div>
+                                <img src="/img/info-icon.svg" />
+                            </div>
+                        </div>
                         <div class="api-token-wrapper">
-                            <input type="text" id="api-token-input" placeholder="API Token" />
+                            <input type="text" id="api-token-input" placeholder="Your token (Admin level)" />
                             <p class="helper-text">max. 50 characters</p>
                             <div class="api-token-warning">
-                            </div>
-                            <div class="first">
-                                <input type="text" id="app_name" name="app_name" placeholder="Name"
-                                    pattern="^[\w\s-]{1,48}$" required />
-                            </div>
+                        </div>
+                        <div class="first">
+                            <input type="text" id="app_name" name="app_name" placeholder="App name (Required)"
+                                pattern="^[\w\s-]{1,48}$" required />
+                        </div>
                     </fieldset>
                     <div>
                         <input id="expand_form" type="checkbox" autocomplete="off" />
@@ -43,7 +51,7 @@ permalink: docs/app-registration/
                     <div class="expandable_form">
                         <fieldset>
                             <div class="input-container form-header-container">
-                                <div>
+                                <div class="form-header-container">
                                     <h4 class="register-form-header">Markup</h4>
                                     <div class='info-icon'>
                                         <div class='tooltip'>For each trade performed on your app, you will receive a commission. Set a markup percentage below to determine the commission you will make.</div>
@@ -55,7 +63,7 @@ permalink: docs/app-registration/
                                 <div>
                                     <input id="application-app_markup_percentage" type="text" maxlength="5"
                                         placeholder="Markup percentage" class="last" />
-                                    <p class="helper-text">minimum 0.00 and maximum 5.00</p>
+                                    <p class="helper-text">(0.00-5.00%)</p>
                                 </div>
                             </div>
                             <div class="form-header-container">
@@ -75,25 +83,16 @@ permalink: docs/app-registration/
                                 <input id="application-verification_uri" type="text" maxlength="255"
                                     placeholder="Verification URL" />
                             </div>
-                            <div class="input-container">
-                                <input id="application-homepage" type="text" maxlength="255"
-                                    placeholder="Homepage URL" />
-                            </div>
-                            <div class="input-container">
-                                <input id="application-github" type="text" maxlength="255"
-                                    placeholder="Github URL" />
-                            </div>
-                            <div class="input-container">
-                                <input id="application-appstore" type="text" maxlength="255"
-                                    placeholder="Appstore URL" />
-                            </div>
-                            <div class="input-container">
-                                <input id="application-googleplay" type="text" maxlength="255"
-                                    placeholder="Google Play URL" />
-                            </div>
                         </fieldset>
                         <div class="scopes">
-                            <p class="bold scopes-field">Scopes:</p>
+                            <div>
+                                <h4 class="register-form-header">OAuth authorisation levels</h4>
+                                <p>Bear in mind that you generally need only 
+                                    <b>'Trade'</b> and 
+                                    <b>'Trading information'</b> access. 
+                                    <b>'Admin'</b> access is usually not required.
+                                </p>
+                            </div>
                             <div class="scopes-field">
                                 <input id="read-scope" type="checkbox" value="read" />
                                 <label for="read-scope">Read: View account activity</label>
@@ -213,6 +212,10 @@ permalink: docs/app-registration/
         padding: 10px 0;
     }
 
+    .form-subtitle {
+        font-weight: normal;
+    }
+
     [data-state~="logged_in.register_tab"] .register-app {
         display: flex;
         flex-direction: column;
@@ -232,6 +235,7 @@ permalink: docs/app-registration/
     }
 
     .register-app {
+        width: 100%;
         display: none;
     }
 
@@ -258,8 +262,7 @@ permalink: docs/app-registration/
         position: absolute;
         display: inline-block;
         width: 140px;
-        top: -65px;
-        transform: translate(-19%, -50%);
+        transform: translate(-19%, calc(-100% - 10px));
     }
 
     .info-icon:hover .tooltip:before {
@@ -295,7 +298,7 @@ permalink: docs/app-registration/
     }
 
     .register-form-header {
-        font-size: 14px;
+        font-size: 16px;
         margin-right: 5px;
         line-height: 20px
     }
@@ -320,6 +323,7 @@ permalink: docs/app-registration/
 
     .input-container {
         display: flex;
+        flex-direction: column;
     }
 
     .login-image {
@@ -402,8 +406,7 @@ permalink: docs/app-registration/
 
         .info-icon:hover .tooltip {
             width: 280px;
-            top: -47px;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, calc(-100% - 10px));
         }
     }
 </style>
