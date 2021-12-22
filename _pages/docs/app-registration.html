@@ -5,7 +5,7 @@ permalink: docs/app-registration/
 <div id="app-registration-machine">
     <div class=app-registration-login>
         <div class=login-image>
-            <img src="{{ branch }}/img/login.svg" width="128px" height="128px" />
+            <img src="/img/login.svg" width="128px" height="128px" />
         </div>
         <div class="login-title bold">Log in to your Deriv account to get the API token and start
             using our API.
@@ -47,7 +47,7 @@ permalink: docs/app-registration/
                                     <h4 class="register-form-header">Markup</h4>
                                     <div class='info-icon'>
                                         <div class='tooltip'>For each trade performed on your app, you will receive a commission. Set a markup percentage below to determine the commission you will make.</div>
-                                        <img src="{{ branch }}/img/info-icon.svg" />
+                                        <img src="/img/info-icon.svg" />
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ permalink: docs/app-registration/
                                 <h4 class="register-form-header">Authorisation</h4>
                                 <div class='info-icon'>
                                     <div class='tooltip'>To use OAuth, please fill out the following fields. These details can be changed later using the app_update API call.</div>
-                                    <img src="{{ branch }}/img/info-icon.svg" />
+                                    <img src="/img/info-icon.svg" />
                                 </div>
                             </div>
                             <div class="input-container">
@@ -144,6 +144,33 @@ permalink: docs/app-registration/
             <dialog id="update_app_dialog">
                 Putting something here
                 <!-- add button that updates app -->
+                <!-- add inputs for name, and checkboxes for scopes, redirect URL -->
+                <input id="update_app_name" type="text" maxlength="48" placeholder="Name" />
+                <input id="update_app_redirect_uri" type="text" maxlength="255" placeholder="Redirect URL" />
+                <div id="app_scopes" class="scopes">
+                    <p class="bold scopes-field">Scopes:</p>
+                    <div class="scopes-field">
+                        <input id="update_read-scope" type="checkbox" value="read" />
+                        <label for="update_read-scope">Read: View account activity</label>
+                    </div>
+                    <div class="scopes-field">
+                        <input id="update_trade-scope" type="checkbox" value="trade" />
+                        <label for="update_trade-scope">Trade: Buy and sell contracts</label>
+                    </div>
+                    <div class="scopes-field">
+                        <input id="update_trading_information-scope" type="checkbox" value="trading_information" />
+                        <label for="update_trading_information-scope">Trading Information: View trading and balance
+                            information</label>
+                    </div>
+                    <div class="scopes-field">
+                        <input id="update_payments-scope" type="checkbox" value="payments" />
+                        <label for="update_payments-scope">Payments: Cashier (Deposit, Withdraw)</label>
+                    </div>
+                    <div class="scopes-field mb-0">
+                        <input id="update_admin-scope" type="checkbox" value="admin" />
+                        <label for="update_admin-scope">Admin: API token management, application management</label>
+                    </div>
+                </div>
                 <button id="update_app_button">Update app</button>
             </dialog>
         </div>
@@ -267,12 +294,6 @@ permalink: docs/app-registration/
         border-bottom: 3px solid var(--app-registration-tab-active-underline);
     }
 
-    /* make app-remove-btn disabled when data-state logged_in.manage_tab.loading */
-    [data-state~="logged_in.manage_tab.loading"] .app-remove-btn {
-        pointer-events: none;
-        display: none;
-    }
-
     .register-form-header {
         font-size: 14px;
         margin-right: 5px;
@@ -317,6 +338,47 @@ permalink: docs/app-registration/
     .register-login-button {
         cursor: pointer;
     }
+
+    /* add delete.svg icon to app-remove-btn */
+    .app-remove-btn {
+        background-image: url("/img/delete.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px;
+        background-origin: content-box;
+        background-clip: content-box;
+        border-radius: 4px;
+        border: 1px solid #ff444f;
+        color: #ff444f;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+        /* make app-remove-btn disabled when data-state logged_in.manage_tab.loading */
+        [data-state~="logged_in.manage_tab.loading"] .app-remove-btn {
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    .app-update-btn {
+        background-image: url("/img/edit.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px;
+        background-origin: content-box;
+        background-clip: content-box;
+        border-radius: 4px;
+        border: 1px solid #ff444f;
+        color: #ff444f;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+
 
 
     @media screen and (min-width: 992px) {
