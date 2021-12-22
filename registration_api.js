@@ -424,9 +424,8 @@ const removeApp = async (app_id) => {
 const appUpdate = async (app_id, name, redirect_uri, scopes) => {
     const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
     const token1 = sessionStorage.getItem('token1');
-    const arrayScopes = scopes.split(',').map((scope) => scope.trim());
     await api.authorize(token1);
-    await api.appUpdate({ app_update: app_id, name, redirect_uri, "scopes": arrayScopes });
+    await api.appUpdate({ app_update: app_id, name, redirect_uri, scopes });
     send({ type: 'FETCH_APP_LIST' });
 };
 // add open dialog function
@@ -445,43 +444,48 @@ const open_update_dialog = (id, name, scopes, redirect_uri) => {
     console.log({ id, name, scopes, redirect_uri });
     const dialog = document.getElementById('update_app_dialog');
     dialog.showModal();
-        /*
-                    <div class="scopes">
-                    <p class="bold scopes-field">Scopes:</p>
-                    <div class="scopes-field">
-                        <input id="update_read-scope" type="checkbox" value="read" />
-                        <label for="update_read-scope">Read: View account activity</label>
-                    </div>
-                    <div class="scopes-field">
-                        <input id="update_trade-scope" type="checkbox" value="trade" />
-                        <label for="update_trade-scope">Trade: Buy and sell contracts</label>
-                    </div>
-                    <div class="scopes-field">
-                        <input id="update_trading_information-scope" type="checkbox" value="trading_information" />
-                        <label for="update_trading_information-scope">Trading Information: View trading and balance
-                            information</label>
-                    </div>
-                    <div class="scopes-field">
-                        <input id="update_payments-scope" type="checkbox" value="payments" />
-                        <label for="update_payments-scope">Payments: Cashier (Deposit, Withdraw)</label>
-                    </div>
-                    <div class="scopes-field mb-0">
-                        <input id="update_admin-scope" type="checkbox" value="admin" />
-                        <label for="update_admin-scope">Admin: API token management, application management</label>
-                    </div>
-                </div>
-    */
     const update_name = document.getElementById('update_app_name');
     update_name.value = name;
     const update_redirect_uri = document.getElementById('update_app_redirect_uri');
     update_redirect_uri.value = redirect_uri;
-    const update_scopes = document.getElementById('app_scopes');
-    update_scopes.value = scopes;
     const update_app_button = document.getElementById('update_app_button');
+
+    const update_read_scope = document.getElementById('update_read-scope');
+    if (scopes.includes('read')) {
+        update_read_scope.checked = true;
+    }
+    const update_trade_scope = document.getElementById('update_trade-scope');
+    if (scopes.includes('trade')) {
+        update_trade_scope.checked = true;
+    }
+    const update_trading_information_scope = document.getElementById('update_trading_information-scope');
+    if (scopes.includes('trading_information')) {
+        update_trading_information_scope.checked = true;
+    }
+    const update_payments_scope = document.getElementById('update_payments-scope');
+    if (scopes.includes('payments')) {
+        update_payments_scope.checked = true;
+    }
+    const update_admin_scope = document.getElementById('update_admin-scope');
+    if (scopes.includes('admin')) {
+        update_admin_scope.checked = true;
+    }
+
+    const checkedScopes = () => {
+        const checked_scopes = [];
+        const checkboxes = document.querySelectorAll('#app_scopes input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checked_scopes.push(checkbox.value);
+            }
+        });
+        return checked_scopes;
+    }
+
     update_app_button.addEventListener('click', () => {
         const name = update_name.value;
         const redirect_uri = update_redirect_uri.value;
-        const scopes = update_scopes.value;
+        const scopes = checkedScopes();
         appUpdate(id, name, redirect_uri, scopes);
         dialog.close();
     });
