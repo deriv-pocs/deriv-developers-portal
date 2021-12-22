@@ -352,7 +352,9 @@ const appRegistrationMachine = createMachine({
                                 loadingUpdate: {
                                     id: "loadingUpdate",
                                     invoke: {
-                                        src: async () => await appUpdate(),
+                                        src: async (_, event) => {
+                                            await appUpdate(event.data)
+                                        },
                                         onDone: {
                                             target: "#successUpdate",
                                             // actions: assign({
@@ -502,7 +504,7 @@ const removeApp = async (app_id) => {
 }
 
 // add appUpdate sync function
-const appUpdate = async (app_id, name, redirect_uri, scopes) => {
+const appUpdate = async ({ app_id, name, redirect_uri, scopes }) => {
     const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
     const token1 = sessionStorage.getItem('token1');
     await api.authorize(token1);
@@ -521,7 +523,7 @@ const open_delete_dialog = (app_id) => {
 }
 
 // add open update dialog function
-const open_update_dialog = (id, name, scopes, redirect_uri) => {
+const open_update_dialog = (app_id, name, scopes, redirect_uri) => {
     const dialog = document.getElementById('update_app_dialog');
     dialog.showModal();
     const update_name = document.getElementById('update_app_name');
@@ -566,7 +568,7 @@ const open_update_dialog = (id, name, scopes, redirect_uri) => {
         const name = update_name.value;
         const redirect_uri = update_redirect_uri.value;
         const scopes = checkedScopes();
-        appUpdate(id, name, redirect_uri, scopes);
+        send({ type: "UPDATE_APP", data: { app_id, name, redirect_uri, scopes } });
         dialog.close();
     });
 }
