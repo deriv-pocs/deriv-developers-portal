@@ -263,41 +263,122 @@ const appRegistrationMachine = createMachine({
                 },
                 manage_tab: {
                     id: "manage_tab",
-                    initial: "loading",
+                    initial: "loadingApps",
                     on: {
                         REGISTER_TOGGLE_TAB: "#register_tab",
-                        // FETCH_DATA: "#loading",
-                        FETCH_APP_LIST: "#loading",
+                        FETCH_APP_LIST: "#loadingApps",
+                        DELETE_APP: "#deletingApp",
+                        UPDATE_APP: "#updateApp",
                     },
                     states: {
-                        loading: {
-                            id: "loading",
-                            invoke: {
-                                src: async () => await getAppList(),
-                                onDone: {
-                                    target: "#success",
-                                    // actions: assign({
-                                    //     apps: (_, event) => event.data,
-                                    // }),
+                        loadingApps: {
+                            id: "loadingApps",
+                            initial: 'loading',
+                            states: {
+                                loading: {
+                                    invoke: {
+                                        src: async () => await getAppList(),
+                                        onDone: {
+                                            target: "#successLoadingApps",
+                                            // actions: assign({
+                                            //     apps: (_, event) => event.data,
+                                            // }),
+                                        },
+                                        onError: {
+                                            target: "#errorLoadingApps",
+                                            // actions: assign({
+                                            //     error: (_, event) => event.data,
+                                            // }),
+                                        },
+                                    },
                                 },
-                                onError: {
-                                    target: "#error",
-                                    // actions: assign({
-                                    //     error: (_, event) => event.data,
-                                    // }),
+                                success: {
+                                    id: "successLoadingApps",
+                                    on: {
+                                        REFETCH: "#loadingApps",
+                                    },
+                                },
+                                error: {
+                                    id: "errorLoadingApps",
+                                    on: {
+                                        RETRY: "#loadingApps",
+                                    },
                                 },
                             },
                         },
-                        success: {
-                            id: "success",
-                            on: {
-                                REFETCH: "#loading",
+                        deletingApp: {
+                            id: "deletingApp",
+                            initial: "loadingDelete",
+                            states: {
+                                loadingDelete: {
+                                    id: "loadingDelete",
+                                    invoke: {
+                                        // get the app id from the event
+                                        src: async (_, event) => {
+                                            await removeApp(event.data);
+                                        },
+                                        onDone: {
+                                            target: "#successDelete",
+                                            // actions: assign({
+                                            //     apps: (_, event) => event.data,
+                                            // }),
+                                        },
+                                        onError: {
+                                            target: "#errorDelete",
+                                            // actions: assign({
+                                            //     error: (_, event) => event.data,
+                                            // }),
+                                        },
+                                    },
+                                },
+                                successDelete: {
+                                    id: "successDelete",
+                                    on: {
+                                        REFETCH: "#loadingDelete",
+                                    },
+                                },
+                                errorDelete: {
+                                    id: "errorDelete",
+                                    on: {
+                                        RETRY: "#loadingDelete",
+                                    },
+                                },
                             },
                         },
-                        error: {
-                            id: "error",
-                            on: {
-                                RETRY: "#loading",
+                        updateApp: {
+                            id: "updateApp",
+                            initial: "loadingUpdate",
+                            states: {
+                                loadingUpdate: {
+                                    id: "loadingUpdate",
+                                    invoke: {
+                                        src: async () => await appUpdate(),
+                                        onDone: {
+                                            target: "#successUpdate",
+                                            // actions: assign({
+                                            //     apps: (_, event) => event.data,
+                                            // }),
+                                        },
+                                        onError: {
+                                            target: "#errorUpdate",
+                                            // actions: assign({
+                                            //     error: (_, event) => event.data,
+                                            // }),
+                                        },
+                                    },
+                                },
+                                successUpdate: {
+                                    id: "successUpdate",
+                                    on: {
+                                        REFETCH: "#loadingUpdate",
+                                    },
+                                },
+                                errorUpdate: {
+                                    id: "errorUpdate",
+                                    on: {
+                                        RETRY: "#loadingUpdate",
+                                    },
+                                },
                             },
                         },
                     },
@@ -315,6 +396,7 @@ if (token) {
     sessionStorage.setItem('app_registration_state', 'logged_in');
     sessionState = 'logged_in';
 }
+
 function activate(state) {
     const joinedState = state.toStrings().join(' ');
     const elApp = document.getElementById('app-registration-machine');
@@ -412,7 +494,6 @@ const getAppList = async () => {
 }
 
 const removeApp = async (app_id) => {
-    console.log(app_id);
     const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
     const token1 = sessionStorage.getItem('token1');
     await api.authorize(token1);
@@ -434,14 +515,13 @@ const open_delete_dialog = (app_id) => {
     dialog.showModal();
     const delete_app_button = document.getElementById('delete_app_button');
     delete_app_button.addEventListener('click', () => {
-        removeApp(app_id);
+        send({ type: "DELETE_APP", data: app_id });
         dialog.close();
     });
 }
 
 // add open update dialog function
 const open_update_dialog = (id, name, scopes, redirect_uri) => {
-    console.log({ id, name, scopes, redirect_uri });
     const dialog = document.getElementById('update_app_dialog');
     dialog.showModal();
     const update_name = document.getElementById('update_app_name');
