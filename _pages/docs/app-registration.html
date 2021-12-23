@@ -192,6 +192,8 @@ permalink: docs/app-registration/
         --app-registration-tab-active-underline: #ff444f;
         --app-registration-tab-secondary: #999999;
         --app-registration-tab-tooltip-background: #D6DADB;
+        --app-registration-tab-light-grey: #E6E9E9;
+;
     }
 
     .app-registration-login {
@@ -446,6 +448,19 @@ permalink: docs/app-registration/
     .tooltip-link {
         font-size: 12px;
     }
+    /* add app-registration-tab-light-grey color to thead no borders */
+    [data-state~="logged_in.manage_tab.loadingApps"] .manage-apps thead {
+        display: none;
+    }
+
+
+
+    /* add app-registration-tab-light-grey color to thead no borders */
+    [data-state~="logged_in.manage_tab"] .manage-apps thead {
+        display: block;
+        background-color: var(--app-registration-tab-light-grey);
+    }
+    
 
     @media screen and (min-width: 992px) {
         .app-registration-login {
