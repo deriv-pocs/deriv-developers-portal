@@ -1257,7 +1257,6 @@ nav {
   width: 2px;
   height: inherit;
   margin-left: 220px;
-  background-color: rgba(240, 241, 243, 0.64);
 }
 .with-bg {
   background-image: url("/img/pattern-left.svg"), url("/img/pattern-right.svg");
@@ -1710,8 +1709,14 @@ button {
   max-width: 220px;
   width: 220px;
   position: fixed;
-  height: 100vh;
+  height: 100%;
+  margin-top: 80px;
   z-index: 10;
+  background: white;
+  left: 0;
+  padding-left: 10px;
+  border-right: 2px solid rgba(240, 241, 243, 0.64);
+  top: 105px;
 
   a {
     position: relative;
@@ -2177,7 +2182,6 @@ pre {
       }
 
       .vertical-separator {
-        background-color: rgba(37, 37, 37, 0.72);
         margin: 0 24px 0 0;
         width: 2px;
       }
@@ -2525,6 +2529,7 @@ footer {
   align-items: center;
   height: 54px;
   z-index: 300;
+  position: relative;
 
   .footer-container {
     width: 80%;
