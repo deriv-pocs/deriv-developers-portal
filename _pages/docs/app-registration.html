@@ -32,12 +32,15 @@ permalink: docs/app-registration/
                         <div class="form-header-container">
                             <h4 class="register-form-header">General information</h4>
                             <div class='info-icon'>
-                                <div class='tooltip'>No information provided yet.</div>
+                                <div class='tooltip'>
+                                    Please create your API token here 
+                                    <a href="https://app.deriv.com/account/api-token" class="tooltip-link">app.deriv.com/account/api-token</a>, and copy it into this field.
+                                </div>
                                 <img src="/img/info-icon.svg" />
                             </div>
                         </div>
                         <div class="api-token-wrapper">
-                            <input type="text" id="api-token-input" placeholder="Your token (Admin level)" />
+                            <input type="text" id="api-token-input" placeholder="API token (Required)" />
                             <p class="helper-text">max. 50 characters</p>
                             <div class="api-token-warning">
                         </div>
@@ -47,7 +50,7 @@ permalink: docs/app-registration/
                         </div>
                     </fieldset>
                     <div class="expand-form">
-                        <input id="expand_form" type="checkbox" autocomplete="off" />
+                        <input id="expand_form" class="expand-form-checkbox" type="checkbox" autocomplete="off" />
                         <label for="admin-scope">I'd like to use OAuth or monetise my app</label>
                     </div>
                     <div class="expandable-form">
@@ -158,24 +161,23 @@ permalink: docs/app-registration/
                     <p class="bold scopes-field">Scopes:</p>
                     <div class="scopes-field">
                         <input id="update_read-scope" type="checkbox" value="read" />
-                        <label for="update_read-scope">Read: View account activity</label>
+                        <label for="update_read-scope">Read all: Full access to users information, including private information</label>
                     </div>
                     <div class="scopes-field">
                         <input id="update_trade-scope" type="checkbox" value="trade" />
-                        <label for="update_trade-scope">Trade: Buy and sell contracts</label>
+                        <label for="update_trade-scope">Trade: Buy and sell contracts on the users' behalf</label>
                     </div>
                     <div class="scopes-field">
                         <input id="update_trading_information-scope" type="checkbox" value="trading_information" />
-                        <label for="update_trading_information-scope">Trading Information: View trading and balance
-                            information</label>
+                        <label for="update_trading_information-scope">Trading information: View users trading information, including balance information</label>
                     </div>
                     <div class="scopes-field">
                         <input id="update_payments-scope" type="checkbox" value="payments" />
-                        <label for="update_payments-scope">Payments: Cashier (Deposit, Withdraw)</label>
+                        <label for="update_payments-scope">Payments: Cashier (deposit and withdrawal)</label>
                     </div>
                     <div class="scopes-field mb-0">
                         <input id="update_admin-scope" type="checkbox" value="admin" />
-                        <label for="update_admin-scope">Admin: API token management, application management</label>
+                        <label for="update_admin-scope">Admin: Full account access, including the access to manage security tokens</label>
                     </div>
                 </div>
                 <button id="update_app_button">Update app</button>
@@ -281,6 +283,14 @@ permalink: docs/app-registration/
         padding: 20px 0 10px;
     }
 
+    .expand-form-checkbox {
+        margin-right: 16px;
+        transform: scale(1.23);
+        padding: 9px;
+        top: 1px;
+        position: relative;
+    }
+
     .form-header-container {
         display: flex;
         padding: 10px 0;
@@ -297,6 +307,7 @@ permalink: docs/app-registration/
 
     .info-icon {
         position: relative;
+        top: 2px !important;
     }
 
     .info-icon:hover .tooltip {
@@ -311,6 +322,10 @@ permalink: docs/app-registration/
         display: inline-block;
         width: 140px;
         transform: translate(-19%, calc(-100% - 10px));
+    }
+
+    .info-icon:hover .tooltip:hover {
+        display: inline-block;
     }
 
     .info-icon:hover .tooltip:before {
@@ -377,6 +392,7 @@ permalink: docs/app-registration/
 
     .registered-apps-tabs {
         display: flex;
+        padding: 40px 0;
     }
 
     .registered-apps-tabs button {
@@ -415,10 +431,33 @@ permalink: docs/app-registration/
         display: none;
     }
 
+    .tooltip:after {
+        background: transparent;
+        height: 15px;
+        content: ' ';
+        position: absolute;
+        left: 0;
+        width: inherit;
+        bottom: -15px;
+        padding: 0 8px;
+    }
+
+    .tooltip-link {
+        font-size: 12px;
+    }
+
     @media screen and (min-width: 992px) {
         .app-registration-login {
             padding-left: 158px;
             height: 614px;
+        }
+
+        .app-registration-header .form-title {
+            font-size: 48px;
+        }
+
+        .app-registration-header .form-subtitle {
+            font-size: 20px;
         }
 
         .info-icon:hover .tooltip:before {
