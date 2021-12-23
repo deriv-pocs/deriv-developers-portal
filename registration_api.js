@@ -212,10 +212,7 @@ const getSocketURL = () => {
 };
 
 const { createMachine, actions, interpret, assign } = XState;
-const getApps = () => {
-    const url = `https://random-data-api.com/api/coffee/random_coffee`;
-    return fetch(url).then(response => response.json());
-};
+
 const appRegistrationMachine = createMachine({
     id: "register_api",
     initial: "logged_in",
@@ -257,7 +254,34 @@ const appRegistrationMachine = createMachine({
                             id: "unfolded_form",
                             on: {
                                 TOGGLE_FORM: "#folded_form",
+                                SUBMIT_REGISTRATION: "#submitting_registration",
                             },
+                            states: {
+                                submitting_registration: {
+                                    id: "submitting_registration",
+                                    initial: "loading_registration",
+                                    states: {
+                                        loading_registration: {
+                                            id: "loading_registration",
+                                            invoke: {
+                                                src: async (_, event) => await registerApp(event.data),
+                                                onDone: {
+                                                    target: "#registration_success",
+                                                },
+                                                onError: {
+                                                    target: "#registration_error",
+                                                },
+                                            },
+                                        },
+                                        registration_success: {
+                                            id: "registration_success",
+                                        },
+                                        registration_error: {
+                                            id: "registration_error",
+                                        },
+                                    },
+                                },
+                            }
                         },
                     },
                 },
@@ -572,3 +596,54 @@ const open_update_dialog = (app_id, name, scopes, redirect_uri) => {
         dialog.close();
     });
 }
+
+
+// const token1 = sessionStorage.getItem('token1');
+// // fill api api-token-input input with token1
+// const api_token_input = document.getElementById('api-token-input');
+// if (api_token_input) {
+//     api_token_input.value = token1;
+// }
+
+
+
+// send SEND_REGISTER_APP when register_button is clicked
+const send_register_button = document.getElementById('btnRegister');
+if (send_register_button) {
+    send_register_button.addEventListener('click', (event) => {
+        //prevent default
+        event.preventDefault();
+        const name = document.getElementById('app_name').value;
+        const verification_uri = document.getElementById('app_verification_uri').value;
+        const redirect_uri = document.getElementById('app_redirect_uri').value;
+        const checkedRegisterScopes = () => {
+            const checked_scopes = [];
+            const checkboxes = document.querySelectorAll('#register_scopes input[type="checkbox"]');
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    checked_scopes.push(checkbox.value);
+                }
+            });
+            return checked_scopes;
+        }
+        const scopes = checkedRegisterScopes();
+        const app_markup_percentage = document.getElementById('app_markup_percentage').value;
+        send({
+            "type": "SUBMIT_REGISTRATION",
+            "data": {
+                "name": name,
+                "redirect_uri": redirect_uri,
+                "scopes": scopes,
+                "verification_uri": verification_uri,
+                "app_markup_percentage": app_markup_percentage
+            }
+        });
+    });
+};
+
+const registerApp = async ({ name, redirect_uri, scopes, verification_uri, app_markup_percentage }) => {
+    const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
+    const token1 = sessionStorage.getItem('token1');
+    await api.authorize(token1);
+    await api.appRegister({ name, redirect_uri, scopes, verification_uri, app_markup_percentage });
+};

@@ -66,7 +66,7 @@ permalink: docs/app-registration/
                             </div>
                             <div class="input-container">
                                 <div>
-                                    <input id="application-app_markup_percentage" type="text" maxlength="5"
+                                    <input id="app_markup_percentage" type="text" maxlength="5"
                                         placeholder="Markup percentage" class="last" />
                                     <p class="helper-text">(0.00-5.00%)</p>
                                 </div>
@@ -79,17 +79,17 @@ permalink: docs/app-registration/
                                 </div>
                             </div>
                             <div class="input-container">
-                                <input id="application-redirect_uri" type="text" maxlength="255"
+                                <input id="app_redirect_uri" type="text" maxlength="255"
                                     placeholder="Website URL" />
                                 <p class="helper-text">*Please note that this URL will be used as the OAuth redirect
                                     URL for the OAuth authorisation</p>
                             </div>
                             <div class="input-container">
-                                <input id="application-verification_uri" type="text" maxlength="255"
+                                <input id="app_verification_uri" type="text" maxlength="255"
                                     placeholder="Verification URL" />
                             </div>
                         </fieldset>
-                        <div class="scopes">
+                        <div class="scopes" id="register_scopes">
                             <div>
                                 <div class="form-header-container">
                                     <h4 class="register-form-header">OAuth authorisation levels</h4>
