@@ -26,8 +26,7 @@ $slider-height: 248px;
   .nav > .top-nav > .top-nav-container,
   .nav > header > .header-container > .navbar,
   #playground-sidebar,
-  #sidebar,
-  .vertical-separator {
+  #sidebar {
     display: none;
   }
   .row-container {
@@ -635,9 +634,6 @@ $slider-height: 248px;
     &-api-docs {
       width: 100% !important;
     }
-  }
-  .dark > .vertical-separator {
-    margin: 0 20px 0 40px;
   }
   header > nav {
     margin-left: 56px;
@@ -1253,11 +1249,6 @@ nav {
     }
   }
 }
-.vertical-separator {
-  width: 2px;
-  height: inherit;
-  margin-left: 220px;
-}
 .with-bg {
   background-image: url("/img/pattern-left.svg"), url("/img/pattern-right.svg");
   background-size: 46%, 50%;
@@ -1708,15 +1699,13 @@ button {
   flex-direction: column;
   max-width: 220px;
   width: 220px;
-  position: fixed;
+  position: relative;
   height: 100%;
-  margin-top: 80px;
   z-index: 10;
   background: white;
   left: 0;
   padding-left: 10px;
   border-right: 2px solid rgba(240, 241, 243, 0.64);
-  top: 105px;
 
   a {
     position: relative;
@@ -2179,11 +2168,6 @@ pre {
 
       hr {
         display: none;
-      }
-
-      .vertical-separator {
-        margin: 0 24px 0 0;
-        width: 2px;
       }
 
       .cta {
