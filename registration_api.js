@@ -215,7 +215,7 @@ const { createMachine, actions, interpret, assign } = XState;
 
 const appRegistrationMachine = createMachine({
     id: "register_api",
-    initial: "logged_in",
+    initial: "logged_out",
     // context: {
     //     apps: [],
     //     error: null,
