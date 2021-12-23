@@ -262,6 +262,7 @@ permalink: docs/app-registration/
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 100%;
     }
 
     [data-state~="logged_in.register_tab.unfolded_form"] .expandable-form {
@@ -360,10 +361,9 @@ permalink: docs/app-registration/
     }
 
     [data-state~="logged_in.manage_tab"] .manage-apps {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        display: inline-block;
+        overflow: auto;
+        width: 100%;
     }
 
     .manage-apps {
@@ -417,6 +417,11 @@ permalink: docs/app-registration/
         width: 100%;
         text-indent: 12px;
         margin-bottom: 4px !important;
+    }
+
+    .register-app-form {
+        width: 100%;
+        overflow: hidden;
     }
 
     .register-login-button {

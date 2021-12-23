@@ -1697,7 +1697,7 @@ button {
 .sidebar-left {
   display: flex;
   flex-direction: column;
-  max-width: 220px;
+  min-width: 220px;
   width: 220px;
   position: relative;
   height: 100%;
