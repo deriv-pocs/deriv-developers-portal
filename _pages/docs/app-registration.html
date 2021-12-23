@@ -139,6 +139,8 @@ permalink: docs/app-registration/
                         <th>Application ID</th>
                         <th>Scopes</th>
                         <th>Redirect URL</th>
+                        <th><!-- keep for button --></th>
+                        <th><!-- keep for button --></th>
                     </tr>
                 </thead>
                 <tbody id="app_list">
@@ -193,6 +195,7 @@ permalink: docs/app-registration/
         --app-registration-tab-secondary: #999999;
         --app-registration-tab-tooltip-background: #D6DADB;
         --app-registration-tab-light-grey: #E6E9E9;
+        --app-registration-tab-table-row-grey: #FBFBFB
 ;
     }
 
@@ -366,10 +369,31 @@ permalink: docs/app-registration/
         display: inline-block;
         overflow: auto;
         width: 100%;
+        padding-left: 125px;
     }
 
     .manage-apps {
         display: none;
+    }
+
+    .manage-apps table {
+        border-spacing: 0;
+        width: calc(100% - 125px);
+    }
+
+    .manage-apps thead {
+        height: 50px;
+        text-align: left;
+    }
+
+    .manage-apps th,
+    .manage-apps td {
+        padding: 16px;
+        min-width: 120px;
+    }
+
+    .manage-apps tbody tr:nth-child(even) {
+        background-color: var(--app-registration-tab-table-row-grey);
     }
 
     .page-content {
@@ -449,15 +473,15 @@ permalink: docs/app-registration/
         font-size: 12px;
     }
     /* add app-registration-tab-light-grey color to thead no borders */
-    [data-state~="logged_in.manage_tab.loadingApps"] .manage-apps thead {
-        display: none;
+    [data-state~="logged_in.manage_tab.loadingApps.loading"] thead {
+        visibility: hidden;
     }
 
 
 
     /* add app-registration-tab-light-grey color to thead no borders */
-    [data-state~="logged_in.manage_tab"] .manage-apps thead {
-        display: block;
+    [data-state~="logged_in.manage_tab.loadingApps.success"] .manage-apps thead {
+        visibility: visible;
         background-color: var(--app-registration-tab-light-grey);
     }
     
