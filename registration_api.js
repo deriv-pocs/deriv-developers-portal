@@ -1,3 +1,184 @@
+const { createMachine, actions, interpret, assign } = XState;
+
+const appRegistrationMachine = createMachine({
+    id: "register_api",
+    initial: "logged_out",
+    states: {
+        logged_out: {
+            id: "logged_out",
+            on: {
+                LOGIN: "#logged_in",
+            },
+        },
+        logged_in: {
+            id: "logged_in",
+            initial: "register_tab",
+            on: {
+                LOGOUT: "#logged_out",
+                MANAGE_TOGGLE_TAB: "#manage_tab",
+            },
+            states: {
+                register_tab: {
+                    id: "register_tab",
+                    initial: "folded_form",
+                    on: {
+                        LOGOUT: "#logged_out",
+                        TOGGLE_FORM: "#unfolded_form",
+                        MANAGE_TOGGLE_TAB: "#manage_tab",
+                    },
+                    states: {
+                        folded_form: {
+                            id: "folded_form",
+                            on: {
+                                TOGGLE_FORM: "#unfolded_form",
+                            },
+                        },
+                        unfolded_form: {
+                            id: "unfolded_form",
+                            on: {
+                                TOGGLE_FORM: "#folded_form",
+                                SUBMIT_REGISTRATION: "#submitting_registration",
+                            },
+                            states: {
+                                submitting_registration: {
+                                    id: "submitting_registration",
+                                    initial: "loading_registration",
+                                    states: {
+                                        loading_registration: {
+                                            id: "loading_registration",
+                                            invoke: {
+                                                src: async (_, event) => await registerApp(event.data),
+                                                onDone: {
+                                                    target: "#registration_success",
+                                                },
+                                                onError: {
+                                                    target: "#registration_error",
+                                                },
+                                            },
+                                        },
+                                        registration_success: {
+                                            id: "registration_success",
+                                        },
+                                        registration_error: {
+                                            id: "registration_error",
+                                        },
+                                    },
+                                },
+                            }
+                        },
+                    },
+                },
+                manage_tab: {
+                    id: "manage_tab",
+                    initial: "loadingApps",
+                    on: {
+                        REGISTER_TOGGLE_TAB: "#register_tab",
+                        FETCH_APP_LIST: "#loadingApps",
+                        DELETE_APP: "#deletingApp",
+                        UPDATE_APP: "#updateApp",
+                    },
+                    states: {
+                        loadingApps: {
+                            id: "loadingApps",
+                            initial: 'loading',
+                            states: {
+                                loading: {
+                                    invoke: {
+                                        src: async () => await getAppList(),
+                                        onDone: {
+                                            target: "#successLoadingApps",
+                                        },
+                                        onError: {
+                                            target: "#errorLoadingApps",
+                                        },
+                                    },
+                                },
+                                success: {
+                                    id: "successLoadingApps",
+                                    on: {
+                                        REFETCH: "#loadingApps",
+                                    },
+                                },
+                                error: {
+                                    id: "errorLoadingApps",
+                                    on: {
+                                        RETRY: "#loadingApps",
+                                    },
+                                },
+                            },
+                        },
+                        deletingApp: {
+                            id: "deletingApp",
+                            initial: "loadingDelete",
+                            states: {
+                                loadingDelete: {
+                                    id: "loadingDelete",
+                                    invoke: {
+                                        // get the app id from the event
+                                        src: async (_, event) => {
+                                            await removeApp(event.data);
+                                        },
+                                        onDone: {
+                                            target: "#successDelete",
+                                        },
+                                        onError: {
+                                            target: "#errorDelete",
+                                        },
+                                    },
+                                },
+                                successDelete: {
+                                    id: "successDelete",
+                                    on: {
+                                        REFETCH: "#loadingDelete",
+                                    },
+                                },
+                                errorDelete: {
+                                    id: "errorDelete",
+                                    on: {
+                                        RETRY: "#loadingDelete",
+                                    },
+                                },
+                            },
+                        },
+                        updateApp: {
+                            id: "updateApp",
+                            initial: "loadingUpdate",
+                            states: {
+                                loadingUpdate: {
+                                    id: "loadingUpdate",
+                                    invoke: {
+                                        src: async (_, event) => {
+                                            await appUpdate(event.data)
+                                        },
+                                        onDone: {
+                                            target: "#successUpdate",
+                                        },
+                                        onError: {
+                                            target: "#errorUpdate",
+                                        },
+                                    },
+                                },
+                                successUpdate: {
+                                    id: "successUpdate",
+                                    on: {
+                                        REFETCH: "#loadingUpdate",
+                                    },
+                                },
+                                errorUpdate: {
+                                    id: "errorUpdate",
+                                    on: {
+                                        RETRY: "#loadingUpdate",
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+});
+
 const isStorageSupported = storage => {
     if (typeof storage === 'undefined') {
         return false;
@@ -195,202 +376,6 @@ const loginUrl = ({ language }) => {
     }
     return new URL(getOAuthUrl()).href;
 };
-
-const getSocketURL = () => {
-    let active_loginid_from_url;
-    const search = window.location.search;
-    if (search) {
-        const params = new URLSearchParams(document.location.search.substring(1));
-        active_loginid_from_url = params.get('acct1');
-    }
-
-    const loginid = window.localStorage.getItem('active_loginid') || active_loginid_from_url;
-    const is_real = loginid && !/^VRT/.test(loginid);
-    const server = is_real ? 'green' : 'blue';
-    const server_url = `${server}.binaryws.com`;
-    return server_url;
-};
-
-const { createMachine, actions, interpret, assign } = XState;
-
-const appRegistrationMachine = createMachine({
-    id: "register_api",
-    initial: "logged_out",
-    states: {
-        logged_out: {
-            id: "logged_out",
-            on: {
-                LOGIN: "#logged_in",
-            },
-        },
-        logged_in: {
-            id: "logged_in",
-            initial: "register_tab",
-            on: {
-                LOGOUT: "#logged_out",
-                MANAGE_TOGGLE_TAB: "#manage_tab",
-            },
-            states: {
-                register_tab: {
-                    id: "register_tab",
-                    initial: "folded_form",
-                    on: {
-                        LOGOUT: "#logged_out",
-                        TOGGLE_FORM: "#unfolded_form",
-                        MANAGE_TOGGLE_TAB: "#manage_tab",
-                    },
-                    states: {
-                        folded_form: {
-                            id: "folded_form",
-                            on: {
-                                TOGGLE_FORM: "#unfolded_form",
-                            },
-                        },
-                        unfolded_form: {
-                            id: "unfolded_form",
-                            on: {
-                                TOGGLE_FORM: "#folded_form",
-                                SUBMIT_REGISTRATION: "#submitting_registration",
-                            },
-                            states: {
-                                submitting_registration: {
-                                    id: "submitting_registration",
-                                    initial: "loading_registration",
-                                    states: {
-                                        loading_registration: {
-                                            id: "loading_registration",
-                                            invoke: {
-                                                src: async (_, event) => await registerApp(event.data),
-                                                onDone: {
-                                                    target: "#registration_success",
-                                                },
-                                                onError: {
-                                                    target: "#registration_error",
-                                                },
-                                            },
-                                        },
-                                        registration_success: {
-                                            id: "registration_success",
-                                        },
-                                        registration_error: {
-                                            id: "registration_error",
-                                        },
-                                    },
-                                },
-                            }
-                        },
-                    },
-                },
-                manage_tab: {
-                    id: "manage_tab",
-                    initial: "loadingApps",
-                    on: {
-                        REGISTER_TOGGLE_TAB: "#register_tab",
-                        FETCH_APP_LIST: "#loadingApps",
-                        DELETE_APP: "#deletingApp",
-                        UPDATE_APP: "#updateApp",
-                    },
-                    states: {
-                        loadingApps: {
-                            id: "loadingApps",
-                            initial: 'loading',
-                            states: {
-                                loading: {
-                                    invoke: {
-                                        src: async () => await getAppList(),
-                                        onDone: {
-                                            target: "#successLoadingApps",
-                                        },
-                                        onError: {
-                                            target: "#errorLoadingApps",
-                                        },
-                                    },
-                                },
-                                success: {
-                                    id: "successLoadingApps",
-                                    on: {
-                                        REFETCH: "#loadingApps",
-                                    },
-                                },
-                                error: {
-                                    id: "errorLoadingApps",
-                                    on: {
-                                        RETRY: "#loadingApps",
-                                    },
-                                },
-                            },
-                        },
-                        deletingApp: {
-                            id: "deletingApp",
-                            initial: "loadingDelete",
-                            states: {
-                                loadingDelete: {
-                                    id: "loadingDelete",
-                                    invoke: {
-                                        // get the app id from the event
-                                        src: async (_, event) => {
-                                            await removeApp(event.data);
-                                        },
-                                        onDone: {
-                                            target: "#successDelete",
-                                        },
-                                        onError: {
-                                            target: "#errorDelete",
-                                        },
-                                    },
-                                },
-                                successDelete: {
-                                    id: "successDelete",
-                                    on: {
-                                        REFETCH: "#loadingDelete",
-                                    },
-                                },
-                                errorDelete: {
-                                    id: "errorDelete",
-                                    on: {
-                                        RETRY: "#loadingDelete",
-                                    },
-                                },
-                            },
-                        },
-                        updateApp: {
-                            id: "updateApp",
-                            initial: "loadingUpdate",
-                            states: {
-                                loadingUpdate: {
-                                    id: "loadingUpdate",
-                                    invoke: {
-                                        src: async (_, event) => {
-                                            await appUpdate(event.data)
-                                        },
-                                        onDone: {
-                                            target: "#successUpdate",
-                                        },
-                                        onError: {
-                                            target: "#errorUpdate",
-                                        },
-                                    },
-                                },
-                                successUpdate: {
-                                    id: "successUpdate",
-                                    on: {
-                                        REFETCH: "#loadingUpdate",
-                                    },
-                                },
-                                errorUpdate: {
-                                    id: "errorUpdate",
-                                    on: {
-                                        RETRY: "#loadingUpdate",
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-            },
-        },
-    },
-});
 
 let sessionState = sessionStorage.getItem('app_registration_state') || 'logged_out';
 const urlParams = new URLSearchParams(window.location.search);
