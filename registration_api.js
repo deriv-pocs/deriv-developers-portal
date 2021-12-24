@@ -216,10 +216,6 @@ const { createMachine, actions, interpret, assign } = XState;
 const appRegistrationMachine = createMachine({
     id: "register_api",
     initial: "logged_out",
-    // context: {
-    //     apps: [],
-    //     error: null,
-    // },
     states: {
         logged_out: {
             id: "logged_out",
@@ -304,15 +300,9 @@ const appRegistrationMachine = createMachine({
                                         src: async () => await getAppList(),
                                         onDone: {
                                             target: "#successLoadingApps",
-                                            // actions: assign({
-                                            //     apps: (_, event) => event.data,
-                                            // }),
                                         },
                                         onError: {
                                             target: "#errorLoadingApps",
-                                            // actions: assign({
-                                            //     error: (_, event) => event.data,
-                                            // }),
                                         },
                                     },
                                 },
@@ -343,15 +333,9 @@ const appRegistrationMachine = createMachine({
                                         },
                                         onDone: {
                                             target: "#successDelete",
-                                            // actions: assign({
-                                            //     apps: (_, event) => event.data,
-                                            // }),
                                         },
                                         onError: {
                                             target: "#errorDelete",
-                                            // actions: assign({
-                                            //     error: (_, event) => event.data,
-                                            // }),
                                         },
                                     },
                                 },
@@ -381,15 +365,9 @@ const appRegistrationMachine = createMachine({
                                         },
                                         onDone: {
                                             target: "#successUpdate",
-                                            // actions: assign({
-                                            //     apps: (_, event) => event.data,
-                                            // }),
                                         },
                                         onError: {
                                             target: "#errorUpdate",
-                                            // actions: assign({
-                                            //     error: (_, event) => event.data,
-                                            // }),
                                         },
                                     },
                                 },
@@ -455,7 +433,6 @@ if (unfolded_form_checkbox) {
     });
 }
 
-// get register_button and send event "MANAGE_TOGGLE_TAB"
 const register_button = document.getElementById('register_button');
 if (register_button) {
     register_button.addEventListener('click', () => {
@@ -465,7 +442,6 @@ if (register_button) {
     });
 }
 
-// get manage_button and send event "REGISTER_TOGGLE_TAB"
 const manage_button = document.getElementById('manage_button');
 if (manage_button) {
     manage_button.addEventListener('click', () => {
@@ -527,7 +503,6 @@ const removeApp = async (app_id) => {
     send({ type: 'FETCH_APP_LIST' });
 }
 
-// add appUpdate sync function
 const appUpdate = async ({ app_id, name, redirect_uri, scopes }) => {
     const api = new DerivAPIBasic({ endpoint: 'qa10.deriv.dev', lang: 'EN', app_id: 1016 });
     const token1 = sessionStorage.getItem('token1');
@@ -535,7 +510,7 @@ const appUpdate = async ({ app_id, name, redirect_uri, scopes }) => {
     await api.appUpdate({ app_update: app_id, name, redirect_uri, scopes });
     send({ type: 'FETCH_APP_LIST' });
 };
-// add open dialog function
+
 const open_delete_dialog = (app_id) => {
     const dialog = document.getElementById('delete_app_dialog');
     dialog.showModal();
@@ -546,7 +521,6 @@ const open_delete_dialog = (app_id) => {
     });
 }
 
-// add open update dialog function
 const open_update_dialog = (app_id, name, scopes, redirect_uri) => {
     const dialog = document.getElementById('update_app_dialog');
     dialog.showModal();
@@ -597,21 +571,9 @@ const open_update_dialog = (app_id, name, scopes, redirect_uri) => {
     });
 }
 
-
-// const token1 = sessionStorage.getItem('token1');
-// // fill api api-token-input input with token1
-// const api_token_input = document.getElementById('api-token-input');
-// if (api_token_input) {
-//     api_token_input.value = token1;
-// }
-
-
-
-// send SEND_REGISTER_APP when register_button is clicked
 const send_register_button = document.getElementById('btnRegister');
 if (send_register_button) {
     send_register_button.addEventListener('click', (event) => {
-        //prevent default
         event.preventDefault();
         const name = document.getElementById('app_name').value;
         const verification_uri = document.getElementById('app_verification_uri').value;
