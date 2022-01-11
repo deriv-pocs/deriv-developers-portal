@@ -511,31 +511,31 @@ const getAppList = async () => {
         document.getElementById('app_list').appendChild(tr);
     });
     await api.authorize(token1);
-    // const get_data = await api.appList();
-    // const app_list = get_data.app_list;
-    // // send go to empty state when no app_list
-    // if (!app_list.length) {
-    //     send({
-    //         "type": "GO_TO_EMPTY_STATE"
-    //     });
-    // };
-    // const app_list_body = document.getElementById('app_list');
-    // while (app_list_body.firstChild) {
-    //     app_list_body.removeChild(app_list_body.firstChild);
-    // }
-    // app_list.forEach((app) => {
-    //     const tr = document.createElement('tr');
-    //     tr.innerHTML = `<td>${app.name}</td>
-    //                     <td>${app.app_id}</td>
-    //                     <td>${app.scopes.join(', ')}</td>
-    //                     <td>${app.redirect_uri}</td>
-    //                     <td>
-    //                         <button aria-label="Update app" class="app-btn update-icon" onclick="open_update_dialog(${app.app_id}, '${app.name}', '${app.scopes.join(', ')}', '${app.redirect_uri}' )"><span>Remove app</span></button>
-    //                         <button aria-label="Delete app" class="app-btn delete-icon" onclick="open_delete_dialog(${app.app_id})"><span>Update app</span></button>
-    //                     </td>
-    //                     `;
-    //     app_list_body.appendChild(tr);
-    // });
+    const get_data = await api.appList();
+    const app_list = get_data.app_list;
+    // send go to empty state when no app_list
+    if (!app_list.length) {
+        send({
+            "type": "GO_TO_EMPTY_STATE"
+        });
+    };
+    const app_list_body = document.getElementById('app_list');
+    while (app_list_body.firstChild) {
+        app_list_body.removeChild(app_list_body.firstChild);
+    }
+    app_list.forEach((app) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${app.name}</td>
+                        <td>${app.app_id}</td>
+                        <td>${app.scopes.join(', ')}</td>
+                        <td>${app.redirect_uri}</td>
+                        <td>
+                            <button aria-label="Update app" class="app-btn update-icon" onclick="open_update_dialog(${app.app_id}, '${app.name}', '${app.scopes.join(', ')}', '${app.redirect_uri}' )"><span>Remove app</span></button>
+                            <button aria-label="Delete app" class="app-btn delete-icon" onclick="open_delete_dialog(${app.app_id})"><span>Update app</span></button>
+                        </td>
+                        `;
+        app_list_body.appendChild(tr);
+    });
 }
 
 const removeApp = async (app_id) => {
