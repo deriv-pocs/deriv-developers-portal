@@ -205,7 +205,6 @@ const appRegistrationMachine = createMachine({
 }, {
     services: {
         resetFields: async () => {
-            console.log('resseting plssss ');
             const form = document.querySelector('#frmNewApplication');
             form.reset();
         },
