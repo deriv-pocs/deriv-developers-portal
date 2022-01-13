@@ -29,6 +29,9 @@ const appRegistrationMachine = createMachine({
                     states: {
                         folded_form: {
                             id: "folded_form",
+                            invoke: {
+                                src: 'resetFields',
+                            },
                             on: {
                                 TOGGLE_FORM: "#unfolded_form",
                             },
@@ -158,7 +161,9 @@ const appRegistrationMachine = createMachine({
                 },
                 update_mode: {
                     id: "update_mode",
-                    on: { SUBMIT_REGISTRATION: "#updateApp" },
+                    on: {
+                        SUBMIT_REGISTRATION: "#updateApp",
+                    },
                     states: {
                         updateApp: {
                             id: "updateApp",
@@ -195,6 +200,14 @@ const appRegistrationMachine = createMachine({
                     },
                 },
             },
+        },
+    },
+}, {
+    services: {
+        resetFields: async () => {
+            console.log('resseting plssss ');
+            const form = document.querySelector('#frmNewApplication');
+            form.reset();
         },
     },
 });
