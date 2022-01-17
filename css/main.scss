@@ -1,5 +1,16 @@
 ---
 ---
+:root {
+  --app-sidebar-border-color: #f0f1f3a3;
+  --app-registration-tab-active-font: #333333;
+  --app-registration-tab-active-underline: #ff444f;
+  --app-registration-tab-secondary: #999999;
+  --app-registration-tab-tooltip-background: #D6DADB;
+  --app-registration-tab-light-grey: #E6E9E9;
+  --app-registration-tab-table-row-grey: #FBFBFB;
+  --app-registration-text-submit: #ffffff;
+}
+
 $slider-width: 588px;
 $slider-width-mobile: 248px; 
 $slider-height: 248px;
@@ -26,8 +37,7 @@ $slider-height: 248px;
   .nav > .top-nav > .top-nav-container,
   .nav > header > .header-container > .navbar,
   #playground-sidebar,
-  #sidebar,
-  .vertical-separator {
+  #sidebar {
     display: none;
   }
   .row-container {
@@ -552,7 +562,7 @@ $slider-height: 248px;
           }
 
           .selected {
-            background-color: rgba(240, 241, 243, 0.64);
+            background-color: var(--app-sidebar-border-color);
             border-radius: 4px;
             font-weight: bold;
             opacity: 1;
@@ -572,7 +582,7 @@ $slider-height: 248px;
       }
 
       .selected {
-        background-color: rgba(240, 241, 243, 0.64);
+        background-color: var(--app-sidebar-border-color);
         border-radius: 4px;
         opacity: 1;
 
@@ -635,9 +645,6 @@ $slider-height: 248px;
     &-api-docs {
       width: 100% !important;
     }
-  }
-  .dark > .vertical-separator {
-    margin: 0 20px 0 40px;
   }
   header > nav {
     margin-left: 56px;
@@ -1253,12 +1260,6 @@ nav {
     }
   }
 }
-.vertical-separator {
-  width: 2px;
-  height: inherit;
-  margin-left: 220px;
-  background-color: rgba(240, 241, 243, 0.64);
-}
 .with-bg {
   background-image: url("/img/pattern-left.svg"), url("/img/pattern-right.svg");
   background-size: 46%, 50%;
@@ -1351,7 +1352,7 @@ ul {
   width: auto;
   padding: 24px 0;
   border-radius: 4px;
-  background-color: rgba(240, 241, 243, 0.64);
+  background-color: var(--app-sidebar-border-color);
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
@@ -1707,11 +1708,15 @@ button {
 .sidebar-left {
   display: flex;
   flex-direction: column;
-  max-width: 220px;
+  min-width: 220px;
   width: 220px;
-  position: fixed;
-  height: 100vh;
+  position: relative;
+  height: 100%;
   z-index: 10;
+  background: white;
+  left: 0;
+  padding-left: 10px;
+  border-right: 2px solid var(--app-sidebar-border-color);
 
   a {
     position: relative;
@@ -1751,7 +1756,7 @@ button {
   }
 
   .selected {
-    background-color: rgba(240, 241, 243, 0.64);
+    background-color: var(--app-sidebar-border-color);
     font-size: 16px;
     font-weight: bold;
     line-height: 1.88;
@@ -2176,12 +2181,6 @@ pre {
         display: none;
       }
 
-      .vertical-separator {
-        background-color: rgba(37, 37, 37, 0.72);
-        margin: 0 24px 0 0;
-        width: 2px;
-      }
-
       .cta {
         display: flex;
         flex-direction: column;
@@ -2525,6 +2524,7 @@ footer {
   align-items: center;
   height: 54px;
   z-index: 300;
+  position: relative;
 
   .footer-container {
     width: 80%;
@@ -2579,7 +2579,7 @@ footer {
     border: solid 1px #d6dadb;
     border-radius: 6px;
     thead {
-      background-color: rgba(240, 241, 243, 0.64);
+      background-color: var(--app-sidebar-border-color);
 
       .flex-tr {
         border-bottom: solid 1px #d6dadb;
@@ -2633,3 +2633,5 @@ footer {
 }
 
 @import "monokai.css";
+@import "registration.css";
+
