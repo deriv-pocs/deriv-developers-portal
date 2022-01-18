@@ -561,6 +561,7 @@ const getAppList = async () => {
                         </td>
                         `;
         app_list_body.appendChild(tr);
+        tr.classList.add("data");
     });
 }
 
@@ -591,10 +592,6 @@ const open_delete_dialog = (app_id) => {
         dialog.close();
     });
 }
-
-// const edit_app_mode (app_id, name, scopes, redirect_uri) => {
-
-// }
 
 const go_update_mode = (...app) => {
     const [_active, app_id, app_markup_percentage,

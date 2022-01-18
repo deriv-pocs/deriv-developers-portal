@@ -32,18 +32,21 @@ input[type="checkbox"] {
 .custom-checkbox {
   display: inline-block;
   border: 2px solid var(--app-registration-tab-secondary);
-  width: 11px;
+  min-width: 11px;
   height: 11px;
   position: relative;
   top: 1px;
-  margin-right: 5px;
+  margin-right: 8px;
   border-radius: 2px;
   transition: background-color .25s, border-color .25s;
-}
-
-.custom-checkbox .check-icon {
-  display: none;
-}
+  &#expand_form {
+    top: 3px;
+    margin-right: 16px;
+  }
+  .check-icon {
+    display: none;
+  }
+} 
 
 .active-checkbox .check-icon {
   display: inline-block;
