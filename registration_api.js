@@ -573,12 +573,12 @@ const removeApp = async (app_id) => {
     send({ type: 'FETCH_APP_LIST' });
 }
 
-const appUpdate = async ({ app_id, name, redirect_uri, scopes }) => {
+const appUpdate = async ({ app_id, name, redirect_uri, verification_uri, scopes }) => {
     const endpoint = getEndpoint();
     const api = new DerivAPIBasic({ endpoint, lang: 'EN', app_id });
     const token1 = getToken();
     await api.authorize(token1);
-    await api.appUpdate({ app_update: app_id, name, redirect_uri, scopes });
+    await api.appUpdate({ app_update: app_id, name, redirect_uri, verification_uri, scopes });
     send({ type: 'FETCH_APP_LIST' });
 };
 
@@ -601,8 +601,7 @@ const go_update_mode = (...app) => {
         _appstore, _github, _googleplay, _homepage, name,
         redirect_uri, verification_uri, scopes] = app;
     send({ type: "GO_UPDATE_MODE"}); // TODO: send app_id through xstate
-
-
+    
     // get register your application fields
     const app_name_input = document.getElementById('app_name');
     const app_redirect_uri_input = document.getElementById('app_redirect_uri');
