@@ -133,7 +133,7 @@ const appRegistrationMachine = createMachine({
                                     invoke: {
                                         // get the app id from the event
                                         src: async (_, event) => {
-                                            await removeApp(event.data);
+                                            await removeApp(event.data);;
                                         },
                                         onDone: {
                                             target: "#successDelete",
@@ -173,7 +173,7 @@ const appRegistrationMachine = createMachine({
                                     id: "loadingUpdate",
                                     invoke: {
                                         src: async (_, event) => {
-                                            await appUpdate(event.data)
+                                            await appUpdate(event.data);
                                         },
                                         onDone: {
                                             target: "#successUpdate",
@@ -573,12 +573,13 @@ const removeApp = async (app_id) => {
     send({ type: 'FETCH_APP_LIST' });
 }
 
-const appUpdate = async ({ app_id, name, redirect_uri, verification_uri, scopes }) => {
+const appUpdate = async ({ app_id, app_markup_percentage, name, redirect_uri, verification_uri, scopes }) => {
+    console.log('testestestestest');
     const endpoint = getEndpoint();
     const api = new DerivAPIBasic({ endpoint, lang: 'EN', app_id });
     const token1 = getToken();
     await api.authorize(token1);
-    await api.appUpdate({ app_update: app_id, name, redirect_uri, verification_uri, scopes });
+    await api.appUpdate({ app_update: app_id, app_markup_percentage, name, redirect_uri, verification_uri, scopes });
     send({ type: 'FETCH_APP_LIST' });
 };
 
@@ -591,10 +592,6 @@ const open_delete_dialog = (app_id) => {
         dialog.close();
     });
 }
-
-// const edit_app_mode (app_id, name, scopes, redirect_uri) => {
-
-// }
 
 const go_update_mode = (...app) => {
     const [_active, app_id, app_markup_percentage,
