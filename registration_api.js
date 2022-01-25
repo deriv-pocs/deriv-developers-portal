@@ -410,10 +410,6 @@ const getToken = () => {
     }
 };
 
-const getStorageToken = () => {
-    return localStorage.getItem("config.token");
-}
-
 // get app_id from url
 const app_id_in_url = urlParams.get('app_id');
 // if app_id is in url, set it in LocalStore
