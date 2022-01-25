@@ -35,7 +35,7 @@ input[type="checkbox"] {
 
 .custom-checkbox {
   background-image: url("/img/check.svg");
-  background-size: 0;
+  background-repeat: no-repeat;
   display: inline-block;
   border: 2px solid var(--app-registration-tab-secondary);
   min-width: 11px;
