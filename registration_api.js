@@ -388,6 +388,7 @@ let sessionState = sessionStorage.getItem('app_registration_state') || 'logged_o
 const urlParams = new URLSearchParams(window.location.search);
 const token1_in_url = urlParams.get('token1');
 if (token1_in_url) {
+    sessionStorage.setItem('token1', token1_in_url);
     sessionStorage.setItem('app_registration_state', 'logged_in');
     sessionState = 'logged_in';
 }
@@ -411,7 +412,7 @@ const getToken = () => {
 };
 
 const getStorageToken = () => {
-    return localStorage.getItem("config.token");
+    return sessionStorage.getItem('token1');
 }
 
 // get app_id from url
