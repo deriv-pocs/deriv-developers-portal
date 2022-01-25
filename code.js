@@ -732,8 +732,6 @@ all_main_checkboxes.forEach(checkbox => {
 
   custom_checkbox.className = "custom-checkbox";
   custom_checkbox.id = checkbox.id;
-  check_icon.className = "check-icon";
-  check_icon.setAttribute("src", "/img/check.svg")
   
   custom_checkbox.appendChild(check_icon);
   checkbox.after(custom_checkbox);
