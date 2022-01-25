@@ -580,8 +580,6 @@ const removeApp = async (app_id) => {
     send({ type: 'FETCH_APP_LIST' });
 }
 
-console.log(getStorageToken());
-
 const appUpdate = async ({ app_id, app_markup_percentage, name, redirect_uri, verification_uri, scopes }) => {
     const endpoint = getEndpoint();
     const api = new DerivAPIBasic({ endpoint, lang: 'EN', app_id });
