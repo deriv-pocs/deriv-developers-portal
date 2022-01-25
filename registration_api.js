@@ -133,7 +133,7 @@ const appRegistrationMachine = createMachine({
                                     invoke: {
                                         // get the app id from the event
                                         src: async (_, event) => {
-                                            await removeApp(event.data);;
+                                            await removeApp(event.data);
                                         },
                                         onDone: {
                                             target: "#successDelete",
@@ -574,7 +574,6 @@ const removeApp = async (app_id) => {
 }
 
 const appUpdate = async ({ app_id, app_markup_percentage, name, redirect_uri, verification_uri, scopes }) => {
-    console.log('testestestestest');
     const endpoint = getEndpoint();
     const api = new DerivAPIBasic({ endpoint, lang: 'EN', app_id });
     const token1 = getToken();
