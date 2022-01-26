@@ -40,13 +40,18 @@ permalink: docs/app-registration/
                             </div>
                         </div>
                         <div class="api-token-wrapper">
-                            <input type="text" id="api-token-input" placeholder="API token (Required)" />
+                            <div class="custom-text-input" id="custom-text-input">
+                                <input type="text" id="api_token_input" class="api-token-input" placeholder=" " />
+                                <label>API token (Required)</label>
+                            </div>
                             <p class="helper-text">max. 50 characters</p>
                             <div class="api-token-warning">
                             </div>
                             <div class="first">
-                                <input type="text" id="app_name" name="app_name" placeholder="App name (Required)"
-                                    pattern="^[\w\s-]{1,48}$" required />
+                                <div class="custom-text-input" id="custom-text-input">
+                                    <input type="text" id="app_name" name="app_name" pattern="^[\w\s-]{1,48}$" placeholder=" " required />
+                                    <label>App name (Required)</label>
+                                </div>
                             </div>
                     </fieldset>
                     <div class="expand-form">
@@ -66,8 +71,10 @@ permalink: docs/app-registration/
                             </div>
                             <div class="input-container">
                                 <div>
-                                    <input id="app_markup_percentage" type="text" maxlength="5"
-                                        placeholder="Markup percentage" class="last" />
+                                    <div class="custom-text-input" id="custom-text-input">
+                                        <input id="app_markup_percentage" type="text" maxlength="5" class="last" placeholder=" " />
+                                        <label>Markup percentage</label>
+                                    </div>
                                     <p class="helper-text">(0.00-5.00%)</p>
                                 </div>
                             </div>
@@ -79,14 +86,18 @@ permalink: docs/app-registration/
                                 </div>
                             </div>
                             <div class="input-container">
-                                <input id="app_redirect_uri" type="text" maxlength="255"
-                                    placeholder="Website URL" />
+                                <div class="custom-text-input" id="custom-text-input">
+                                    <input id="app_redirect_uri" type="text" maxlength="255" placeholder=" " />
+                                    <label>Website URL</label>
+                                </div>
                                 <p class="helper-text">*Please note that this URL will be used as the OAuth redirect
                                     URL for the OAuth authorisation</p>
                             </div>
                             <div class="input-container">
-                                <input id="app_verification_uri" type="text" maxlength="255"
-                                    placeholder="Verification URL" />
+                                <div class="custom-text-input" id="custom-text-input">
+                                    <input id="app_verification_uri" type="text" maxlength="255" placeholder=" " />
+                                    <label>Verification URL</label>
+                                </div>
                             </div>
                         </fieldset>
                         <div class="scopes" id="register_scopes">
@@ -106,24 +117,23 @@ permalink: docs/app-registration/
                             </div>
                             <div class="scopes-field">
                                 <input id="read-scope" type="checkbox" value="read" />
-                                <label for="read-scope">Read: View account activity</label>
+                                <label for="read-scope">Read all: Full access to users’ information, including private information</label>
                             </div>
                             <div class="scopes-field">
                                 <input id="trade-scope" type="checkbox" value="trade" />
-                                <label for="trade-scope">Trade: Buy and sell contracts</label>
+                                <label for="trade-scope">Trade: Buy and sell contracts on the users’ behalf</label>
                             </div>
                             <div class="scopes-field">
                                 <input id="trading_information-scope" type="checkbox" value="trading_information" />
-                                <label for="trading_information-scope">Trading Information: View trading and balance
-                                    information</label>
+                                <label for="trading_information-scope">Trading information: View users’ trading information, including balance information</label>
                             </div>
                             <div class="scopes-field">
                                 <input id="payments-scope" type="checkbox" value="payments" />
-                                <label for="payments-scope">Payments: Cashier (Deposit, Withdraw)</label>
+                                <label for="payments-scope">Payments: Cashier (deposit and withdrawal)</label>
                             </div>
                             <div class="scopes-field mb-0">
                                 <input id="admin-scope" type="checkbox" value="admin" />
-                                <label for="admin-scope">Admin: API token management, application management</label>
+                                <label for="admin-scope">Admin: Full account access, including the access to manage security tokens</label>
                             </div>
                         </div>
                             <div class="terms-of-conditions-register">
@@ -182,10 +192,10 @@ permalink: docs/app-registration/
                             <img src="/img/table-empty.svg" alt="No apps registered" />
                         </div>
                         <div class="no-apps-text">
-                            <p>To modify your details please go back to the form and update your applicaton.</p>
+                            <p>To see your details reflected, please register your app via the registration form.</p>
                         </div>
                         <!-- add go back button like in dialogs "got it" -->
-                        <button class="gray-btn-submit" id="empty_go_back">Go back</button>
+                        <button class="gray-btn-submit" id="empty_go_back">Register now</button>
                     </div>
                 </div>
             </div>
@@ -203,54 +213,6 @@ permalink: docs/app-registration/
                     <div class="dialog-footer">
                         <button class="dialog-btn-cancel" id="delete_app_keep">No, keep it</button>
                         <button class="dialog-btn-submit" id="delete_app_button">Yes, delete</button>
-                    </div>
-                </div>
-            </dialog>
-            <!-- add update_app_dialog -->
-            <dialog id="update_app_dialog" class="dialog-wrapper">
-                <div class="dialog dialog-update">
-                    <div class="dialog-header">
-                        <img id="close_update_dialog" src="/img/close_dialog.svg" alt="Close" />
-                    </div>
-                    <div class="dialog-body dialog-body-update">
-                        <div class="dialog-update-input">
-                            <h4 class="register-form-header">App name</h4>
-                            <input class="input-container" id="update_app_name" type="text" maxlength="48" placeholder="Name" />
-                        </div>
-                        <div class="dialog-update-input">
-                            <h4 class="register-form-header">Redirect URL</h4>
-                            <input class="input-container" id="update_app_redirect_uri" type="text" maxlength="255" placeholder="Redirect URL" />
-                        </div>
-                        <div class="dialog-update-scopes" id="app_scopes">
-                        <p class="bold scopes-field">Scopes:</p>
-                        <div class="scopes-field">
-                            <input id="update_read-scope" type="checkbox" value="read" />
-                            <label for="update_read-scope">Read all: Full access to users information, including private
-                                information</label>
-                        </div>
-                        <div class="scopes-field">
-                            <input id="update_trade-scope" type="checkbox" value="trade" />
-                            <label for="update_trade-scope">Trade: Buy and sell contracts on the users' behalf</label>
-                        </div>
-                        <div class="scopes-field">
-                            <input id="update_trading_information-scope" type="checkbox" value="trading_information" />
-                            <label for="update_trading_information-scope">Trading information: View users trading
-                                information, including balance information</label>
-                        </div>
-                        <div class="scopes-field">
-                            <input id="update_payments-scope" type="checkbox" value="payments" />
-                            <label for="update_payments-scope">Payments: Cashier (deposit and withdrawal)</label>
-                        </div>
-                        <div class="scopes-field mb-0">
-                            <input id="update_admin-scope" type="checkbox" value="admin" />
-                            <label for="update_admin-scope">Admin: Full account access, including the access to manage
-                                security tokens</label>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="dialog-footer">
-                        <button class="dialog-btn-cancel" id="update_app_cancel">Cancel</button>
-                        <button class="dialog-btn-submit" id="update_app_button">Update app</button>
                     </div>
                 </div>
             </dialog>
