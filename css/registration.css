@@ -27,6 +27,15 @@
     width: 32px;
 }
 
+[data-state~="logged_in.update_mode"] .custom-text-input .api-token-input[readonly=true] {
+    color: var(--app-registration-tab-tooltip-background);
+    cursor: not-allowed;  
+}
+
+[data-state~="logged_in.update_mode"] .custom-text-input .api-token-input[readonly=true]~label {
+    color: var(--app-registration-tab-tooltip-background) !important;
+}
+
 .app-btn span {
     visibility: hidden;
 }
@@ -146,32 +155,32 @@
 
 
 /* red "No, keep it" button with white text */
-.dialog-btn-cancel {
+.dialog-btn-submit {
     background-color: var(--app-registration-tab-active-underline);
     color: white;
     height: 40px;
     border: none;
     border-radius: 4px;
     padding: 10px 16px 10px 16px;
-    margin-right: 24px;
 }
 
-.dialog-btn-cancel:hover {
+.dialog-btn-submit:hover {
     background-color: #ff5560;
 }
 
 /* white "Yes, delete" button with black text */
-.dialog-btn-submit {
+.dialog-btn-cancel {
     background-color: white;
     color: black;
     border: 1px solid #999999;
     height: 40px;
     border-radius: 4px;
     padding: 10px 16px 10px 16px;
+    margin-right: 24px;
 }
 
     /* add hover color to "Yes, delete" */
-.dialog-btn-submit:hover {
+.dialog-btn-cancel:hover {
     background-color: #e4e2e2;
 }
 
@@ -207,7 +216,10 @@
 }
 
 .expand-form {
-    padding: 20px 0 10px;
+    width: 100%;
+    left: 0;
+    display: flex;
+    padding: 40px 0 10px;
 }
 
 .expand-form-checkbox {
@@ -290,6 +302,7 @@
     display: inline-block;
     overflow: auto;
     width: 100%;
+    max-height: 500px;
 }
 
 .manage-apps {
@@ -411,6 +424,26 @@
     right: 0;
 }
 
+[data-state~="logged_in.update_mode"] .register-button {
+    pointer-events: none;
+    visibility: hidden;
+    position: relative;
+}
+
+[data-state~="logged_in.update_mode"] .register-button::before {
+    visibility: visible;
+    content: "Update your application";
+    font-weight: bold;
+    color: var(--app-registration-tab-active-font);
+    border-bottom: 3px solid var(--app-registration-tab-active-underline);
+    position: absolute;
+    padding: 10px 0;
+    width: 100%;
+    right: 0;
+    top: 0;
+    bottom: -1px;
+}
+
 [data-state~="logged_in.update_mode"] .register-app {
     display: flex;
     flex-direction: column;
@@ -437,7 +470,7 @@
     padding: 0;
     width: 100%;
     text-indent: 12px;
-    margin-bottom: 4px !important;
+    margin-bottom: 0 !important;
 }
 
 /* make registration-dialog display none */
@@ -458,6 +491,10 @@
 
 .register-login-button {
     cursor: pointer;
+}
+
+.scopes {
+    margin-top: 40px;
 }
 
 .skeleton {

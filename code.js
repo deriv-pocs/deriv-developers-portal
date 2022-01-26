@@ -9,6 +9,7 @@ var JSON_SAMPLES = ["ticks", "user-information", "account-status", "balance"];
 var api;
 var $console;
 var anchor_shift = 100;
+var shouldScroll = false;
 
 
 // SLIDER
@@ -285,6 +286,7 @@ function getCurrentApi() {
 }
 
 function updatePlaygroundWithRequestAndResponse() {
+  shouldScroll = false;
   try {
     var json = JSON.parse($("#playground-request").val());
   } catch (err) {
@@ -540,9 +542,7 @@ function isProduction(url) {
 
 function getBaseUrl(url) {
   url = url || document.location.href;
-  return (
-    (isProduction(url) || isLocal(url) ? "" : "/" + url.split("/")[3]) + "/"
-  );
+  return "/";
 }
 
 function getServerUrl() {
@@ -620,10 +620,10 @@ function appendToConsoleAndScrollIntoView(html) {
     $console.append(html);
     $("#toggle-theme").show();
 
-    if (consoleShouldScroll()) {
+    if (consoleShouldScroll() && !shouldScroll) {
       scrollConsoleToBottom();
       setTimeout(function () {
-        if (consoleShouldScroll()) {
+        if (consoleShouldScroll() && !shouldScroll) {
           $console.animate(
             {
               scrollTop: $console[0].scrollHeight,
@@ -650,9 +650,14 @@ function toggleTheme() {
   );
 }
 
+function updateDocsHash() {
+  window.history.replaceState({}, '','/docs/');
+}
+
 function onAnchorClick() {
   if (location.hash.length !== 0) {
     window.scrollTo(window.scrollX, window.scrollY - anchor_shift);
+    updateDocsHash(); 
   }
 }
 
@@ -734,8 +739,8 @@ function addEventListeners() {
   $("#scroll-to-bottom-btn").on("click", scrollConsoleToBottom);
 
   $console.on("scroll", function () {
-    var shouldShow = consoleShouldScroll() && !$console.is(":animated");
-    $("#scroll-to-bottom-btn").toggle(shouldShow);
+    shouldScroll = consoleShouldScroll() && !$console.is(":animated");
+    $("#scroll-to-bottom-btn").toggle(shouldScroll);
   });
 
   $("#toggle-theme").on("click", toggleTheme);
@@ -747,4 +752,38 @@ function addEventListeners() {
       onAnchorClick();
     }, 0);
   });
+
+  $(document).ready(() => {
+    if (window.location.hash) {
+      window.location.href = window.location.hash;
+      updateDocsHash(); 
+    }
+  }); 
 }
+
+// Creating custom checkbox.
+const all_main_checkboxes = document.querySelectorAll("input[type='checkbox']");
+all_main_checkboxes.forEach(checkbox => {
+  const custom_checkbox = document.createElement("span");
+  const check_icon = document.createElement("img");
+
+  custom_checkbox.className = "custom-checkbox";
+  custom_checkbox.id = checkbox.id;
+  
+  custom_checkbox.appendChild(check_icon);
+  checkbox.after(custom_checkbox);
+
+  custom_checkbox.addEventListener("click", (event) => {
+    const main_checkbox = document.querySelector(`input#${event.target.id}`);
+    const is_checked = main_checkbox.hasAttribute("checked");
+    if (!is_checked && event.target.id === checkbox.id) {
+      // check
+      main_checkbox.setAttribute("checked", "");
+      custom_checkbox.classList.add("active-checkbox");
+    } else {
+      // uncheck
+      main_checkbox.removeAttribute("checked");
+      custom_checkbox.classList.remove("active-checkbox");
+    }
+  });
+});

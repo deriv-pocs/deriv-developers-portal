@@ -29,6 +29,9 @@ const appRegistrationMachine = createMachine({
                     states: {
                         folded_form: {
                             id: "folded_form",
+                            invoke: {
+                                src: 'resetFields',
+                            },
                             on: {
                                 TOGGLE_FORM: "#unfolded_form",
                             },
@@ -158,7 +161,9 @@ const appRegistrationMachine = createMachine({
                 },
                 update_mode: {
                     id: "update_mode",
-                    on: { SUBMIT_REGISTRATION: "#updateApp" },
+                    on: {
+                        SUBMIT_REGISTRATION: "#updateApp",
+                    },
                     states: {
                         updateApp: {
                             id: "updateApp",
@@ -168,7 +173,7 @@ const appRegistrationMachine = createMachine({
                                     id: "loadingUpdate",
                                     invoke: {
                                         src: async (_, event) => {
-                                            await appUpdate(event.data)
+                                            await appUpdate(event.data);
                                         },
                                         onDone: {
                                             target: "#successUpdate",
@@ -195,6 +200,13 @@ const appRegistrationMachine = createMachine({
                     },
                 },
             },
+        },
+    },
+}, {
+    services: {
+        resetFields: async () => {
+            const form = document.querySelector('#frmNewApplication');
+            form.reset();
         },
     },
 });
@@ -381,18 +393,26 @@ if (token1_in_url) {
     sessionState = 'logged_in';
 }
 
-// add getToken function
-const getToken = () => token1_in_url || sessionStorage.getItem('token1');
 
+// token field api_token_input onchange set token
+const token_input = document.getElementById('api_token_input');
+if (token_input) {
+    token_input.onchange = (e) =>{
+        const token = e.target.value;
+        if (token) {
+            sessionStorage.setItem('token1', token);
+        }
+    };
+}
 
-// add setToken function
-const setToken = (token) => {
-    LocalStore.set('config.token', token);
+const getToken = () => {
+    if (token_input) {
+        return token_input.value;
+    }
 };
 
-// sest token in localStore if getToken is true
-if (getToken()) {
-    setToken(getToken());
+const getStorageToken = () => {
+    return sessionStorage.getItem('token1');
 }
 
 // get app_id from url
@@ -437,16 +457,16 @@ const loginUrl = ({ language }) => {
 function activate(state) {
     const joinedState = state.toStrings().join(' ');
     const elApp = document.getElementById('app-registration-machine');
-    const form_checkbox = document.getElementById('expand_form');
+    const form_checkbox = document.querySelector('span#expand_form');
     const is_folded_state = joinedState === 'logged_in logged_in.register_tab logged_in.register_tab.folded_form';
     if (elApp) {
         elApp.dataset.state = joinedState;
         elApp.setAttribute("data-state", joinedState);
     }
     if (is_folded_state) {
-        if (form_checkbox) form_checkbox.checked = false;
+        if (form_checkbox) form_checkbox.classList.remove("active-checkbox");
     } else {
-        if (form_checkbox) form_checkbox.checked = true;
+        if (form_checkbox) form_checkbox.classList.add("active-checkbox");
     }
 }
 
@@ -457,9 +477,9 @@ const interpreter = XState
 
 const { send } = interpreter;
 
-const unfolded_form_checkbox = document.getElementById('expand_form');
+const unfolded_form_checkbox = document.querySelector('span#expand_form');
 if (unfolded_form_checkbox) {
-    unfolded_form_checkbox.addEventListener('change', () => {
+    unfolded_form_checkbox.addEventListener('click', () => {
         send({
             "type": "TOGGLE_FORM"
         });
@@ -472,6 +492,16 @@ if (register_button) {
         send({
             "type": "REGISTER_TOGGLE_TAB"
         });
+        const all_checkboxes = document.querySelectorAll("[data-state~='logged_in.register_tab'] input[type='checkbox']");
+        const api_token_input_element = document.getElementById('api_token_input');
+        all_checkboxes.forEach(checkbox => {
+            if (checkbox.hasAttribute("checked")) {
+                const custom_checkbox = checkbox.parentElement.querySelector(".custom-checkbox");
+                checkbox.removeAttribute("checked");
+                custom_checkbox.classList.remove("active-checkbox");
+            }
+        });
+        api_token_input_element.removeAttribute('readonly');
     });
 }
 
@@ -504,7 +534,7 @@ const getAppList = async () => {
     const app_id = getSessionAppId();
     const endpoint = getEndpoint();
     const api = new DerivAPIBasic({ endpoint, lang: 'EN', app_id });
-    const token1 = getToken();
+    const token1 = getStorageToken();
 
     // rewrite skeleton to have div inside td with class="skeleton"
     const skeleton = `<tr>
@@ -518,11 +548,16 @@ const getAppList = async () => {
     // create an array with 5 skeleton
     const skeleton_array = Array(5).fill(skeleton);
     // for each skeleton create a tr
-    skeleton_array.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = item;
-        document.getElementById('app_list').appendChild(tr);
-    });
+    const app_list_element = document.getElementById('app_list');
+    const is_app_list_tr_loaded = app_list_element.querySelectorAll('tr').length > 0;
+    if (!is_app_list_tr_loaded) {
+        skeleton_array.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = item;
+            app_list_element.appendChild(tr);
+        });
+    }
+
     await api.authorize(token1);
     const get_data = await api.appList();
     const app_list = get_data.app_list;
@@ -555,18 +590,18 @@ const getAppList = async () => {
 const removeApp = async (app_id) => {
     const endpoint = getEndpoint();
     const api = new DerivAPIBasic({ endpoint, lang: 'EN', app_id });
-    const token1 = getToken();
+    const token1 = getStorageToken();
     await api.authorize(token1);
     await api.appDelete(app_id);
     send({ type: 'FETCH_APP_LIST' });
 }
 
-const appUpdate = async ({ app_id, name, redirect_uri, scopes }) => {
+const appUpdate = async ({ app_id, app_markup_percentage, name, redirect_uri, verification_uri, scopes }) => {
     const endpoint = getEndpoint();
     const api = new DerivAPIBasic({ endpoint, lang: 'EN', app_id });
-    const token1 = getToken();
+    const token1 = getStorageToken();
     await api.authorize(token1);
-    await api.appUpdate({ app_update: app_id, name, redirect_uri, scopes });
+    await api.appUpdate({ app_update: app_id, app_markup_percentage, name, redirect_uri, verification_uri, scopes });
     send({ type: 'FETCH_APP_LIST' });
 };
 
@@ -580,23 +615,19 @@ const open_delete_dialog = (app_id) => {
     });
 }
 
-// const edit_app_mode (app_id, name, scopes, redirect_uri) => {
-
-// }
-
 const go_update_mode = (...app) => {
     const [_active, app_id, app_markup_percentage,
         _appstore, _github, _googleplay, _homepage, name,
         redirect_uri, verification_uri, scopes] = app;
     send({ type: "GO_UPDATE_MODE"}); // TODO: send app_id through xstate
-
-
+    
     // get register your application fields
     const app_name_input = document.getElementById('app_name');
     const app_redirect_uri_input = document.getElementById('app_redirect_uri');
     const app_verification_uri_input = document.getElementById('app_verification_uri');
     const app_markup_percentage_input = document.getElementById('app_markup_percentage');
     const app_id_input = document.getElementById('app_id');
+    const api_token_input_element = document.getElementById('api_token_input');
     app_id_input.setAttribute('value', app_id);
 
     // prefill in the fields with app data
@@ -604,26 +635,58 @@ const go_update_mode = (...app) => {
     app_redirect_uri_input.value = redirect_uri;
     app_verification_uri_input.value = verification_uri;
     app_markup_percentage_input.value = app_markup_percentage;
+    api_token_input_element.value = getStorageToken();
+    // set api_token_input to readonly
+    api_token_input_element.setAttribute('readonly', true);
 
-    const update_read_scope = document.getElementById('read-scope');
-    if (scopes.includes('read')) {
-        update_read_scope.checked = true;
+    const custom_read_checkbox = document.querySelector("span#read-scope");
+    const read_checkbox = document.querySelector("input#read-scope");
+    if (scopes.includes("read")) {
+        custom_read_checkbox.classList.add("active-checkbox");
+        read_checkbox.setAttribute("checked", "");
+    } else {
+        custom_read_checkbox.classList.remove("active-checkbox");
+        read_checkbox.removeAttribute("checked");
     }
-    const update_trade_scope = document.getElementById('trade-scope');
-    if (scopes.includes('trade')) {
-        update_trade_scope.checked = true;
+
+    const custom_trade_checkbox = document.querySelector("span#trade-scope");
+    const trade_checkbox = document.querySelector("input#trade-scope");
+    if (scopes.includes("trade")) {
+        custom_trade_checkbox.classList.add("active-checkbox");
+        trade_checkbox.setAttribute("checked", "");
+    } else {
+        custom_trade_checkbox.classList.remove("active-checkbox");
+        trade_checkbox.removeAttribute("checked");
     }
-    const update_trading_information_scope = document.getElementById('trading_information-scope');
-    if (scopes.includes('trading_information')) {
-        update_trading_information_scope.checked = true;
+    
+    const custom_trading_information_checkbox = document.querySelector("span#trading_information-scope");
+    const trading_information_checkbox = document.querySelector("input#trading_information-scope");
+    if (scopes.includes("trading_information")) {
+        custom_trading_information_checkbox.classList.add("active-checkbox");
+        trading_information_checkbox.setAttribute("checked", "");
+    } else {
+        custom_trading_information_checkbox.classList.remove("active-checkbox");
+        trading_information_checkbox.removeAttribute("checked");
     }
-    const update_payments_scope = document.getElementById('payments-scope');
-    if (scopes.includes('payments')) {
-        update_payments_scope.checked = true;
+
+    const custom_payments_scope_checkbox = document.querySelector("span#payments-scope");
+    const payments_scope_checkbox = document.querySelector("input#payments-scope");
+    if (scopes.includes("payments")) {
+        custom_payments_scope_checkbox.classList.add("active-checkbox");
+        payments_scope_checkbox.setAttribute("checked", "");
+    } else {
+        custom_payments_scope_checkbox.classList.remove("active-checkbox");
+        payments_scope_checkbox.removeAttribute("checked");
     }
-    const update_admin_scope = document.getElementById('admin-scope');
-    if (scopes.includes('admin')) {
-        update_admin_scope.checked = true;
+
+    const custom_admin_scope_checkbox = document.querySelector("span#admin-scope");
+    const admin_scope_checkbox = document.querySelector("input#admin-scope");
+    if (scopes.includes("admin")) {
+        custom_admin_scope_checkbox.classList.add("active-checkbox");
+        admin_scope_checkbox.setAttribute("checked", "");
+    } else {
+        custom_admin_scope_checkbox.classList.remove("active-checkbox");
+        admin_scope_checkbox.removeAttribute("checked");
     }
 }
 
