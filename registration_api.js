@@ -547,8 +547,8 @@ const getAppList = async () => {
     const skeleton_array = Array(5).fill(skeleton);
     // for each skeleton create a tr
     const app_list_element = document.getElementById('app_list');
-    const app_list_tr_loaded = app_list_element.querySelectorAll('tr').length;
-    if (!app_list_tr_loaded) {
+    const is_app_list_tr_loaded = app_list_element.querySelectorAll('tr').length > 0;
+    if (!is_app_list_tr_loaded) {
         skeleton_array.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = item;
