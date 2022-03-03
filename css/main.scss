@@ -1854,7 +1854,7 @@ fieldset {
   }
 }
 textarea {
-  width: 100%;
+  width: calc(100% - 16px);
   min-height: 119px;
   border-radius: 4px;
   border: solid 1px #d6dadb;
@@ -2463,6 +2463,7 @@ pre,
 textarea {
   font-size: 16px;
   resize: none;
+
 }
 code,
 pre p {
@@ -2656,7 +2657,7 @@ pre {
         border-radius: 4px;
         color: #5D5381;
         resize: none;
-
+        padding-top: 1rem;
         @media (max-width: 480px) {
           font-size: 14px;
         }
