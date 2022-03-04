@@ -2692,11 +2692,7 @@ pre {
         align-items: center;
         justify-content: flex-start;
         min-width: 60%;
-        @media (max-width:1078px) and (min-width:1000px)  {
-            padding-left: 15%;
-          }
         
-      
         input[type="text"] {
           border: 1px solid #D6DADB;
           border-radius: 4px;
@@ -2720,9 +2716,7 @@ pre {
         font-size: 14px;
         margin-bottom: unset;
         white-space: nowrap;
-        @media (max-width:1078px) and (min-width:1000px) {
-          padding-left: 30%;
-        }
+        
         .title {
           font-weight: bold;
           line-height: 1.43;
