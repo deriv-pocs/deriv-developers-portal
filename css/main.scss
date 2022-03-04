@@ -2558,6 +2558,11 @@ pre {
   white-space: pre-wrap;
   word-break: break-word;
 }
+@media (max-width:1078px) and (min-width:1000px)  {
+  .doc-content{
+    padding: 105px 0px 80px ;
+  }
+}
 .playground {
   display: flex;
   justify-content: center;
@@ -2575,6 +2580,10 @@ pre {
 
     @media (max-width: 480px) {
       width: 100%;
+    }
+    
+    @media (min-width:1000px) {
+      flex-direction: row;
     }
   }
 
@@ -2668,12 +2677,14 @@ pre {
       flex-wrap: nowrap;
       border-radius: 4px;
       background-color: #f8fafb;
-      padding: 0rem 2rem 0rem 0.5rem;
+      padding: 1rem 2rem 0rem 0.5rem;
       margin-top: 16px;
       justify-content: space-between;
       box-sizing: border-box;
       gap:1rem;
-      
+      @media (max-width:1078px) and (min-width:1000px) {
+        flex-wrap: wrap;
+      }
 
       fieldset {
         display: flex;
@@ -2681,6 +2692,10 @@ pre {
         align-items: center;
         justify-content: flex-start;
         min-width: 60%;
+        @media (max-width:1078px) and (min-width:1000px)  {
+            padding-left: 15%;
+          }
+        
       
         input[type="text"] {
           border: 1px solid #D6DADB;
@@ -2705,7 +2720,9 @@ pre {
         font-size: 14px;
         margin-bottom: unset;
         white-space: nowrap;
-
+        @media (max-width:1078px) and (min-width:1000px) {
+          padding-left: 30%;
+        }
         .title {
           font-weight: bold;
           line-height: 1.43;
