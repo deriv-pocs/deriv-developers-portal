@@ -2680,8 +2680,7 @@ pre {
         flex-wrap: nowrap;
         align-items: center;
         justify-content: flex-start;
-        min-width: 60%;
-        
+        min-width: 60%; 
         input[type="text"] {
           border: 1px solid #D6DADB;
           border-radius: 4px;
@@ -2705,7 +2704,6 @@ pre {
         font-size: 14px;
         margin-bottom: unset;
         white-space: nowrap;
-        
         .title {
           font-weight: bold;
           line-height: 1.43;
