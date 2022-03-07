@@ -2577,10 +2577,6 @@ pre {
     @media (max-width: 480px) {
       width: 100%;
     }
-    
-    @media (min-width:1000px) {
-      flex-direction: row;
-    }
   }
 
   &-api-json {
@@ -3164,6 +3160,10 @@ footer {
 
 [data-view~="laptop"] .doc-content {
   padding: 105px 0px 80px ;
+}
+
+[data-view~="laptop"] .playground-page-wrapper {
+  flex-direction: row;
 }
 
 @import "monokai.css";
