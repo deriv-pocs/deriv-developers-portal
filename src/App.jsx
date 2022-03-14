@@ -2,7 +2,14 @@ import logo from './logo.svg'
 import './App.css'
 import './stateSignal';
 import { send } from './stateSignal';
+import { Router,Outlet,Link,useMatch
+ } from '@tanstack/react-location';
+import { routes,location } from './Router';
+import { Suspense } from 'solid-js';
 
+const Documentation=() =>{
+  const params=useMatch();
+}
 
 function App() {
   const setOurCountFunction = () => {
@@ -10,38 +17,18 @@ function App() {
   };
 
   return (
-    <div id="app" className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-          <button type="button" onClick={setOurCountFunction}>
-            LOGIN
-          </button>
-          <div className='logged-in'>You are logged in!</div>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <Router routes={routes} location={location}>
+      <div id="app" className="App">
+        <div className='Our Header'>
+        <Suspense fallback={<div>Error loading</div>}>
+          <Link to="/">HomePage</Link>
+          <Link to="/docs">Documantation</Link>
+          <Link to="/ApiExplorer">ApiExplorer</Link>
+        </Suspense>
+        </div>
+        <Outlet/>
+      </div>
+    </Router>
   )
 }
 
