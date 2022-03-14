@@ -1,3 +1,5 @@
+import { QueryClient, QueryClientProvider } from 'react-query'
+
 import logo from './logo.svg'
 import './App.css'
 import './stateSignal';
@@ -16,19 +18,23 @@ function App() {
     send('LOGIN');
   };
 
+  const queryClient = new QueryClient()
+
   return (
-    <Router routes={routes} location={location}>
-      <div id="app" className="App">
-        <div className='Our Header'>
-        <Suspense fallback={<div>Error loading</div>}>
-          <Link to="/">HomePage</Link>
-          <Link to="/docs">Documantation</Link>
-          <Link to="/ApiExplorer">ApiExplorer</Link>
-        </Suspense>
+      <QueryClientProvider client={queryClient}>
+      <Router routes={routes} location={location}>
+        <div id="app" className="App">
+          <div className='Our Header'>
+            <Suspense fallback={<div>Error loading</div>}>
+              <Link to="/">HomePage</Link>
+              <Link to="/docs">Documantation</Link>
+              <Link to="/api-explorer">ApiExplorer</Link>
+            </Suspense>
+          </div>
+          <Outlet/>
         </div>
-        <Outlet/>
-      </div>
-    </Router>
+      </Router>
+    </QueryClientProvider>
   )
 }
 
