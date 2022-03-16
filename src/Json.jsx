@@ -1,6 +1,3 @@
-import * as  React from "react";
-
-
 export default function Json(){
     return (
         <div>
