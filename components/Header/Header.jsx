@@ -18,7 +18,7 @@ export default function Header() {
                     </div>
                     <Link to="/">
                         <a className={styles.flexContainer}>
-                            <img classnName={styles.logo} alt="Deriv Logo" src="/img/deriv.svg" width="180" height="73"></img>
+                            <div className={styles.logo}/>
                             <h1 className={styles.branding}>API</h1>
                         </a>
                     </Link>
