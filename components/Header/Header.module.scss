@@ -21,6 +21,7 @@
             height: 2px;
             bottom: 0;
             left: 0;
+            background-color: var(--app-registration-tab-active-underline);
             visibility: hidden;
             transition: all 0.2s ease-in-out;
         }
@@ -29,6 +30,7 @@
             width: 20px;
         }
     }
+
 
     .selected {
         &::before {
@@ -40,6 +42,9 @@
     .flexContainer {
         display: flex;
         align-items: center;
+        &::before{
+           --app-registration-tab-active-underline: var(--background);
+        }
         .branding {
             display: inline;
             font-size: 24px;
