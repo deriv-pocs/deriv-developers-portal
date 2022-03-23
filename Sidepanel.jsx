@@ -15,9 +15,6 @@ const Sidepanel = () => {
             <li><Link to="docs/bug_bounty">Bug Bounty</Link></li>
         </ul>
     </div>
-
-
-
   )
 }
 
