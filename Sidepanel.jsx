@@ -23,19 +23,6 @@ const Sidepanel = () => {
 
 export default Sidepanel
 
-// export default function Sidepanel() {
-//     return (
-//         <div>
-//              <Link to="/">Home</Link>
-//              <Link to="docs">Quickstart</Link>
-//              <Link to="api_explorer">API Explorer</Link>
-//              <Link to="app_registartaion">App registartaion</Link>
-//              <Link to="api_guide">API guide</Link>
-                   
-//         </div>
-//     );
-// };
-
   
   
   
