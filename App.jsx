@@ -4,6 +4,7 @@ import { Router,Outlet} from '@tanstack/react-location';
 import { routes,location } from './Router';
 import { Suspense } from 'react';
 import Header from './components/Header/Header';
+import Docs from './Docs';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           </Router>
       </QueryClientProvider>
     </Suspense>
+    
   )
 }
 
