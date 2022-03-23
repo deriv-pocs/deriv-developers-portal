@@ -19,7 +19,3 @@ const Sidepanel = () => {
 }
 
 export default Sidepanel
-
-  
-  
-  
