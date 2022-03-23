@@ -1,4 +1,3 @@
-import './stateSignal';
 import { Router,Outlet, Link} from '@tanstack/react-location';
 import { routes,location } from './Router';
 import { Suspense } from 'react';
