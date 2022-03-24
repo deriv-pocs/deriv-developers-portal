@@ -27,11 +27,15 @@ export const routes=[
         element:<Quickstart/>
       },
       {
+        path:"quickstart",
+        element:<Quickstart/>
+      },
+      {
         path:"api_explorer",
         element: <ApiExplorer/>
       },
       {
-        path:"app_registeration",
+        path:"app_registration",
         element: <AppRegistration/>
       },
       {
