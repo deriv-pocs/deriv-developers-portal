@@ -5,7 +5,7 @@ const HomePage = lazy(()=>import('./Homepage'));
 const Docs = lazy(()=>import('./Docs'));
 const ApiExplorer = lazy(()=>import('./ApiExplorer'));
 const AppRegistration = lazy(()=>import('./AppRegistration'));
-const ApiGuide = lazy(()=>import('./ApiGuide'));
+import ApiGuide from './ApiGuide';
 const Faq = lazy(()=>import('./Faq'));
 const Json = lazy(()=>import('./Json'));
 const BugBounty = lazy(()=>import('./Bugbounty'));
