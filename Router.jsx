@@ -2,7 +2,7 @@ import {lazy} from 'react';
 import {ReactLocation} from '@tanstack/react-location'
 import React from 'react';
 const HomePage = lazy(()=>import('./Homepage'));
-const Docs = lazy(()=>import('./Docs'));
+import Docs from './Docs';
 const ApiExplorer = lazy(()=>import('./ApiExplorer'));
 const AppRegistration = lazy(()=>import('./AppRegistration'));
 import ApiGuide from './ApiGuide';
