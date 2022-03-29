@@ -8,12 +8,12 @@ const Sidebar = () => {
             <p className={styles.sidebartitle}>Deriv API</p>
             <div>
             <Link to="/docs" >Quickstart</Link>
-            <Link to="app-registration/">App registration</Link>
-            <Link to="/api-explorer/">API explorer</Link>
-            <Link to="api-guide/">API guide</Link>
-            <Link to="faq/">FAQ</Link>
-            <Link to="json-schemas/">JSON Schemas</Link>
-            <Link to="bug-bounty/">Bug Bounty</Link>
+            <Link to="/docs/app-registration/">App registration</Link>
+            <Link to="/api-explorer">API explorer</Link>
+            <Link to="/docs/api-guide/">API guide</Link>
+            <Link to="/docs/faq/">FAQ</Link>
+            <Link to="/docs/json-schemas/">JSON Schemas</Link>
+            <Link to="/docs/bug-bounty/">Bug Bounty</Link>
             </div>
     </div>
   )
