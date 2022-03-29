@@ -1,4 +1,4 @@
-import styles from "./QuickStart.module.scss";
+import styles from "./Quickstart.module.scss";
 import CodeBlock from "./Codeblock";
 
 
