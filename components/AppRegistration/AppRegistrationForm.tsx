@@ -120,7 +120,7 @@ export default function AppRegistrationForm () {
                     application</span></button>
                 </div>
             </div>
-            <input type="hidden" id="app_id" name="app_id" defaultValue />
+            <input type="hidden" id="app_id" name="app_id" />
         </form>
     )
 }
