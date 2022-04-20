@@ -1,43 +1,33 @@
 .manageApps {
     display: none;
-}
-
-.manageApps table {
-    border-spacing: 0;
-    width: calc(100% - 125px);
-}
-
-.manageApps thead {
-    background-color: var(--app-registration-tab-light-grey);
-    height: 50px;
-    text-align: left;
-}
-
-.manageApps th,
-.manageApps td {
-    padding: 16px;
-    min-width: 120px;
-}
-
-/* Set width of last two table columns to 40px */
-.manageApps td:last-child,
-.manageApps th:last-child {
-    min-width: 1px !important;
-    width: 1px !important;
-    padding: 0;
-    white-space: nowrap;
-    padding-left: 5%;
-}
-
-/* set padding-left of first column to 32px */
-.manageApps td:first-child,
-.manageApps th:first-child {
-    padding-left: 32px;
-}
-
-/* set width of last table column to 20px */
-.manageApps tbody tr:nth-child(even) {
-    background-color: var(--app-registration-tab-table-row-grey);
+    table {
+        border-spacing: 0;
+        width: calc(100% - 125px);
+    }
+    thead {
+        background-color: var(--app-registration-tab-light-grey);
+        height: 50px;
+        text-align: left;
+    }
+    th, td {
+        padding: 16px;
+        min-width: 120px;
+    }
+    td:last-child,
+    th:last-child {
+        min-width: 1px !important;
+        width: 1px !important;
+        padding: 0;
+        white-space: nowrap;
+        padding-left: 5%;
+    }
+    td:first-child,
+    th:first-child {
+        padding-left: 32px;
+    }
+    tbody tr:nth-child(even) {
+        background-color: var(--app-registration-tab-table-row-grey);
+    }
 }
 
 [data-state~="registration.logged_in.manage_tab"] .manageApps {
