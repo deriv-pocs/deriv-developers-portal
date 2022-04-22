@@ -149,7 +149,7 @@
 
 /* red "No, keep it" button with white text */
 .dialog-btn-submit {
-    background-color: var(--app-registration-tab-active-underline);
+    background-color: var(--red-01);
     color: white;
     font-weight: bold;
     height: 40px;
@@ -209,6 +209,12 @@
 .login-image {
     margin-top: 95px;
     margin-bottom: 16px;
+    background-image: url(/img/login.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 128px;
+    height: 128px;
 }
 
 .login-title {
@@ -219,13 +225,6 @@
     text-align: center;
 }
 
-[data-state~="registration.logged_in.manage_tab"] .manage-apps {
-    display: inline-block;
-    overflow: auto;
-    width: 100%;
-    max-height: 500px;
-}
-
 .main-register-btn {
     padding: 10px 16px;
     border-radius: 4px;
@@ -233,48 +232,6 @@
     text-decoration: none;
     font-weight: 700;
     color: #fff;
-}
-
-.manage-apps {
-    display: none;
-}
-
-.manage-apps table {
-    border-spacing: 0;
-    width: calc(100% - 125px);
-}
-
-.manage-apps thead {
-    background-color: var(--app-registration-tab-light-grey);
-    height: 50px;
-    text-align: left;
-}
-
-.manage-apps th,
-.manage-apps td {
-    padding: 16px;
-    min-width: 120px;
-}
-
-/* Set width of last two table columns to 40px */
-.manage-apps td:last-child,
-.manage-apps th:last-child {
-    min-width: 1px !important;
-    width: 1px !important;
-    padding: 0;
-    white-space: nowrap;
-    padding-left: 5%;
-}
-
-/* set padding-left of first column to 32px */
-.manage-apps td:first-child,
-.manage-apps th:first-child {
-    padding-left: 32px;
-}
-
-/* set width of last table column to 20px */
-.manage-apps tbody tr:nth-child(even) {
-    background-color: var(--app-registration-tab-table-row-grey);
 }
 
 .no-apps {
@@ -287,15 +244,6 @@
     margin: 0 auto;
 }
 
-.no-apps-icon {
-    margin-top: 16px;
-    margin-bottom: 20px;
-}
-
-.no-apps-text {
-    text-align: center;
-}
-
 .no-apps-wrapper {
     display: none;
 }
@@ -303,10 +251,6 @@
 [data-state~="registration.logged_in.manage_tab.loadingApps.empty"] .no-apps-wrapper {
     display: inline-block;
     visibility: visible;
-}
-
-[data-state~="registration.logged_in.manage_tab.loadingApps.empty"] .manage-apps {
-    visibility: hidden;
 }
 
 .no-apps-wrapper {
@@ -344,7 +288,7 @@
 [data-state~="registration.logged_in.register_tab"] .register-button {
     font-weight: bold;
     color: var(--app-registration-tab-active-font);
-    border-bottom: 3px solid var(--app-registration-tab-active-underline);
+    border-bottom: 3px solid var(--red-01);
 }
 
 [data-state~="registration.logged_in.update_mode"] .register-button {
@@ -358,7 +302,7 @@
     content: "Update your application";
     font-weight: bold;
     color: var(--app-registration-tab-active-font);
-    border-bottom: 3px solid var(--app-registration-tab-active-underline);
+    border-bottom: 3px solid var(--red-01);
     position: absolute;
     padding: 10px 0;
     width: 100%;
@@ -408,41 +352,6 @@
 
 .scopes {
     margin-top: 40px;
-}
-
-.skeleton {
-    background-image: linear-gradient(to right, white, #E6E6E6, #E6E6E6);
-    padding: 10px;
-    height: 20px;
-    margin-bottom: 16px;
-    width: 100px;
-    position: relative;
-}
-
-.skeleton:before {
-    content: ' ';
-    background-image: linear-gradient(to right, #E6E6E6, #E6E6E6, white);
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation-name: loading-skeleton;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-
-@keyframes loading-skeleton {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 
 .terms-of-conditions-register {
@@ -510,11 +419,6 @@
         margin-bottom: 24px;
     }
 
-
-    [data-state~="registration.logged_in.manage_tab"] .manage-apps {
-        margin-left: 125px;
-    }
-
     .no-apps-wrapper {
         width: calc(100% - 125px);
         position: relative;
@@ -528,6 +432,14 @@
 
     .no-apps-text {
         width: 390px;
+    }
+    
+    .expandable-form .register-app-button {
+        padding: 12px 20px;
+    }
+
+    .register-form-header {
+        font-size: 16px;
     }
 
     [data-state~="registration.logged_in"] .app-registration-signout {

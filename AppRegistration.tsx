@@ -1,5 +1,5 @@
 import { styles } from './AppRegistration.module.scss';
-import ManageApps from './components/AppRegistration/ManageApps';
+import AppManagementLazy from './AppManagementLazy';
 import AppRegistrationForm from './components/AppRegistration/AppRegistrationForm';
 import AppRegistrationLogin from './components/AppRegistration/AppRegistrationLogin';
 import RegisterAppDialog from './components/AppRegistration/RegisterAppDialog';
@@ -20,9 +20,8 @@ export default function AppRegistration() {
           <AppRegistrationForm />
           <RegisterAppDialog />
         </div>
-        <ManageApps />
+        <AppManagementLazy />
       </div>
-      <button id="logout" className="app-registration-signout gray-btn-submit">Sign out</button>
     </div>
   )
 }
