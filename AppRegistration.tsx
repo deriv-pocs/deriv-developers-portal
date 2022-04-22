@@ -1,4 +1,4 @@
-import { styles } from './AppRegistration.module.scss';
+import './AppRegistration.scss';
 import AppManagementLazy from './AppManagementLazy';
 import AppRegistrationForm from './components/AppRegistration/AppRegistrationForm';
 import AppRegistrationLogin from './components/AppRegistration/AppRegistrationLogin';
