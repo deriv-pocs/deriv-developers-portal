@@ -1,5 +1,5 @@
 import './AppRegistration.scss';
-import AppManagementLazy from './AppManagementLazy';
+import AppManagementLazy from './components/AppRegistration/AppManagementLazy';
 import AppRegistrationForm from './components/AppRegistration/AppRegistrationForm';
 import AppRegistrationLogin from './components/AppRegistration/AppRegistrationLogin';
 import RegisterAppDialog from './components/AppRegistration/RegisterAppDialog';

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */ 
+
 import { useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import '../../AppRegistration.scss';
