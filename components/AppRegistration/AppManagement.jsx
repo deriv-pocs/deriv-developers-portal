@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
-import './AppRegistration.scss';
+import '../../AppRegistration.scss';
 import styles from './AppManagement.module.scss';
-import { useApps } from './useApps';
-import SkeletonText from './components/SkeletonText/SkeletonText';
+import { useApps } from '../../useApps';
+import SkeletonText from '../SkeletonText/SkeletonText';
 import AppManagementEmptyLazy from './AppManagementEmptyLazy';
 
 const columns = [
