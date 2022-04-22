@@ -43,7 +43,7 @@ createMachine({
       },
     },
     registration: {
-      initial: "logged_out",
+      initial: "logged_in", // set back to logged_out after implementing the form;
       states: {
         logged_out: {
           on: {
