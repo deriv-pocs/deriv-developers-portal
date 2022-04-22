@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import styles from './AppRegistrationForm.module.scss';
 
-type FormData = {
+interface FormData {
     api_token_input: string;
     app_name: string;
     app_markup_percentage: number;
@@ -15,6 +15,8 @@ type FormData = {
 
 export default function AppRegistrationForm () {
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
+
+    console.log(errors);
 
     return (
         <form id="frmNewApplication" onSubmit={handleSubmit((data) => {console.log(data)} )}>
@@ -33,16 +35,19 @@ export default function AppRegistrationForm () {
                     </div>
                     <div className="api-token-wrapper">
                         <div className={styles.customTextInput} id="custom-text-input">
-                            <input {...register("api_token_input", { required: true })} type="text" id="api_token_input" className={styles.apiTokenInput} placeholder=" " />
-                            {errors.api_token_input && <span className={styles.errorMessage}>API token is required. wat dis?</span>}
+                            <input {...register("api_token_input", { required: true, maxLength: 255 })} type="text" id="api_token_input" className={styles.apiTokenInput} placeholder=" " />
                             <label>API token (Required)</label>
                         </div>
+                        {errors.api_token_input?.type === "required" && <span className={styles.errorMessage}>You require an API token to register an app.</span>}
+                        {errors.api_token_input?.type === "maxLength" && <span className={styles.errorMessage}>You cannot write more than 255 characters.</span>}
                         <div className="api-token-warning" />
                         <div className="first">
                             <div className={styles.customTextInput} id="custom-text-input">
-                                <input {...register("app_name")} type="text" id="app_name" placeholder=" " />
+                                <input {...register("app_name", { required: true, maxLength: 48 })} type="text" id="app_name" placeholder=" " />
                                 <label>App name (Required)</label>
                             </div>
+                            {errors.app_name?.type === "required" && <span className={styles.errorMessage}>An app name is required.</span>}
+                            {errors.app_name?.type === "maxLength" && <span className={styles.errorMessage}>Your app name cannot exceed more than 48 characters.</span>}
                         </div>
                     </div>
                 </fieldset>
@@ -64,9 +69,11 @@ export default function AppRegistrationForm () {
                         <div className="input-container">
                             <div>
                                 <div className="custom-text-input" id="custom-text-input">
-                                    <input {...register("app_markup_percentage", { required: true, valueAsNumber: true, maxLength: { value: 4, message:" Too Many Characters"} })} max="4" type="number" id="app_markup_percentage" className="last" placeholder=" " />
+                                    <input {...register("app_markup_percentage", { required: true, maxLength: 4 })} type="number" id="app_markup_percentage" className="last" placeholder=" " />
                                     <label>Markup percentage</label>
                                 </div>
+                                {errors.app_markup_percentage?.type === "required" && <span className={styles.errorMessage}>Please fill in a value in range of 0.00 to 5.00.</span>}
+                                {errors.app_markup_percentage?.type === "maxLength" && <span className={styles.errorMessage}>You cannot exceed more than 4 characters.</span>}
                                 <p className="helper-text">(0.00-5.00%)</p>
                             </div>
                         </div>
@@ -80,9 +87,21 @@ export default function AppRegistrationForm () {
                         </div>
                         <div className="input-container">
                             <div className="custom-text-input" id="custom-text-input">
-                                <input {...register("app_redirect_uri")} id="app_redirect_uri" type="text" placeholder=" " />
+                                <input {...register(
+                                    "app_redirect_uri", { 
+                                        required: {
+                                            value: true,
+                                            message: "Please fill in your website."
+                                        },
+                                        pattern: {
+                                            value: /^[a-z][a-z0-9.+\-]*:\/\/[0-9a-zA-Z\.-]+[\%\/\w \.-]*$/,
+                                            message: "Please correct your link formatting. (example: https://your.link)"
+                                        }
+                                    })} 
+                                id="app_redirect_uri" type="text" placeholder=" " />
                                 <label>Website URL</label>
                             </div>
+                            {errors.app_redirect_uri && <span className={styles.errorMessage}>{errors.app_redirect_uri.message}</span>}
                             <p className="helper-text">*Please note that this URL will be used as the OAuth redirect
                                 URL for the OAuth authorisation</p>
                         </div>
