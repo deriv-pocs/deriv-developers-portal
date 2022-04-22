@@ -441,14 +441,4 @@
     .register-form-header {
         font-size: 16px;
     }
-
-    [data-state~="registration.logged_in"] .app-registration-signout {
-        display: block;
-        position: fixed;
-        right: 174px;
-        top: 43px;
-        z-index: 100;
-        color: var(--label-background);
-        background-color: transparent;
-    }
 }

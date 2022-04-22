@@ -2,9 +2,7 @@ import { oauthUrl } from '../../appRegistrationEffects';
 export default function AppRegistrationLogin() {
     return (
         <div className="app-registration-login">
-            <div className="login-image">
-                <img src="/img/login.svg" alt="Login" width="128px" height="128px" />
-            </div>
+            <div className="login-image" />
             <div className="login-title bold">Log in to your Deriv account to get the API token and start
                 using our API.
             </div>
