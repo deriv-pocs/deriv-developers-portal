@@ -1,79 +1,211 @@
-.formContent {
-    margin-bottom: 0;
-    .expandForm {
-        width: 80%;
-        left: 0;
-        display: flex;
-        padding: 40px 0 10px;
-        .expandFormCheckbox {
-            margin-right: 16px;
-            transform: scale(1.23);
-            padding: 9px;
-            top: 1px;
-            position: relative;
+.customCheckbox {
+    background-image: url(/img/check.svg);
+    background-repeat: no-repeat;
+    display: inline-block;
+    border: 2px solid var(--app-registration-tab-secondary);
+    min-width: 11px;
+    height: 11px;
+    position: relative;
+    top: 1px;
+    margin-right: 8px;
+    border-radius: 2px;
+    transition: background-color .25s,border-color .25s;
+}
+
+.customTextInput {
+    align-items: center;
+    border: 1px solid var(--border-normal);
+    border-radius: 4px;
+    display: flex;
+    line-height: 1.43;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    &:focus-within {
+        border-color: var(--brand-secondary);
+    }
+    &:hover {
+        border: 1px solid var(--app-registration-tab-secondary);
+    }
+    input[type=text],
+    input[type=number] {
+        background: 0 0;
+        box-sizing: border-box;
+        color: var(--app-registration-tab-active-font);
+        display: block;
+        height: 2.5rem;
+        min-width: 0;
+        width: 100%;
+        border: none;
+        &:focus {
+            outline: none;
+            &~label {
+                color: var(--brand-secondary);
+                background-color: var(--white-01);
+                padding: 0 4px;
+                transform: translateY(-20px) scale(.75);
+            }
         }
     }
-    .expandableForm {
-        display: none;
+    label {
+        position: absolute;
+        color: var(--app-registration-tab-secondary);
+        left: 12px;
+        font-size: 14px;
+        pointer-events: none;
+        transform-origin: top left;
+        transition: all .25s ease;
+        white-space: nowrap;
+    }
+}
+
+.frmNewApplication {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    .formContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         width: 80%;
-        .termsOfConditionRegister {
-            margin-top: 35px;
+        input[type=checkbox] {
+            display: none;
         }
-        .scopes {
-            margin-top: 40px;
-        }
-        fieldset {
+        fieldset input[type=text] {
+            padding: 0;
             width: 100%;
+            text-indent: 12px;
+            margin-bottom: 0!important;
         }
-        .registerAppButton {
-            padding: 12px 32.5px;
+        .helperText {
+            width: 60%;
+            padding-left: 12px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #999;
         }
-    }
-    .formHeaderContainer {
-        display: flex;
-        padding: 10px 0;
-        .registerFormHeader {
-            font-size: 16px;
-            margin-right: 5px;
-            line-height: 20px
-        }
-        .infoIcon {
-            position: relative;
-            top: 2px !important;
-            .infoIconImage {
-                background-image: url(/img/info-icon.svg);
-                background-position: center;
-                background-repeat: no-repeat;
+        .expandForm {
+            width: 80%;
+            left: 0;
+            display: flex;
+            padding: 40px 0 10px;
+
+            .expandFormCheckbox {
+                margin-right: 16px;
+                transform: scale(1.23);
+                padding: 9px;
+                top: 1px;
+                position: relative;
             }
-            .tooltip .tooltipLink {
-                font-size: 12px;
-            }
-            &:hover .tooltip {
-                background-color: var(--border-normal);
+        }
+        .expandableForm {
+            display: inline-block;
+            width: 80%;
+            .registerAppButton {
+                width: fit-content;
+                height: fit-content;
+                padding: 12px 20px;
+                line-height: 1.43;
+                letter-spacing: normal;
+                text-align: center;
+                color: #fff;
+                font-size: 14px;
                 border-radius: 4px;
-                color: var(--app-registration-tab-active-font);
-                font-size: 12px;
-                left: 50%;
-                line-height: 18px;
-                padding: 8px;
-                position: absolute;
-                display: inline-block;
-                width: 140px;
-                transform: translate(-19%, calc(-100% - 10px));
-                &:hover {
-                    display: inline-block;
+                border: none;
+                background-color: #ff444f;
+                margin: 40px auto;
+                font-weight: 700;
+            }
+            .termsOfConditionRegister {
+                margin-top: 35px;
+            }
+            .scopes {
+                margin-top: 40px;
+                .scopesField{
+                    width: 90%;
+                    display: flex;
+                    flex-direction: row;
+                    margin-bottom: 16px;
+                    align-items: center;
+                    justify-self: center;
+                    &> input[type=checkbox] {
+                        margin-right: 16px;
+                        transform: scale(1.23);
+                        padding: 9px;
+                    }
                 }
-                &:before {
-                    content: ' ';
-                    width: 0;
-                    height: 0;
-                    border-left: 8px solid transparent;
-                    border-right: 8px solid transparent;
-                    border-top: 8px solid var(--border-normal);
-                    left: 30px;
-                    transform: translateX(-50%);
+            }
+            fieldset {
+                width: 100%;
+            }
+            .registerAppButton {
+                padding: 12px 32.5px;
+            }
+        }
+        .formHeaderContainer {
+            display: flex;
+            padding: 10px 0;
+            .registerFormHeader {
+                font-size: 16px;
+                margin-right: 5px;
+                line-height: 20px
+            }
+            .infoIcon {
+                position: relative;
+                top: 2px !important;
+                .infoIconImage {
+                    background-image: url(/img/info-icon.svg);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    width: 20px;
+                    height: 20px;
+                }
+                .tooltip {
+                    display: none;
+                    &:after {
+                        background: 0 0;
+                        height: 15px;
+                        content: ' ';
+                        position: absolute;
+                        left: 0;
+                        width: inherit;
+                        bottom: -15px;
+                        padding: 0 8px;
+                    }
+                    .tooltipLink {
+                        font-size: 12px;
+                    }
+                }
+                &:hover .tooltip {
+                    background-color: var(--border-normal);
+                    border-radius: 4px;
+                    color: var(--app-registration-tab-active-font);
+                    font-size: 12px;
+                    left: 50%;
+                    line-height: 18px;
+                    padding: 8px;
                     position: absolute;
-                    bottom: -5px;
+                    display: inline-block;
+                    width: 280px;
+                    transform: translate(-50%, calc(-100% - 10px));   
+                    &:hover {
+                        display: inline-block;
+                    }
+                    &:before {
+                        content: ' ';
+                        width: 0;
+                        height: 0;
+                        border-left: 8px solid transparent;
+                        border-right: 8px solid transparent;
+                        border-top: 8px solid var(--border-normal);
+                        left: 30px;
+                        transform: translateX(-50%);
+                        position: absolute;
+                        bottom: -5px;
+                        left: 50%;
+                    }
                 }
             }
         }
@@ -117,15 +249,15 @@
         .expandableForm .registerAppButton {
             padding: 12px 20px;
         }
-    }
-    .registerFormHeader {
-        font-size: 16px;
+        .registerAppButton {
+            padding: 12px 32.5px;
+        }
+        .registerFormHeader {
+            font-size: 16px;
+        }
     }
     .infoIcon:hover .tooltip {
-        width: 280px;
-        transform: translate(-50%, calc(-100% - 10px));   
-        &:before {
-            left: 50%;
-        }
+        width: 140px;
+        transform: translate(-19%, calc(-100% - 10px)); 
     }
 }

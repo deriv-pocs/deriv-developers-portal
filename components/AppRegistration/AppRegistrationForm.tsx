@@ -18,7 +18,7 @@ export default function AppRegistrationForm () {
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
 
     return (
-        <form id="frmNewApplication" onSubmit={handleSubmit((data) => {console.log(data)} )}>
+        <form className={styles.frmNewApplication} id="frmNewApplication" onSubmit={handleSubmit((data) => {console.log(data)} )}>
             <div className={styles.formContent}>
                 <fieldset>
                     <div className={styles.formHeaderContainer}>
@@ -52,6 +52,7 @@ export default function AppRegistrationForm () {
                             />
                             <label>API token (Required)</label>
                         </div>
+                        <p className={styles.helperText}>max. 50 characters</p>
                         {errors.api_token_input && <span className={styles.errorMessage}>{errors.api_token_input.message}</span>}
                         <div className="api-token-warning" />
                         <div className="first">
@@ -79,6 +80,7 @@ export default function AppRegistrationForm () {
                 </fieldset>
                 <div className={styles.expandForm}>
                     <input id="expand_form" className={styles.expandFormCheckbox} type="checkbox" autoComplete="off" />
+                    <span className={styles.customCheckbox} id="expand-form" />
                     <label htmlFor="admin-scope">I'd like to use OAuth or monetise my app</label>
                 </div>
                 <div className={styles.expandableForm}>
@@ -96,7 +98,11 @@ export default function AppRegistrationForm () {
                             <div>
                                 <div className={styles.customTextInput} id="custom-text-input">
                                     <input {...register(
-                                        "app_markup_percentage", { 
+                                        "app_markup_percentage", {
+                                            pattern: {
+                                                value: /^((([0-4]\.([0-9]([0-9])?)?))||([5]\.([0]([0])?)?)||([0-5]))$/,
+                                                message: "Please choose a markup value between 0.00 and 5.00",
+                                            },
                                             maxLength: {
                                                 value: 4,
                                                 message: "Markup cannot exceed more than 4 characters.",
@@ -109,8 +115,8 @@ export default function AppRegistrationForm () {
                                     />
                                     <label>Markup percentage</label>
                                 </div>
+                                <p className={styles.helperText}>(0.00-5.00%)</p>
                                 {errors.app_markup_percentage && <span className={styles.errorMessage}>{errors.app_markup_percentage.message}</span>}
-                                <p className="helper-text">(0.00-5.00%)</p>
                             </div>
                         </div>
                         <div className={styles.formHeaderContainer}>
@@ -141,7 +147,7 @@ export default function AppRegistrationForm () {
                                 <label>Website URL</label>
                             </div>
                             {errors.app_redirect_uri && <span className={styles.errorMessage}>{errors.app_redirect_uri.message}</span>}
-                            <p className="helper-text">*Please note that this URL will be used as the OAuth redirect
+                            <p className={styles.helperText}>*Please note that this URL will be used as the OAuth redirect
                                 URL for the OAuth authorisation</p>
                         </div>
                         <div className="input-container">
@@ -180,32 +186,41 @@ export default function AppRegistrationForm () {
                                 <b>'Trading information'</b> access.
                             </p>
                         </div>
-                        <div className="scopes-field">
+                        <div className={styles.scopesField}>
                             <input {...register("read_scope")} id="read-scope" type="checkbox" defaultValue="read" />
+                            <span className={styles.customCheckbox} />
                             <label htmlFor="read-scope">Read all: Full access to users' information, including private
                                 information</label>
                         </div>
-                        <div className="scopes-field">
+                        <div className={styles.scopesField}>
                             <input {...register("trade_scope")} id="trade-scope" type="checkbox" defaultValue="trade" />
+                            <span className={styles.customCheckbox} />
                             <label htmlFor="trade-scope">Trade: Buy and sell contracts on the users' behalf</label>
                         </div>
-                        <div className="scopes-field">
+                        <div className={styles.scopesField}>
                             <input {...register("trading_information_scope")} id="trading_information-scope" type="checkbox" defaultValue="trading_information" />
+                            <span className={styles.customCheckbox} />
                             <label htmlFor="trading_information-scope">Trading information: View users' trading
                                 information, including balance information</label>
                         </div>
-                        <div className="scopes-field">
+                        <div className={styles.scopesField}>
                             <input {...register("payments_scope")} id="payments-scope" type="checkbox" defaultValue="payments" />
+                            <span className={styles.customCheckbox} />
                             <label htmlFor="payments-scope">Payments: Cashier (deposit and withdrawal)</label>
                         </div>
-                        <div className="scopes-field mb-0">
+                        <div className={`${styles.scopesField} mb-0`}>
                             <input {...register(
                                 "admin_scope", {
                                     required: {
                                         value: true,
                                         message: "Admin scope is required."
                                     }
-                                })} id="admin-scope" type="checkbox" defaultValue="admin" />
+                                })}
+                                id="admin-scope"
+                                type="checkbox"
+                                defaultValue="admin" 
+                            />
+                            <span className={styles.customCheckbox} />
                             <label htmlFor="read-scope">Read all: Full access to users' information, including private
                                 information</label>
                         </div>

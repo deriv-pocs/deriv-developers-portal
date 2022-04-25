@@ -196,6 +196,15 @@
     width: 100%;
 }
 
+fieldset {
+    width: 80%;
+    margin: 0 auto;
+    border: none;
+    .first {
+        margin-top: 20px;
+    }
+}
+
 .form-subtitle {
     font-weight: normal;
     line-height: 24px;
