@@ -17,8 +17,6 @@ interface FormData {
 export default function AppRegistrationForm () {
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
 
-    console.log(errors);
-
     return (
         <form id="frmNewApplication" onSubmit={handleSubmit((data) => {console.log(data)} )}>
             <div className={styles.formContent}>
@@ -85,18 +83,18 @@ export default function AppRegistrationForm () {
                 </div>
                 <div className={styles.expandableForm}>
                     <fieldset>
-                        <div className="form-header-container">
-                            <h4 className="register-form-header">Markup</h4>
-                            <div className="info-icon">
-                                <div className="tooltip">For each trade performed on your app, you will receive a
+                        <div className={styles.formHeaderContainer}>
+                            <h4 className={styles.registerFormHeader}>Markup</h4>
+                            <div className={styles.infoIcon}>
+                                <div className={styles.tooltip}>For each trade performed on your app, you will receive a
                                 commission. Set a markup percentage below to determine the commission you will
                                 make.</div>
-                                <img src="/img/info-icon.svg" alt="Info" />
+                                <div className={styles.infoIconImage} />
                             </div>
                         </div>
                         <div className="input-container">
                             <div>
-                                <div className="custom-text-input" id="custom-text-input">
+                                <div className={styles.customTextInput} id="custom-text-input">
                                     <input {...register(
                                         "app_markup_percentage", { 
                                             maxLength: {
@@ -115,16 +113,16 @@ export default function AppRegistrationForm () {
                                 <p className="helper-text">(0.00-5.00%)</p>
                             </div>
                         </div>
-                        <div className="form-header-container">
-                            <h4 className="register-form-header">Authorisation</h4>
-                            <div className="info-icon">
-                                <div className="tooltip">To use OAuth, please fill out the following fields. These
+                        <div className={styles.formHeaderContainer}>
+                            <h4 className={styles.registerFormHeader}>Authorisation</h4>
+                            <div className={styles.infoIcon}>
+                                <div className={styles.tooltip}>To use OAuth, please fill out the following fields. These
                                 details can be changed later using the app_update API call.</div>
-                                <img src="/img/info-icon.svg" alt="Info" />
+                                <div className={styles.infoIconImage} />
                             </div>
                         </div>
                         <div className="input-container">
-                            <div className="custom-text-input" id="custom-text-input">
+                            <div className={styles.customTextInput} id="custom-text-input">
                                 <input {...register(
                                     "app_redirect_uri", { 
                                         maxLength: {
@@ -136,7 +134,10 @@ export default function AppRegistrationForm () {
                                             message: "Please correct your link formatting. (example: https://www.deriv.com)"
                                         }
                                     })}
-                                id="app_redirect_uri" type="text" placeholder=" " />
+                                    id="app_redirect_uri"
+                                    type="text"
+                                    placeholder=" "
+                                />
                                 <label>Website URL</label>
                             </div>
                             {errors.app_redirect_uri && <span className={styles.errorMessage}>{errors.app_redirect_uri.message}</span>}
@@ -144,7 +145,7 @@ export default function AppRegistrationForm () {
                                 URL for the OAuth authorisation</p>
                         </div>
                         <div className="input-container">
-                            <div className="custom-text-input" id="custom-text-input">
+                            <div className={styles.customTextInput} id="custom-text-input">
                                 <input {...register(
                                     "app_verification_uri", {
                                         maxLength: {
@@ -155,19 +156,23 @@ export default function AppRegistrationForm () {
                                             value: /^[a-z][a-z0-9.+\-]*:\/\/[0-9a-zA-Z\.-]+[\%\/\w \.-]*$/,
                                             message: "Please correct your link formatting. (example: https://www.deriv.com)"
                                         }
-                                    })} id="app_verification_uri" type="text" placeholder=" " />
+                                    })}
+                                    id="app_verification_uri"
+                                    type="text"
+                                    placeholder=" "
+                                />
                                 <label>Verification URL</label>
                             </div>
                         </div>
                     </fieldset>
-                    <div className="scopes" id="register_scopes">
+                    <div className={styles.scopes} id="register_scopes">
                         <div>
-                            <div className="form-header-container">
-                                <h4 className="register-form-header">OAuth authorisation levels</h4>
-                                <div className="info-icon">
-                                <div className="tooltip">Please select the level of access you would like clients to
-                                    give to your app.</div>
-                                <img src="/img/info-icon.svg" alt="Info" />
+                            <div className={styles.formHeaderContainer}>
+                                <h4 className={styles.registerFormHeader}>OAuth authorisation levels</h4>
+                                <div className={styles.infoIcon}>
+                                    <div className={styles.tooltip}>Please select the level of access you would like clients to
+                                        give to your app.</div>
+                                    <div className={styles.infoIconImage} />
                                 </div>
                             </div>
                             <p>Bear in mind that you generally need only
@@ -206,7 +211,7 @@ export default function AppRegistrationForm () {
                         </div>
                     </div>
                     {errors.admin_scope && <span className={styles.errorMessage}>{errors.admin_scope.message}</span>}
-                    <div className="terms-of-conditions-register">
+                    <div className={styles.termsOfConditionRegister}>
                         <span>By registering your application, you acknowledge that you’ve read and accepted the
                         Deriv API </span>
                         <a href="https://deriv.com/tnc/business-partners-api-user.pdf" target="_blank" rel="noreferrer">

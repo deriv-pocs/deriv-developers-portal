@@ -16,6 +16,12 @@
     .expandableForm {
         display: none;
         width: 80%;
+        .termsOfConditionRegister {
+            margin-top: 35px;
+        }
+        .scopes {
+            margin-top: 40px;
+        }
         fieldset {
             width: 100%;
         }
