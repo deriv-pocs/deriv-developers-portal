@@ -11,6 +11,7 @@ interface FormData {
     trade_scope: string;
     trading_information_scope: string;
     payments_scope: string;
+    admin_scope: string;
 }
 
 export default function AppRegistrationForm () {
@@ -35,19 +36,46 @@ export default function AppRegistrationForm () {
                     </div>
                     <div className="api-token-wrapper">
                         <div className={styles.customTextInput} id="custom-text-input">
-                            <input {...register("api_token_input", { required: true, maxLength: 255 })} type="text" id="api_token_input" className={styles.apiTokenInput} placeholder=" " />
+                            <input {...register(
+                                "api_token_input", {
+                                    required: {
+                                        value: true,
+                                        message: "You require an API token to register an app."
+                                    },
+                                    maxLength: {
+                                        value: 255,
+                                        message: "You cannot write more than 255 characters."
+                                    }
+                                })}
+                                type="text"
+                                id="api_token_input"
+                                className={styles.apiTokenInput}
+                                placeholder=" "
+                            />
                             <label>API token (Required)</label>
                         </div>
-                        {errors.api_token_input?.type === "required" && <span className={styles.errorMessage}>You require an API token to register an app.</span>}
-                        {errors.api_token_input?.type === "maxLength" && <span className={styles.errorMessage}>You cannot write more than 255 characters.</span>}
+                        {errors.api_token_input && <span className={styles.errorMessage}>{errors.api_token_input.message}</span>}
                         <div className="api-token-warning" />
                         <div className="first">
                             <div className={styles.customTextInput} id="custom-text-input">
-                                <input {...register("app_name", { required: true, maxLength: 48 })} type="text" id="app_name" placeholder=" " />
+                                <input {...register(
+                                    "app_name", {
+                                        required: {
+                                            value: true,
+                                            message: "An app name is required.",
+                                        },
+                                        maxLength: {
+                                            value: 48,
+                                            message: "Your app name cannot exceed more than 48 characters.",
+                                        }
+                                    })} 
+                                    type="text"
+                                    id="app_name"
+                                    placeholder=" "
+                                />
                                 <label>App name (Required)</label>
                             </div>
-                            {errors.app_name?.type === "required" && <span className={styles.errorMessage}>An app name is required.</span>}
-                            {errors.app_name?.type === "maxLength" && <span className={styles.errorMessage}>Your app name cannot exceed more than 48 characters.</span>}
+                            {errors.app_name && <span className={styles.errorMessage}>{errors.app_name.message}</span>}
                         </div>
                     </div>
                 </fieldset>
@@ -69,11 +97,21 @@ export default function AppRegistrationForm () {
                         <div className="input-container">
                             <div>
                                 <div className="custom-text-input" id="custom-text-input">
-                                    <input {...register("app_markup_percentage", { required: true, maxLength: 4 })} type="number" id="app_markup_percentage" className="last" placeholder=" " />
+                                    <input {...register(
+                                        "app_markup_percentage", { 
+                                            maxLength: {
+                                                value: 4,
+                                                message: "Markup cannot exceed more than 4 characters.",
+                                            }
+                                        })} 
+                                        type="number"
+                                        id="app_markup_percentage"
+                                        className="last"
+                                        placeholder=" "
+                                    />
                                     <label>Markup percentage</label>
                                 </div>
-                                {errors.app_markup_percentage?.type === "required" && <span className={styles.errorMessage}>Please fill in a value in range of 0.00 to 5.00.</span>}
-                                {errors.app_markup_percentage?.type === "maxLength" && <span className={styles.errorMessage}>You cannot exceed more than 4 characters.</span>}
+                                {errors.app_markup_percentage && <span className={styles.errorMessage}>{errors.app_markup_percentage.message}</span>}
                                 <p className="helper-text">(0.00-5.00%)</p>
                             </div>
                         </div>
@@ -89,15 +127,15 @@ export default function AppRegistrationForm () {
                             <div className="custom-text-input" id="custom-text-input">
                                 <input {...register(
                                     "app_redirect_uri", { 
-                                        required: {
-                                            value: true,
-                                            message: "Please fill in your website."
+                                        maxLength: {
+                                            value: 255,
+                                            message: "Your website URL cannot exceed more than 255 characters."
                                         },
                                         pattern: {
                                             value: /^[a-z][a-z0-9.+\-]*:\/\/[0-9a-zA-Z\.-]+[\%\/\w \.-]*$/,
-                                            message: "Please correct your link formatting. (example: https://your.link)"
+                                            message: "Please correct your link formatting. (example: https://www.deriv.com)"
                                         }
-                                    })} 
+                                    })}
                                 id="app_redirect_uri" type="text" placeholder=" " />
                                 <label>Website URL</label>
                             </div>
@@ -107,7 +145,17 @@ export default function AppRegistrationForm () {
                         </div>
                         <div className="input-container">
                             <div className="custom-text-input" id="custom-text-input">
-                                <input {...register("app_verification_uri")} id="app_verification_uri" type="text" placeholder=" " />
+                                <input {...register(
+                                    "app_verification_uri", {
+                                        maxLength: {
+                                            value: 255,
+                                            message: "Your verification URL cannot exceed more than 255 characters."
+                                        },
+                                        pattern: {
+                                            value: /^[a-z][a-z0-9.+\-]*:\/\/[0-9a-zA-Z\.-]+[\%\/\w \.-]*$/,
+                                            message: "Please correct your link formatting. (example: https://www.deriv.com)"
+                                        }
+                                    })} id="app_verification_uri" type="text" placeholder=" " />
                                 <label>Verification URL</label>
                             </div>
                         </div>
@@ -129,23 +177,35 @@ export default function AppRegistrationForm () {
                         </div>
                         <div className="scopes-field">
                             <input {...register("read_scope")} id="read-scope" type="checkbox" defaultValue="read" />
-                            <label htmlFor="read-scope">Read all: Full access to users’ information, including private
+                            <label htmlFor="read-scope">Read all: Full access to users' information, including private
                                 information</label>
                         </div>
                         <div className="scopes-field">
                             <input {...register("trade_scope")} id="trade-scope" type="checkbox" defaultValue="trade" />
-                            <label htmlFor="trade-scope">Trade: Buy and sell contracts on the users’ behalf</label>
+                            <label htmlFor="trade-scope">Trade: Buy and sell contracts on the users' behalf</label>
                         </div>
                         <div className="scopes-field">
                             <input {...register("trading_information_scope")} id="trading_information-scope" type="checkbox" defaultValue="trading_information" />
-                            <label htmlFor="trading_information-scope">Trading information: View users’ trading
+                            <label htmlFor="trading_information-scope">Trading information: View users' trading
                                 information, including balance information</label>
                         </div>
-                        <div className="scopes-field mb-0">
+                        <div className="scopes-field">
                             <input {...register("payments_scope")} id="payments-scope" type="checkbox" defaultValue="payments" />
                             <label htmlFor="payments-scope">Payments: Cashier (deposit and withdrawal)</label>
                         </div>
+                        <div className="scopes-field mb-0">
+                            <input {...register(
+                                "admin_scope", {
+                                    required: {
+                                        value: true,
+                                        message: "Admin scope is required."
+                                    }
+                                })} id="admin-scope" type="checkbox" defaultValue="admin" />
+                            <label htmlFor="read-scope">Read all: Full access to users' information, including private
+                                information</label>
+                        </div>
                     </div>
+                    {errors.admin_scope && <span className={styles.errorMessage}>{errors.admin_scope.message}</span>}
                     <div className="terms-of-conditions-register">
                         <span>By registering your application, you acknowledge that you’ve read and accepted the
                         Deriv API </span>
