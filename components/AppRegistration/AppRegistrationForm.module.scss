@@ -1,17 +1,3 @@
-.customCheckbox {
-    background-image: url(/img/check.svg);
-    background-repeat: no-repeat;
-    display: inline-block;
-    border: 2px solid var(--app-registration-tab-secondary);
-    min-width: 11px;
-    height: 11px;
-    position: relative;
-    top: 1px;
-    margin-right: 8px;
-    border-radius: 2px;
-    transition: background-color .25s,border-color .25s;
-}
-
 .customTextInput {
     align-items: center;
     border: 1px solid var(--border-normal);
@@ -21,11 +7,22 @@
     position: relative;
     width: 100%;
     box-sizing: border-box;
+    margin-top: 15px;
     &:focus-within {
         border-color: var(--brand-secondary);
     }
     &:hover {
         border: 1px solid var(--app-registration-tab-secondary);
+    }
+    label {
+        position: absolute;
+        color: var(--app-registration-tab-secondary);
+        left: 12px;
+        font-size: 14px;
+        pointer-events: none;
+        transform-origin: top left;
+        transition: all .25s ease;
+        white-space: nowrap;
     }
     input[type=text],
     input[type=number] {
@@ -37,6 +34,13 @@
         min-width: 0;
         width: 100%;
         border: none;
+        text-indent: 12px;
+        &:not(:placeholder-shown)~label {
+            color: var(--app-registration-tab-active-font);
+            background-color: var(--white-01);
+            padding: 0 4px;
+            transform: translateY(-20px) scale(.75);
+        }
         &:focus {
             outline: none;
             &~label {
@@ -46,16 +50,6 @@
                 transform: translateY(-20px) scale(.75);
             }
         }
-    }
-    label {
-        position: absolute;
-        color: var(--app-registration-tab-secondary);
-        left: 12px;
-        font-size: 14px;
-        pointer-events: none;
-        transform-origin: top left;
-        transition: all .25s ease;
-        white-space: nowrap;
     }
 }
 
@@ -70,13 +64,9 @@
         align-items: center;
         justify-content: center;
         width: 80%;
-        input[type=checkbox] {
-            display: none;
-        }
         fieldset input[type=text] {
             padding: 0;
             width: 100%;
-            text-indent: 12px;
             margin-bottom: 0!important;
         }
         .helperText {
@@ -85,6 +75,7 @@
             font-size: 12px;
             line-height: 1.5;
             color: #999;
+            margin-bottom: 0;
         }
         .expandForm {
             width: 80%;
@@ -101,22 +92,9 @@
             }
         }
         .expandableForm {
-            display: inline-block;
             width: 80%;
-            .registerAppButton {
-                width: fit-content;
-                height: fit-content;
-                padding: 12px 20px;
-                line-height: 1.43;
-                letter-spacing: normal;
-                text-align: center;
-                color: #fff;
-                font-size: 14px;
-                border-radius: 4px;
-                border: none;
-                background-color: #ff444f;
-                margin: 40px auto;
-                font-weight: 700;
+            fieldset {
+                width: 100%;
             }
             .termsOfConditionRegister {
                 margin-top: 35px;
@@ -130,23 +108,22 @@
                     margin-bottom: 16px;
                     align-items: center;
                     justify-self: center;
-                    &> input[type=checkbox] {
-                        margin-right: 16px;
-                        transform: scale(1.23);
-                        padding: 9px;
-                    }
                 }
             }
-            fieldset {
+            .registerAppButtonContainer {
+                display: flex;
+                justify-content: center;
                 width: 100%;
-            }
-            .registerAppButton {
-                padding: 12px 32.5px;
+                margin-top: 25px;
+                button {
+                    font-size: 16px;
+                }
             }
         }
         .formHeaderContainer {
             display: flex;
             padding: 10px 0;
+            margin-top: 15px;
             .registerFormHeader {
                 font-size: 16px;
                 margin-right: 5px;
@@ -222,20 +199,6 @@
     display: none;
 }
 
-[data-state~="registration.logged_in.update_mode"] .expandableForm { 
-    .registerAppButton span {
-        visibility: hidden;
-        position: relative;
-        &:after {
-            visibility: visible;
-            content: "Update application";
-            position: absolute;
-            left: 0;
-            right: 0;
-        }
-    }
-}
-
 [data-state~="registration.logged_in.update_mode"] .customTextInput .apiTokenInput[readonly=true] {
     color: var(--border-normal);
     cursor: not-allowed;
@@ -246,12 +209,6 @@
 
 [data-state*="responsive.mobile"] {
     .formContent {
-        .expandableForm .registerAppButton {
-            padding: 12px 20px;
-        }
-        .registerAppButton {
-            padding: 12px 32.5px;
-        }
         .registerFormHeader {
             font-size: 16px;
         }

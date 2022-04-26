@@ -1,4 +1,7 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import Checkbox from '../Checkbox/Checkbox';
+import Button from '../Button/Button';
 import styles from './AppRegistrationForm.module.scss';
 
 interface FormData {
@@ -15,6 +18,9 @@ interface FormData {
 }
 
 export default function AppRegistrationForm () {
+    const [is_expanded, setIsExpanded] = React.useState(false);
+    const toggleFormExpand = () => is_expanded ? setIsExpanded(false) : setIsExpanded(true);
+
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
 
     return (
@@ -25,7 +31,7 @@ export default function AppRegistrationForm () {
                         <h4 className={styles.registerFormHeader}>General information</h4>
                         <div className={styles.infoIcon}>
                             <div className={styles.tooltip}>
-                                Please create your API token
+                                Please create your API token {" "}
                                 <a href="https://app.deriv.com/account/api-token" className={styles.tooltipLink}>here</a>, and
                                 copy it into this field.
                             </div>
@@ -53,7 +59,7 @@ export default function AppRegistrationForm () {
                             <label>API token (Required)</label>
                         </div>
                         <p className={styles.helperText}>max. 50 characters</p>
-                        {errors.api_token_input && <span className={styles.errorMessage}>{errors.api_token_input.message}</span>}
+                        {errors.api_token_input && <span className="error-message">{errors.api_token_input.message}</span>}
                         <div className="api-token-warning" />
                         <div className="first">
                             <div className={styles.customTextInput} id="custom-text-input">
@@ -74,16 +80,19 @@ export default function AppRegistrationForm () {
                                 />
                                 <label>App name (Required)</label>
                             </div>
-                            {errors.app_name && <span className={styles.errorMessage}>{errors.app_name.message}</span>}
+                            {errors.app_name && <span className="error-message">{errors.app_name.message}</span>}
                         </div>
                     </div>
                 </fieldset>
                 <div className={styles.expandForm}>
-                    <input id="expand_form" className={styles.expandFormCheckbox} type="checkbox" autoComplete="off" />
-                    <span className={styles.customCheckbox} id="expand-form" />
-                    <label htmlFor="admin-scope">I'd like to use OAuth or monetise my app</label>
+                    <Checkbox
+                        id="expand-form"
+                        label="I'd like to use OAuth or monetise my app"
+                        value=""
+                        onClickFunction={() => toggleFormExpand()}
+                    />
                 </div>
-                <div className={styles.expandableForm}>
+                <div style={{ display: is_expanded ? "inline-block" : "none" }} className={styles.expandableForm}>
                     <fieldset>
                         <div className={styles.formHeaderContainer}>
                             <h4 className={styles.registerFormHeader}>Markup</h4>
@@ -116,7 +125,7 @@ export default function AppRegistrationForm () {
                                     <label>Markup percentage</label>
                                 </div>
                                 <p className={styles.helperText}>(0.00-5.00%)</p>
-                                {errors.app_markup_percentage && <span className={styles.errorMessage}>{errors.app_markup_percentage.message}</span>}
+                                {errors.app_markup_percentage && <span className="error-message">{errors.app_markup_percentage.message}</span>}
                             </div>
                         </div>
                         <div className={styles.formHeaderContainer}>
@@ -146,9 +155,9 @@ export default function AppRegistrationForm () {
                                 />
                                 <label>Website URL</label>
                             </div>
-                            {errors.app_redirect_uri && <span className={styles.errorMessage}>{errors.app_redirect_uri.message}</span>}
                             <p className={styles.helperText}>*Please note that this URL will be used as the OAuth redirect
                                 URL for the OAuth authorisation</p>
+                            {errors.app_redirect_uri && <span className="error-message">{errors.app_redirect_uri.message}</span>}
                         </div>
                         <div className="input-container">
                             <div className={styles.customTextInput} id="custom-text-input">
@@ -169,6 +178,7 @@ export default function AppRegistrationForm () {
                                 />
                                 <label>Verification URL</label>
                             </div>
+                            {errors.app_verification_uri && <span className="error-message">{errors.app_verification_uri.message}</span>}
                         </div>
                     </fieldset>
                     <div className={styles.scopes} id="register_scopes">
@@ -181,51 +191,53 @@ export default function AppRegistrationForm () {
                                     <div className={styles.infoIconImage} />
                                 </div>
                             </div>
-                            <p>Bear in mind that you generally need only
-                                <b>'Trade'</b> and
+                            <p>Bear in mind that you generally need only {" "}
+                                <b>'Trade'</b> and {" "}
                                 <b>'Trading information'</b> access.
                             </p>
                         </div>
                         <div className={styles.scopesField}>
-                            <input {...register("read_scope")} id="read-scope" type="checkbox" defaultValue="read" />
-                            <span className={styles.customCheckbox} />
-                            <label htmlFor="read-scope">Read all: Full access to users' information, including private
-                                information</label>
+                            <Checkbox 
+                                name={register("read_scope")} 
+                                id="read-scope"
+                                label="Read all: Full access to users' information, including private information"
+                                value="read"
+                            />
                         </div>
                         <div className={styles.scopesField}>
-                            <input {...register("trade_scope")} id="trade-scope" type="checkbox" defaultValue="trade" />
-                            <span className={styles.customCheckbox} />
-                            <label htmlFor="trade-scope">Trade: Buy and sell contracts on the users' behalf</label>
+                            <Checkbox 
+                                name={register("trade_scope")}
+                                id="trade-scope"
+                                label="Trade: Buy and sell contracts on the users' behalf"
+                                value="trade"
+                            />
                         </div>
                         <div className={styles.scopesField}>
-                            <input {...register("trading_information_scope")} id="trading_information-scope" type="checkbox" defaultValue="trading_information" />
-                            <span className={styles.customCheckbox} />
-                            <label htmlFor="trading_information-scope">Trading information: View users' trading
-                                information, including balance information</label>
+                            <Checkbox 
+                                name={register("trading_information_scope")}
+                                id="trading_information-scope"
+                                label="Trading information: View users' trading information, including balance information"
+                                value="trading_information"
+                            />
                         </div>
                         <div className={styles.scopesField}>
-                            <input {...register("payments_scope")} id="payments-scope" type="checkbox" defaultValue="payments" />
-                            <span className={styles.customCheckbox} />
-                            <label htmlFor="payments-scope">Payments: Cashier (deposit and withdrawal)</label>
+                            <Checkbox 
+                                name={register("payments_scope")}
+                                id="payments-scope"
+                                label="Payments: Cashier (deposit and withdrawal)"
+                                value="payments"
+                            />
                         </div>
                         <div className={`${styles.scopesField} mb-0`}>
-                            <input {...register(
-                                "admin_scope", {
-                                    required: {
-                                        value: true,
-                                        message: "Admin scope is required."
-                                    }
-                                })}
+                            <Checkbox 
+                                name={register("admin_scope")} 
                                 id="admin-scope"
-                                type="checkbox"
-                                defaultValue="admin" 
+                                label="Admin: Full account access, including the access to manage security tokens"
+                                value="admin"
                             />
-                            <span className={styles.customCheckbox} />
-                            <label htmlFor="read-scope">Read all: Full access to users' information, including private
-                                information</label>
                         </div>
                     </div>
-                    {errors.admin_scope && <span className={styles.errorMessage}>{errors.admin_scope.message}</span>}
+                    {errors.admin_scope && <span className="error-message">{errors.admin_scope.message}</span>}
                     <div className={styles.termsOfConditionRegister}>
                         <span>By registering your application, you acknowledge that you’ve read and accepted the
                         Deriv API </span>
@@ -234,7 +246,9 @@ export default function AppRegistrationForm () {
                         </a>
                         <span>.</span>
                     </div>
-                    <input type="submit" value="Register new application" className={`${styles.registerAppButton} primary-btn-submit`} id="btnRegister" />
+                    <div className={styles.registerAppButtonContainer}>
+                        <Button onClick={null}>Register new Application</Button>
+                    </div>
                 </div>
             </div>
             <input type="hidden" id="app_id" name="app_id" />
