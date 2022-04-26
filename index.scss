@@ -3,6 +3,7 @@
 :root {
   --text-01: #333333;
   --red-01: #ff444f;
+  --red-02: #d43e47;
   --gray-01: #f0f1f3a3;
   --gray-02: #e6e9e9;
   --gray-03: #fbfbfb;
@@ -175,6 +176,12 @@ li {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+.error-message {
+  color: var(--red-01);
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: 10px;
 }
 .take-to-lib {
   padding: 80px 0 0;
