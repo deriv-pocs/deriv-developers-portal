@@ -71,10 +71,7 @@
     font-weight: bold;
 } 
 
-[data-state~="responsive.mobileS"],
-[data-state~="responsive.mobileM"], 
-[data-state~="responsive.mobileL"],
-[data-state~="responsive.mobileTablet"]  {
+[data-state*="responsive.mobile"] {
     .sidebarleft {
       display: none;
     }
