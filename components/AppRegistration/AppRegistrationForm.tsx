@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useRegisterApp } from '../../custom_hooks/useRegisterApp';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 import styles from './AppRegistrationForm.module.scss';
@@ -19,13 +20,11 @@ interface FormData {
 export default function AppRegistrationForm () {
     const [is_expanded, setIsExpanded] = React.useState(false);
     const toggleFormExpand = () => is_expanded ? setIsExpanded(false) : setIsExpanded(true);
-    
-    // console.log(useRegisterApp());
 
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
 
     return (
-        <form className={styles.frmNewApplication} id="frmNewApplication" onSubmit={handleSubmit((data) => {console.log(data)} )}>
+        <form className={styles.frmNewApplication} id="frmNewApplication" onSubmit={handleSubmit((data) => useRegisterApp(data) )}>
             <div className={styles.formContent}>
                 <fieldset>
                     <div className={styles.formHeaderContainer}>

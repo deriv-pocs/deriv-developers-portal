@@ -43,7 +43,7 @@ createMachine({
       },
     },
     registration: {
-      initial: "logged_in",
+      initial: "logged_out",
       states: {
         logged_out: {
           on: {
