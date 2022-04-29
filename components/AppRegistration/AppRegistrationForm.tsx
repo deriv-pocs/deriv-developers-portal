@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 import styles from './AppRegistrationForm.module.scss';
-
 interface FormData {
     api_token_input: string;
     app_name: string;
@@ -20,6 +19,8 @@ interface FormData {
 export default function AppRegistrationForm () {
     const [is_expanded, setIsExpanded] = React.useState(false);
     const toggleFormExpand = () => is_expanded ? setIsExpanded(false) : setIsExpanded(true);
+    
+    // console.log(useRegisterApp());
 
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
 

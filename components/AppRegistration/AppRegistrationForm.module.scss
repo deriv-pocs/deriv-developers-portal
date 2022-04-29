@@ -12,11 +12,11 @@
         border-color: var(--brand-secondary);
     }
     &:hover {
-        border: 1px solid var(--app-registration-tab-secondary);
+        border: 1px solid var(--gray-05);
     }
     label {
         position: absolute;
-        color: var(--app-registration-tab-secondary);
+        color: var(--gray-05);
         left: 12px;
         font-size: 14px;
         pointer-events: none;
@@ -158,14 +158,14 @@
                 &:hover .tooltip {
                     background-color: var(--border-normal);
                     border-radius: 4px;
-                    color: var(--app-registration-tab-active-font);
+                    color: var(--black-01);
                     font-size: 12px;
                     left: 50%;
                     line-height: 18px;
                     padding: 8px;
                     position: absolute;
                     display: inline-block;
-                    width: 280px;
+                    width: 200px;
                     transform: translate(-50%, calc(-100% - 10px));   
                     &:hover {
                         display: inline-block;
@@ -215,7 +215,6 @@
         }
     }
     .infoIcon:hover .tooltip {
-        width: 140px;
-        transform: translate(-19%, calc(-100% - 10px)); 
+        width: 30vw !important;
     }
 }
