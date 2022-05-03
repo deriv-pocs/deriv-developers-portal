@@ -20,11 +20,12 @@ interface FormData {
 export default function AppRegistrationForm () {
     const [is_expanded, setIsExpanded] = React.useState(false);
     const toggleFormExpand = () => is_expanded ? setIsExpanded(false) : setIsExpanded(true);
+    const { registerApp } = useRegisterApp();
 
     const { register, handleSubmit, formState: {errors} } = useForm<FormData>();
 
     return (
-        <form className={styles.frmNewApplication} id="frmNewApplication" onSubmit={handleSubmit((data) => useRegisterApp(data) )}>
+        <form className={styles.frmNewApplication} id="frmNewApplication" onSubmit={handleSubmit((data) => registerApp(data))}>
             <div className={styles.formContent}>
                 <fieldset>
                     <div className={styles.formHeaderContainer}>
@@ -87,8 +88,8 @@ export default function AppRegistrationForm () {
                 <div className={styles.expandForm}>
                     <Checkbox
                         id="expand-form"
+                        key="expand-form"
                         label="I'd like to use OAuth or monetise my app"
-                        value=""
                         onClickFunction={() => toggleFormExpand()}
                     />
                 </div>
@@ -198,42 +199,42 @@ export default function AppRegistrationForm () {
                         </div>
                         <div className={styles.scopesField}>
                             <Checkbox 
-                                name={register("read_scope")} 
+                                register={register("read_scope")} 
                                 id="read-scope"
+                                key="read-scope"
                                 label="Read all: Full access to users' information, including private information"
-                                value="read"
                             />
                         </div>
                         <div className={styles.scopesField}>
                             <Checkbox 
-                                name={register("trade_scope")}
+                                register={register("trade_scope")}
                                 id="trade-scope"
+                                key="trade-scope"
                                 label="Trade: Buy and sell contracts on the users' behalf"
-                                value="trade"
                             />
                         </div>
                         <div className={styles.scopesField}>
                             <Checkbox 
-                                name={register("trading_information_scope")}
+                                register={register("trading_information_scope")}
                                 id="trading_information-scope"
+                                key="trading_information-scope"
                                 label="Trading information: View users' trading information, including balance information"
-                                value="trading_information"
                             />
                         </div>
                         <div className={styles.scopesField}>
                             <Checkbox 
-                                name={register("payments_scope")}
+                                register={register("payments_scope")}
                                 id="payments-scope"
+                                key="payments-scope"
                                 label="Payments: Cashier (deposit and withdrawal)"
-                                value="payments"
                             />
                         </div>
                         <div className={`${styles.scopesField} mb-0`}>
                             <Checkbox 
-                                name={register("admin_scope")} 
+                                register={register("admin_scope")} 
                                 id="admin-scope"
+                                key="admin-scope"
                                 label="Admin: Full account access, including the access to manage security tokens"
-                                value="admin"
                             />
                         </div>
                     </div>
