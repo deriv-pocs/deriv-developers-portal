@@ -1,0 +1,14 @@
+.apiGuide {
+    display: flex;
+    flex-direction: column;
+}
+
+.apiGuideContent {
+    width: 100%;
+}
+
+[data-state*="responsive.desktop"] {
+    .apiGuideContent {
+        width: calc(100% - 270px);
+    }
+}

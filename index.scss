@@ -9,6 +9,7 @@
   --gray-03: #fbfbfb;
   --gray-04: #6e6e6e;
   --gray-05: #999999;
+  --gray-06: #577A9214;
   --app-registration-tab-secondary: #999999;
   --app-registration-tab-light-grey: #e6e9e9;
   --app-registration-tab-table-row-grey: #fbfbfb;
@@ -19,7 +20,7 @@
   --brand-secondary: #85acb0;
   --copy-hover:#424242;
   --copy-color:#c2c2c2;
-  --hamburger-active-link: #577A9214;
+  --hamburger-active-link: var(--gray-06);
   --hamburger-menu-width: 260px;
   --white-01: #ffffff;
   --btn-background: var(--red-01);
