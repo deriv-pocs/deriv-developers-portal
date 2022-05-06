@@ -24,7 +24,7 @@
     p {
         code {
             font-weight: normal;
-            color: var(--red-01)
+            color: var(--red-01);
         }
     }
 
@@ -35,7 +35,7 @@
             }
             code {
                 font-weight: normal;
-                color: var(--red-01)
+                color: var(--red-01);
             }
         }
     }
@@ -61,28 +61,27 @@
     border-radius: 6px;
     background-color: var(--black-02);
 
-    &_header {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      border-radius: 6px;
-      background-color: var(--black-01);
-      border-bottom: 1px solid rgba(242, 243, 244, 0.2);
-      color: var(--gray-07);
-      line-height: 1.5;
-  
-      &_title {
-        width: 100%;
-        margin-bottom: unset;
-        padding-left: 24px;
-      }
-      select {
-        background-color: inherit;
-        border: var(--black-01);
+    .cardHeader {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        border-radius: 6px;
+        background-color: var(--black-02);
         color: var(--gray-07);
-      }
-      option{
-        color: var(--black-01);
-      }
+        line-height: 1.5;
+
+        .cardTitle {
+            width: 100%;
+            margin-bottom: unset;
+            padding-left: 24px;
+        }
+        select {
+            background-color: inherit;
+            border: var(--black-01);
+            color: var(--gray-07);
+        }
+        option {
+            color: var(--black-01);
+        }
     }
-  }
+}

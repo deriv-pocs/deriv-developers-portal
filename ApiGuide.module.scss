@@ -19,8 +19,20 @@
 .apiGuideImage {
     margin-bottom: 24px;
     img {
-        width: 100%;
+        width: 80%;
     }
+}
+
+.apiCodeBlock {
+       width: 100%; 
+}
+
+.apiGuideTableContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 [data-state~="responsive.mobileL"],
@@ -37,5 +49,10 @@
 [data-state*="responsive.desktop"] {
     .apiGuideContent {
         width: calc(100% - 270px);
+    }
+
+    .apiCodeBlock {
+        max-width: 80%;
+        margin: 0 auto;
     }
 }

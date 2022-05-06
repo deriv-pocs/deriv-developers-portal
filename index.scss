@@ -16,8 +16,6 @@
   --app-registration-tab-table-row-grey: #fbfbfb;
   --black-01: #0e0e0e;
   --black-02: #1d1f20;
-  --blockquote-separator-color: #f5f7fa;
-  --blockquote-text-color: #f2f3f4;
   --border-normal: #d6dadb;
   --brand-secondary: #85acb0;
   --copy-hover:#424242;
@@ -25,16 +23,22 @@
   --hamburger-active-link: var(--gray-06);
   --hamburger-menu-width: 260px;
   --white-01: #ffffff;
+  --white-02: #f5f7fa;
+  --white-03: #f2f3f4;
+  --blockquote-separator-color: var(--white-02);
+  --blockquote-text-color: var(--white-03);
   --btn-background: var(--red-01);
   --btn-text-color: var(--white-01);
   --btn-background-disabled: var(--gray-02);
   --btn-text-color-disabled: var(--white-01);
+
 }
 * {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 16px;
   margin: 0;
   padding: 0;
+  scroll-margin-top: 100px;
 }
 html,
 body {
@@ -71,6 +75,14 @@ h4 {
 p {
   line-height: 28px;
   margin-bottom: 16px;
+}
+.inline-code {
+  font-weight: 400;
+  color: var(--red-01);
+  border-radius: 4px;
+  padding: 2px 4px;
+  background-color: var(--gray-01);
+  border: 1px solid var(--gray-02);
 }
 .doc-content{
   padding: 188px 80px;

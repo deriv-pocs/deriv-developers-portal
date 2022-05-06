@@ -6,16 +6,18 @@ const CopyButton = ({ content_to_copy }) => {
     navigator.clipboard.writeText(content_to_copy)
   }
   return (
-    <div
-      data-testid="copyButton"
-      className={styles.copyButton}
-      onClick={handleCopyButtonClick}
-    >
+    <div className={styles.copyButtonHeader}>
       <div
-        className={styles.copyButtonImage}
-        alt="copy code icon"
-      />
-      <div>Copy</div>
+        data-testid="copyButton"
+        className={styles.copyButton}
+        onClick={handleCopyButtonClick}
+      >
+        <div
+          className={styles.copyButtonImage}
+          alt="copy code icon"
+        />
+        <div>Copy</div>
+      </div>
     </div>
   )
 }
