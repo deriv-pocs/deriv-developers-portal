@@ -4,174 +4,174 @@ export default function ApiGuideTable() {
     return (
         <table className={styles.apiGuideTable} cellSpacing={0} cellPadding={0}>
             <tbody><tr>
-                <th className={styles.apiGuideTableHeader}>API contract name</th>
-                <th className={styles.apiGuideTableHeader}>Category on website</th>
-                <th className={styles.apiGuideTableHeader}>Name on website</th>
+                <th>API contract name</th>
+                <th>Category on website</th>
+                <th>Name on website</th>
             </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>MULTUP</td>
-                    <td className={styles.apiGuideTableCell}>Multiply Up/Multiply Down</td>
-                    <td className={styles.apiGuideTableCell}>Multiply Up</td>
+                    <td>MULTUP</td>
+                    <td>Multiply Up/Multiply Down</td>
+                    <td>Multiply Up</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>MULTDOWN</td>
-                    <td className={styles.apiGuideTableCell}>Multiply Up/Multiply Down</td>
-                    <td className={styles.apiGuideTableCell}>Multiply Down</td>
+                    <td>MULTDOWN</td>
+                    <td>Multiply Up/Multiply Down</td>
+                    <td>Multiply Down</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>UPORDOWN</td>
-                    <td className={styles.apiGuideTableCell}>Stays Between/Goes Outside</td>
-                    <td className={styles.apiGuideTableCell}>Goes Outside</td>
+                    <td>UPORDOWN</td>
+                    <td>Stays Between/Goes Outside</td>
+                    <td>Goes Outside</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>EXPIRYRANGE</td>
-                    <td className={styles.apiGuideTableCell}>Ends Between/Ends Outside</td>
-                    <td className={styles.apiGuideTableCell}>Ends Between</td>
+                    <td>EXPIRYRANGE</td>
+                    <td>Ends Between/Ends Outside</td>
+                    <td>Ends Between</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>ONETOUCH</td>
-                    <td className={styles.apiGuideTableCell}>Touch/No Touch</td>
-                    <td className={styles.apiGuideTableCell}>Touches</td>
+                    <td>ONETOUCH</td>
+                    <td>Touch/No Touch</td>
+                    <td>Touches</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>CALLE</td>
-                    <td className={styles.apiGuideTableCell}>Rise/Fall Equal</td>
-                    <td className={styles.apiGuideTableCell}>Higher</td>
+                    <td>CALLE</td>
+                    <td>Rise/Fall Equal</td>
+                    <td>Higher</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>LBHIGHLOW</td>
-                    <td className={styles.apiGuideTableCell}>Lookbacks</td>
-                    <td className={styles.apiGuideTableCell}>High-Low</td>
+                    <td>LBHIGHLOW</td>
+                    <td>Lookbacks</td>
+                    <td>High-Low</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>ASIAND</td>
-                    <td className={styles.apiGuideTableCell}>Asians</td>
-                    <td className={styles.apiGuideTableCell}>Asian Down</td>
+                    <td>ASIAND</td>
+                    <td>Asians</td>
+                    <td>Asian Down</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>EXPIRYRANGEE</td>
-                    <td className={styles.apiGuideTableCell} />
-                    <td className={styles.apiGuideTableCell} />
+                    <td>EXPIRYRANGEE</td>
+                    <td />
+                    <td />
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>DIGITDIFF</td>
-                    <td className={styles.apiGuideTableCell}>Digits</td>
-                    <td className={styles.apiGuideTableCell}>Digit Differs</td>
+                    <td>DIGITDIFF</td>
+                    <td>Digits</td>
+                    <td>Digit Differs</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>DIGITMATCH</td>
-                    <td className={styles.apiGuideTableCell}>Digits</td>
-                    <td className={styles.apiGuideTableCell}>Digit Matches</td>
+                    <td>DIGITMATCH</td>
+                    <td>Digits</td>
+                    <td>Digit Matches</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>DIGITOVER</td>
-                    <td className={styles.apiGuideTableCell}>Digits</td>
-                    <td className={styles.apiGuideTableCell}>Digit Over</td>
+                    <td>DIGITOVER</td>
+                    <td>Digits</td>
+                    <td>Digit Over</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>PUTE</td>
-                    <td className={styles.apiGuideTableCell}>Rise/Fall Equal</td>
-                    <td className={styles.apiGuideTableCell}>Lower</td>
+                    <td>PUTE</td>
+                    <td>Rise/Fall Equal</td>
+                    <td>Lower</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>DIGITUNDER</td>
-                    <td className={styles.apiGuideTableCell}>Digits</td>
-                    <td className={styles.apiGuideTableCell}>Digit Under</td>
+                    <td>DIGITUNDER</td>
+                    <td>Digits</td>
+                    <td>Digit Under</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>NOTOUCH</td>
-                    <td className={styles.apiGuideTableCell}>Touch/No Touch</td>
-                    <td className={styles.apiGuideTableCell}>Does Not touch</td>
+                    <td>NOTOUCH</td>
+                    <td>Touch/No Touch</td>
+                    <td>Does Not touch</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>CALL</td>
-                    <td className={styles.apiGuideTableCell}>Up/Down</td>
-                    <td className={styles.apiGuideTableCell}>Higher</td>
+                    <td>CALL</td>
+                    <td>Up/Down</td>
+                    <td>Higher</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>RANGE</td>
-                    <td className={styles.apiGuideTableCell}>Stays Between/Goes Outside</td>
-                    <td className={styles.apiGuideTableCell}>Stays Between</td>
+                    <td>RANGE</td>
+                    <td>Stays Between/Goes Outside</td>
+                    <td>Stays Between</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>LBFLOATPUT</td>
-                    <td className={styles.apiGuideTableCell}>Lookbacks</td>
-                    <td className={styles.apiGuideTableCell}>High-Close</td>
+                    <td>LBFLOATPUT</td>
+                    <td>Lookbacks</td>
+                    <td>High-Close</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>DIGITODD</td>
-                    <td className={styles.apiGuideTableCell}>Digits</td>
-                    <td className={styles.apiGuideTableCell}>Digit Odd</td>
+                    <td>DIGITODD</td>
+                    <td>Digits</td>
+                    <td>Digit Odd</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>PUT</td>
-                    <td className={styles.apiGuideTableCell}>Up/Down</td>
-                    <td className={styles.apiGuideTableCell}>Lower</td>
+                    <td>PUT</td>
+                    <td>Up/Down</td>
+                    <td>Lower</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>ASIANU</td>
-                    <td className={styles.apiGuideTableCell}>Asians</td>
-                    <td className={styles.apiGuideTableCell}>Asian Up</td>
+                    <td>ASIANU</td>
+                    <td>Asians</td>
+                    <td>Asian Up</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>LBFLOATCALL</td>
-                    <td className={styles.apiGuideTableCell}>Lookbacks</td>
-                    <td className={styles.apiGuideTableCell}>Close-Low</td>
+                    <td>LBFLOATCALL</td>
+                    <td>Lookbacks</td>
+                    <td>Close-Low</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>EXPIRYMISSE</td>
-                    <td className={styles.apiGuideTableCell} />
-                    <td className={styles.apiGuideTableCell} />
+                    <td>EXPIRYMISSE</td>
+                    <td />
+                    <td />
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>EXPIRYMISS</td>
-                    <td className={styles.apiGuideTableCell}>Ends Between/Ends Outside</td>
-                    <td className={styles.apiGuideTableCell}>Ends Outside</td>
+                    <td>EXPIRYMISS</td>
+                    <td>Ends Between/Ends Outside</td>
+                    <td>Ends Outside</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>DIGITEVEN</td>
-                    <td className={styles.apiGuideTableCell}>Digits</td>
-                    <td className={styles.apiGuideTableCell}>Digit Even</td>
+                    <td>DIGITEVEN</td>
+                    <td>Digits</td>
+                    <td>Digit Even</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>TICKHIGH</td>
-                    <td className={styles.apiGuideTableCell}>highlowticks</td>
-                    <td className={styles.apiGuideTableCell}>High Tick</td>
+                    <td>TICKHIGH</td>
+                    <td>highlowticks</td>
+                    <td>High Tick</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>TICKLOW</td>
-                    <td className={styles.apiGuideTableCell}>highlowticks</td>
-                    <td className={styles.apiGuideTableCell}>Low Tick</td>
+                    <td>TICKLOW</td>
+                    <td>highlowticks</td>
+                    <td>Low Tick</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>RESETCALL</td>
-                    <td className={styles.apiGuideTableCell}>Reset Call/Reset Put</td>
-                    <td className={styles.apiGuideTableCell}>Reset Call</td>
+                    <td>RESETCALL</td>
+                    <td>Reset Call/Reset Put</td>
+                    <td>Reset Call</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>RESETPUT</td>
-                    <td className={styles.apiGuideTableCell}>Reset Call/Reset Put</td>
-                    <td className={styles.apiGuideTableCell}>Reset Put</td>
+                    <td>RESETPUT</td>
+                    <td>Reset Call/Reset Put</td>
+                    <td>Reset Put</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>CALLSPREAD</td>
-                    <td className={styles.apiGuideTableCell}>Call Spread/Put Spread</td>
-                    <td className={styles.apiGuideTableCell}>Call Spread</td>
+                    <td>CALLSPREAD</td>
+                    <td>Call Spread/Put Spread</td>
+                    <td>Call Spread</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>PUTSPREAD</td>
-                    <td className={styles.apiGuideTableCell}>Call Spread/Put Spread</td>
-                    <td className={styles.apiGuideTableCell}>Put Spread</td>
+                    <td>PUTSPREAD</td>
+                    <td>Call Spread/Put Spread</td>
+                    <td>Put Spread</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>RUNHIGH</td>
-                    <td className={styles.apiGuideTableCell}>Only Ups/Only Downs</td>
-                    <td className={styles.apiGuideTableCell}>Only Ups</td>
+                    <td>RUNHIGH</td>
+                    <td>Only Ups/Only Downs</td>
+                    <td>Only Ups</td>
                 </tr>
                 <tr>
-                    <td className={styles.apiGuideTableCell}>RUNLOW</td>
-                    <td className={styles.apiGuideTableCell}>Only Ups/Only Downs</td>
-                    <td className={styles.apiGuideTableCell}>Only Downs</td>
+                    <td>RUNLOW</td>
+                    <td>Only Ups/Only Downs</td>
+                    <td>Only Downs</td>
                 </tr>
             </tbody>
         </table>

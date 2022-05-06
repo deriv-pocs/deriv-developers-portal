@@ -3,12 +3,12 @@
     border-radius: 1rem;
     overflow: hidden;
     border: 1px solid var(--gray-02);
-    .apiGuideTableHeader {
+    th {
         background-color: var(--gray-02);
         padding: 1.5rem 2rem;
         text-align: left;
     }
-    .apiGuideTableCell {
+    td {
         padding: 1.5rem 2rem;
         box-shadow: inset 0 -1px 0 var(--white-03);
     }
@@ -16,21 +16,21 @@
 
 [data-state*="responsive.mobile"] .apiGuideTable {
     width: 100%;
-    .apiGuideTableHeader, .apiGuideTableCell {
+    th, td {
         padding: 4px;
     }
 }
 
 [data-state*="responsive.mobileTablet"] .apiGuideTable {
     width: 80%;
-    .apiGuideTableHeader, .apiGuideTableCell {
+    th, td {
         padding: 1.5rem 2rem;
     }
 }
 
 [data-state~="responsive.desktopLaptopM"] .apiGuideTable {
     width: 60%;
-    .apiGuideTableHeader, .apiGuideTableCell {
+    th, td {
         padding: 10px 15px;
     }
 }
