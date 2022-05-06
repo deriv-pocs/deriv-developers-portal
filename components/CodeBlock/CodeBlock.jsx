@@ -3,7 +3,7 @@ import CodeContent from "./CodeContent"
 import CopyButton from './CopyButton'
 import styles from "./CodeBlock.module.scss"
 
-const CodeBlock = ({ id, title, desc, subdesc }) => {
+const CodeBlock = ({ id }) => {
   const [file_content, setFileContent] = useState(" ")
   const [lang, setLang] = useState("javascript")
 
@@ -28,9 +28,6 @@ const CodeBlock = ({ id, title, desc, subdesc }) => {
 
   return (
     <div className={styles.codeBlock}>
-      <h2 className={styles.codeBlockTitle}>{title}</h2>
-      <p className={styles.codeBlockDesc}>{desc}</p>
-      {subdesc && <p className={styles.codeBlockDesc}>{subdesc}</p>}
       <div className={styles.card}>
         <div className={styles.cardHeader}>
           <p className={styles.cardTitle}>

@@ -41,22 +41,6 @@
     }
 }
 
-.codeBlockTitle {
-    font-size: 32px;
-    margin-bottom: 12px;
-    text-align: left;
-    width: 100%;
-
-    @media (max-width: 480px) {
-        font-size: 24px;
-        margin-bottom: 8px;
-    }
-}
-.codeBlockDesc {
-    line-height: 28px;
-    margin-bottom: 16px;
-}
-
 .card {
     border-radius: 6px;
     background-color: var(--black-02);
@@ -83,5 +67,13 @@
         option {
             color: var(--black-01);
         }
+    }
+}
+
+[data-state~="responsive.mobileS"],
+[data-state~="responsive.mobileM"] {
+    .codeBlockTitle {
+        font-size: 24px;
+        margin-bottom: 8px;
     }
 }
