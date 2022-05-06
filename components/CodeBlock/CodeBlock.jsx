@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import CodeContent from "./CodeContent"
 import CopyButton from './CopyButton'
-import styles from "./Quickstart.module.scss"
+import styles from "./CodeBlock.module.scss"
 
 const CodeBlock = ({ id, title, desc, subdesc }) => {
   const [file_content, setFileContent] = useState(" ")

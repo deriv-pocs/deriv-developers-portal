@@ -4,9 +4,12 @@ import Navigator from './components/Navigator/Navigator';
 import { useSelector } from '@xstate/react';
 import { isMobileSelector } from './selectors';
 import { stateService } from './stateSignal';
+import CodeBlockSingleLanguage from './components/CodeBlock/CodeBlockSingleLanguage';
+import ticksJSON from './public/demos/json/ticks.json';
 
 export default function ApiGuide() {
   const isMobile = useSelector(stateService, isMobileSelector);
+  const tickContent = JSON.stringify(ticksJSON, null, 2);
   return (
     <div className={styles.apiGuide}>
       {!isMobile && <Navigator />}
@@ -69,7 +72,7 @@ export default function ApiGuide() {
             <li>
               <p>You can earn commission on trades and payments your clients perform via the
                 websites and apps you
-                create with Deriv API. Get more details about the commission plans <a href="https://deriv.com/partners/affiliate-ib/" target="_blank">here</a>. </p>
+                create with Deriv API. Get more details about the commission plans <a href="https://deriv.com/partners/affiliate-ib/" rel="noreferrer" target="_blank">here</a>. </p>
             </li>
             <li>
               <p>You can also earn from markups on every contract purchased via a trading app you created
@@ -100,7 +103,7 @@ export default function ApiGuide() {
           <p>The WebSockets protocol is an advanced version of the communication channel that is available in all popular
             programming languages. It allows the server to send information to the client and maintain the connection without
             the client requesting it every time.</p>
-          <p>In comparison, APIs using REST over HTTP don’t maintain a connection to the client once the server has replied to
+          <p>In comparison, APIs using REST over HTTP don't maintain a connection to the client once the server has replied to
             it.</p>
           <p>The WebSockets protocol provides clients with a faster and more efficient way to receive updated information as
             soon as it becomes available. For example, you can subscribe to account balance updates and the Deriv servers will
@@ -115,6 +118,8 @@ export default function ApiGuide() {
           <p>Here is an example of the JSON formatted code, where “ticks” is the name of the attribute and “R_100” is the
             value of that attribute.</p>
         </div>
+        <CodeBlockSingleLanguage lang="json" content={tickContent} />
+        <p>Data in JSON can also be nested, so if you wanted to send user information with an address, it could look like:</p>
       </div>
     </div>
   )

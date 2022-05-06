@@ -10,10 +10,12 @@
   --gray-04: #6e6e6e;
   --gray-05: #999999;
   --gray-06: #577A9214;
+  --gray-07: #d6d6d6;
   --app-registration-tab-secondary: #999999;
   --app-registration-tab-light-grey: #e6e9e9;
   --app-registration-tab-table-row-grey: #fbfbfb;
   --black-01: #0e0e0e;
+  --black-02: #1d1f20;
   --blockquote-separator-color: #f5f7fa;
   --blockquote-text-color: #f2f3f4;
   --border-normal: #d6dadb;
@@ -44,13 +46,13 @@ a {
 }
 @mixin header {
   margin-bottom: 16px;
-  text-align: center;
   color: var(--text-01);
 }
 h1 {
   @include header;
   font-size: 48px;
   margin-bottom: 40px;
+  text-align: center;
 }
 h2 {
   @include header;
@@ -60,12 +62,10 @@ h2 {
 h3 {
   @include header;
   font-size: 24px;
-  text-align: left;
   line-height: 1.5;
 }
 h4 {
   @include header;
-  text-align: left;
   font-size: 20px;
 }
 p {
