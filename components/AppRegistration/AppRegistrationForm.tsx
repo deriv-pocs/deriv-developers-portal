@@ -144,6 +144,7 @@ export default function AppRegistrationForm() {
                                             id="app_markup_percentage"
                                             className="last"
                                             placeholder=" "
+                                            onWheel={(e:any) => e.target.blur()}
                                         />
                                         <label>Markup percentage</label>
                                     </div>
