@@ -89,7 +89,6 @@ export default function AppRegistrationForm() {
                                 />
                                 <label>API token (Required)</label>
                             </div>
-                            <p className={styles.helperText}>max. 50 characters</p>
                             {errors.api_token_input && <span className="error-message">{errors.api_token_input.message}</span>}
                             <div className="api-token-warning" />
                             <div className="first">
@@ -166,7 +165,7 @@ export default function AppRegistrationForm() {
                                         "app_redirect_uri", {
                                         required: {
                                             value: true,
-                                            message: "A redirect URL is required.",
+                                            message: "A Website URL is required.",
                                         }, 
                                         maxLength: {
                                             value: 255,
@@ -181,7 +180,7 @@ export default function AppRegistrationForm() {
                                         type="text"
                                         placeholder=" "
                                     />
-                                    <label>Website URL</label>
+                                    <label>Website URL (Required)</label>
                                 </div>
                                 <p className={styles.helperText}>*Please note that this URL will be used as the OAuth redirect
                                     URL for the OAuth authorisation</p>
@@ -221,7 +220,8 @@ export default function AppRegistrationForm() {
                                 </div>
                                 <p>Bear in mind that you generally need only {" "}
                                     <b>'Trade'</b> and {" "}
-                                    <b>'Trading information'</b> access.
+                                    <b>'Trading information'</b> access. {" "}
+                                    <b>'Admin'</b> access is usually not required.
                                 </p>
                             </div>
                             <div className={styles.scopesField}>
