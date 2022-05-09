@@ -1,12 +1,11 @@
 import { createEffect, createSignal } from 'solid-js';
-import { useSanitizeURL } from './custom_hooks/useSanitizeURL';
+import { sanitizeURL } from './global_functions/sanitizeURL';
 
 export const [token1, setToken1] = createSignal('');
 export const [app_id, setAppId] = createSignal('');
 export const [server_url, setServerUrl] = createSignal('');
 createEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const sanitizeURL = useSanitizeURL;
     const token1_in_url = urlParams.get('token1');
     const app_id_in_url = urlParams.get('app_id');
     const endpoint_in_url = urlParams.get('endpoint');
