@@ -20,9 +20,9 @@ export default function HomepageSlider() {
     const [slide_position, setSlidePosition] = React.useState(1);
     
     React.useEffect(() => {
-        if (window_resize.width >= devices.laptop) {
+        if (window_resize.width >= devices.desktopLaptopM) {
             setSlideDistance((slide_size.big * slide_position) * -1);
-        } else if (window_resize.width <= devices.laptop) {
+        } else if (window_resize.width <= devices.desktopLaptopM) {
             setSlideDistance((slide_size.small * slide_position) * -1);
         }
     }, [slide_position, window_resize, devices, slide_size])
@@ -109,19 +109,14 @@ export default function HomepageSlider() {
             slidingTo(NEXT);
         }
     }
-    
-    interface touchEvent {
-        targetTouches: unknown;
-    }
-    interface slideEventValue extends touchEvent {
-        clientX: number;
-    }
 
-    const enableSliding = (event_type:string, event:slideEventValue) => {
+    type sliderEvent = React.MouseEvent<HTMLElement>|React.TouchEvent<HTMLElement>;
+
+    const enableSliding = (event_type:string, event:sliderEvent):void => {
         setIsHoldingCard(true)
-        if (event_type === "mouse") {
+        if (event_type === "mouse" && "clientX" in event) {
             setMouseDownPosition(event.clientX);
-        } else if (event_type === "touch") {
+        } else if (event_type === "touch" && "targetTouches" in event) {
             setMouseDownPosition(event.targetTouches[0].clientX);
         }
     }

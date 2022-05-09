@@ -27,15 +27,6 @@
     width: 32px;
 }
 
-[data-state~="registration.logged_in.update_mode"] .custom-text-input .api-token-input[readonly=true] {
-    color: var(--border-normal);
-    cursor: not-allowed;  
-}
-
-[data-state~="registration.logged_in.update_mode"] .custom-text-input .api-token-input[readonly=true]~label {
-    color: var(--border-normal) !important;
-}
-
 .app-btn span {
     visibility: hidden;
 }
@@ -158,7 +149,7 @@
 
 /* red "No, keep it" button with white text */
 .dialog-btn-submit {
-    background-color: var(--app-registration-tab-active-underline);
+    background-color: var(--red-01);
     color: white;
     font-weight: bold;
     height: 40px;
@@ -205,92 +196,18 @@
     width: 100%;
 }
 
-[data-state~="registration.logged_in.register_tab.unfolded_form"] .expandable-form {
-    display: flex;
-    flex-direction: column;
-
-}
-
-[data-state~="registration.logged_in.register_tab.folded_form"] .expandable-form {
-    display: none;
-}
-
-.expandable-form {
-    display: none;
+fieldset {
     width: 80%;
-}
-
-.expandable-form fieldset {
-    width: 100%;
-}
-
-.expand-form {
-    width: 80%;
-    left: 0;
-    display: flex;
-    padding: 40px 0 10px;
-}
-
-.expand-form-checkbox {
-    margin-right: 16px;
-    transform: scale(1.23);
-    padding: 9px;
-    top: 1px;
-    position: relative;
-}
-
-.form-content h4 {
-    margin-bottom: 0;
-}
-
-.form-header-container {
-    display: flex;
-    padding: 10px 0;
+    margin: 0 auto;
+    border: none;
+    .first {
+        margin-top: 20px;
+    }
 }
 
 .form-subtitle {
     font-weight: normal;
     line-height: 24px;
-}
-
-.info-icon-tooltip {
-    position: relative;
-}
-
-.info-icon {
-    position: relative;
-    top: 2px !important;
-}
-
-.info-icon:hover .tooltip {
-    background-color: var(--border-normal);
-    border-radius: 4px;
-    color: var(--app-registration-tab-active-font);
-    font-size: 12px;
-    left: 50%;
-    line-height: 18px;
-    padding: 8px;
-    position: absolute;
-    display: inline-block;
-    width: 140px;
-    transform: translate(-19%, calc(-100% - 10px));
-}
-
-.info-icon:hover .tooltip:hover {
-    display: inline-block;
-}
-
-.info-icon:hover .tooltip:before {
-    content: ' ';
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid var(--border-normal);
-    left: 30px;
-    transform: translateX(-50%);
-    position: absolute;
-    bottom: -5px;
 }
 
 .input-container {
@@ -301,6 +218,12 @@
 .login-image {
     margin-top: 95px;
     margin-bottom: 16px;
+    background-image: url(/img/login.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 128px;
+    height: 128px;
 }
 
 .login-title {
@@ -311,13 +234,6 @@
     text-align: center;
 }
 
-[data-state~="registration.logged_in.manage_tab"] .manage-apps {
-    display: inline-block;
-    overflow: auto;
-    width: 100%;
-    max-height: 500px;
-}
-
 .main-register-btn {
     padding: 10px 16px;
     border-radius: 4px;
@@ -325,48 +241,6 @@
     text-decoration: none;
     font-weight: 700;
     color: #fff;
-}
-
-.manage-apps {
-    display: none;
-}
-
-.manage-apps table {
-    border-spacing: 0;
-    width: calc(100% - 125px);
-}
-
-.manage-apps thead {
-    background-color: var(--app-registration-tab-light-grey);
-    height: 50px;
-    text-align: left;
-}
-
-.manage-apps th,
-.manage-apps td {
-    padding: 16px;
-    min-width: 120px;
-}
-
-/* Set width of last two table columns to 40px */
-.manage-apps td:last-child,
-.manage-apps th:last-child {
-    min-width: 1px !important;
-    width: 1px !important;
-    padding: 0;
-    white-space: nowrap;
-    padding-left: 5%;
-}
-
-/* set padding-left of first column to 32px */
-.manage-apps td:first-child,
-.manage-apps th:first-child {
-    padding-left: 32px;
-}
-
-/* set width of last table column to 20px */
-.manage-apps tbody tr:nth-child(even) {
-    background-color: var(--app-registration-tab-table-row-grey);
 }
 
 .no-apps {
@@ -379,15 +253,6 @@
     margin: 0 auto;
 }
 
-.no-apps-icon {
-    margin-top: 16px;
-    margin-bottom: 20px;
-}
-
-.no-apps-text {
-    text-align: center;
-}
-
 .no-apps-wrapper {
     display: none;
 }
@@ -395,10 +260,6 @@
 [data-state~="registration.logged_in.manage_tab.loadingApps.empty"] .no-apps-wrapper {
     display: inline-block;
     visibility: visible;
-}
-
-[data-state~="registration.logged_in.manage_tab.loadingApps.empty"] .manage-apps {
-    visibility: hidden;
 }
 
 .no-apps-wrapper {
@@ -427,29 +288,16 @@
 .registered-apps-tabs button {
     border: none;
     background-color: transparent;
-    color: var(--app-registration-tab-secondary);
-    border-bottom: 1px solid var(--app-registration-tab-secondary);
+    color: var(--gray-05);
+    border-bottom: 1px solid var(--gray-05);
     padding: 10px 20px;
 }
 
 [data-state~="registration.logged_in.manage_tab"] .manage-button,
 [data-state~="registration.logged_in.register_tab"] .register-button {
     font-weight: bold;
-    color: var(--app-registration-tab-active-font);
-    border-bottom: 3px solid var(--app-registration-tab-active-underline);
-}
-
-[data-state~="registration.logged_in.update_mode"] .expandable-form .register-app-button span {
-    visibility: hidden;
-    position: relative;
-}
-
-[data-state~="registration.logged_in.update_mode"] .expandable-form .register-app-button span:after {
-    visibility: visible;
-    content: "Update application";
-    position: absolute;
-    left: 0;
-    right: 0;
+    color: var(--text-01);
+    border-bottom: 3px solid var(--red-01);
 }
 
 [data-state~="registration.logged_in.update_mode"] .register-button {
@@ -462,8 +310,8 @@
     visibility: visible;
     content: "Update your application";
     font-weight: bold;
-    color: var(--app-registration-tab-active-font);
-    border-bottom: 3px solid var(--app-registration-tab-active-underline);
+    color: var(--text-01);
+    border-bottom: 3px solid var(--red-01);
     position: absolute;
     padding: 10px 0;
     width: 100%;
@@ -482,16 +330,6 @@
 [data-state~="registration.logged_in.update_mode"] .expandable-form {
     display: flex;
     flex-direction: column;
-}
-
-.expandable-form .register-app-button {
-    padding: 12px 32.5px;
-}
-
-.register-form-header {
-    font-size: 16px;
-    margin-right: 5px;
-    line-height: 20px
 }
 
 .register-app fieldset input[type="text"] {
@@ -521,49 +359,6 @@
     cursor: pointer;
 }
 
-.scopes {
-    margin-top: 40px;
-}
-
-.skeleton {
-    background-image: linear-gradient(to right, white, #E6E6E6, #E6E6E6);
-    padding: 10px;
-    height: 20px;
-    margin-bottom: 16px;
-    width: 100px;
-    position: relative;
-}
-
-.skeleton:before {
-    content: ' ';
-    background-image: linear-gradient(to right, #E6E6E6, #E6E6E6, white);
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation-name: loading-skeleton;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-
-@keyframes loading-skeleton {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-.terms-of-conditions-register {
-    margin-top: 35px;
-}
-
 .tooltip {
     display: none;
 }
@@ -577,10 +372,6 @@
     width: inherit;
     bottom: -15px;
     padding: 0 8px;
-}
-
-.tooltip-link {
-    font-size: 12px;
 }
 
 .app-registration-signout {
@@ -624,23 +415,9 @@
         margin-bottom: 24px;
     }
 
-    .info-icon:hover .tooltip:before {
-        left: 50%;
-    }
-
-    .info-icon:hover .tooltip {
-        width: 280px;
-        transform: translate(-50%, calc(-100% - 10px));
-    }
-
     .login-title {
         font-size: 20px;
         margin-bottom: 24px;
-    }
-
-
-    [data-state~="registration.logged_in.manage_tab"] .manage-apps {
-        margin-left: 125px;
     }
 
     .no-apps-wrapper {
@@ -657,22 +434,8 @@
     .no-apps-text {
         width: 390px;
     }
-
+    
     .expandable-form .register-app-button {
         padding: 12px 20px;
-    }
-
-    .register-form-header {
-        font-size: 16px;
-    }
-
-    [data-state~="registration.logged_in"] .app-registration-signout {
-        display: block;
-        position: fixed;
-        right: 174px;
-        top: 43px;
-        z-index: 100;
-        color: var(--label-background);
-        background-color: transparent;
     }
 }
