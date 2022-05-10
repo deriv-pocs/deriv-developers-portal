@@ -216,6 +216,7 @@ createMachine({
       },
     },
     responsive: {
+      initial: "desktopLaptopL",
       states: {
         desktopLaptopL: {},
         desktopLaptopM: {},

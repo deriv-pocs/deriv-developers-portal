@@ -1,5 +1,5 @@
 import Sidebar from "./Sidebar"
-import { Outlet } from "@tanstack/react-location"
+import { Outlet } from "react-router-dom"
 
 export default function ApiExplorer() {
     return (

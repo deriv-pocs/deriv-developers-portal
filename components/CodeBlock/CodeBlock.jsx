@@ -20,8 +20,8 @@ const CodeBlock = ({ id }) => {
       .then(response => response.text())
       .then(data => {
         const formatted_code = data
-          .replaceAll("&lt;", "<")
-          .replaceAll("&gt;", ">")
+          ?.replaceAll?.("&lt;", "<")
+          ?.replaceAll?.("&gt;", ">")
         setFileContent(formatted_code)
       })
   }, [id, lang])

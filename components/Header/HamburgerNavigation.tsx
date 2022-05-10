@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-location";
+import { Link } from "react-router-dom";
 import { send } from "../../stateSignal";
 import styles from "./Header.module.scss";
 export default function HamburgerNavigation() {
@@ -16,7 +16,7 @@ export default function HamburgerNavigation() {
                         <li><Link to="/docs/app-registration/">App Registration</Link></li>
                         <li><Link to="/api-explorer/">API Explorer</Link></li>
                         <li><Link to="/docs/api-guide/">API Guide</Link></li>
-                        <li><Link to="/docs/faq/">FAQ</Link></li>
+                        <li><Link data-testid="faqlink" to="/docs/faq/">FAQ</Link></li>
                         <li><Link to="/docs/json-schemas/">JSON Schemas</Link></li>
                         <li><Link to="/docs/bug-bounty/">Bug Bounty</Link></li>
                     </section>
