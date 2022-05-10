@@ -2,7 +2,7 @@ import { useSelector } from '@xstate/react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRegisterOrUpdateApp } from '../../custom_hooks/useRegisterOrUpdate';
-import { isUpdateModeSelector, isRegisterTabIdle } from '../../selectors';
+import { isUpdateModeSelector, isRegisterTabIdleSelector } from '../../selectors';
 import { stateService, updatingRow } from '../../stateSignal';
 import { token1 } from '../../storageSignals';
 import Button from '../Button/Button';
@@ -26,7 +26,7 @@ export default function AppRegistrationForm() {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm<FormData>({ mode: 'onBlur' });
     const { registerApp, isLoading, error } = useRegisterOrUpdateApp();
     const isUpdateMode = useSelector(stateService, isUpdateModeSelector);
-    const isOnRegisterTab = useSelector(stateService, isRegisterTabIdle);
+    const isOnRegisterTab = useSelector(stateService, isRegisterTabIdleSelector);
     useEffect(() => {
         if (isOnRegisterTab) reset();
         if (isUpdateMode) {
