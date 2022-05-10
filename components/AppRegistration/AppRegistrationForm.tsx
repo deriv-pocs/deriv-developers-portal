@@ -52,12 +52,6 @@ export default function AppRegistrationForm() {
 
     const registerButtonMessage = isUpdateMode ? 'Update application' : 'Register new application';
 
-    const limitCharacters = (event:any) => {
-        const value_length = event.target.value.length;
-        const backspace = event.keyCode === 8;
-        if (value_length >= 4 && !backspace) event.preventDefault();
-    }
-
     return (
         <>
             <form className={styles.frmNewApplication} id="frmNewApplication" onSubmit={handleSubmit((data) => {
@@ -154,8 +148,6 @@ export default function AppRegistrationForm() {
                                             placeholder=" "
                                             // eslint-disable-next-line
                                             onWheel={(e:any) => e.target.blur()}
-                                            // eslint-disable-next-line
-                                            onKeyDown={(e:any) => limitCharacters(e)}
                                         />
                                         <label>Markup percentage</label>
                                     </div>
