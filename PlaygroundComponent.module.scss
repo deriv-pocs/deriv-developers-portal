@@ -1,20 +1,17 @@
 @import "./colors.module";
 
-.playground-content {
+.playgroundContent {
     min-height: 95vh;
+    width: 100%;
     border-left: 2px solid var(--app-sidebar-border-color);
 
-    .header-title h1 {
+    .headerTitle h1 {
         text-align: center;
         font-size: 48px;
         margin-bottom: 40px;
-
-        @media (max-width: 992px) {
-            font-size: 32px;
-        }
     }
 
-    .page-wrapper {
+    .pageWrapper {
         display: flex;
         color: $black-color;
 
@@ -27,32 +24,20 @@
             width: 100%;
             margin-bottom: 160px;
 
-            @media (max-width: 992px) {
-                margin-bottom: unset;
-            }
-
-            &-page-wrapper {
+            .playgroundPageWrapper {
                 display: flex;
                 width: 95%;
-
-                @media (max-width: 1078px) {
-                    flex-direction: column;
-                }
             }
         }
     }
 }
 
-.playground-api-json {
+.playgroundApiJson {
     display: flex;
     flex-direction: column;
     margin-right: 24px;
 
-    @media (max-width: 1078px) {
-        width: 100%;
-    }
-
-    .api-token {
+    .apiToken {
         display: flex;
         flex-wrap: nowrap;
         border-radius: 4px;
@@ -60,10 +45,6 @@
         padding: 0 24px;
         margin-bottom: 48px;
         margin-top: 16px;
-
-        @media (max-width: 992px) and (max-width: 640px) {
-            flex-direction: column-reverse;
-        }
 
         fieldset {
             display: flex;
@@ -77,32 +58,11 @@
             border: none;
             color: $black-color;
             margin: 0 24px 0 0;
-
-            @media (max-width: 992px) and (max-width: 640px) {
-                margin-top: 24px;
-            }
-
-            @media (max-width: 992px) {
-                flex-wrap: nowrap;
-            }
-        }
-
-        .vertical-separator {
-            background-color: 1px solid var(--app-sidebar-border-color);
-            margin: 0 24px 0 0;
-            height: inherit;
-            width: 2px;
-
-            @media (max-width: 992px) and (max-width: 640px) {
-                margin-left: auto;
-                margin-right: auto;
-                height: 2px;
-                width: 94%;
-            }
+            padding: 10px 0;
         }
     }
 
-    .api-request {
+    .apiRequest {
         display: flex;
         flex-wrap: nowrap;
         border-radius: 4px;
@@ -116,17 +76,14 @@
         flex-direction: column;
         flex-wrap: nowrap;
         font-size: 14px;
-        width: 70%;
+        width: 100%;
         margin-bottom: unset;
         align-items: center;
         justify-content: center;
+        padding: 10px 0;
+        border-left: 1px solid var(--app-sidebar-border-color);
 
-        @media (max-width: 992px) and (max-width: 640px) {
-            width: 100%;
-            margin-bottom: 24px;
-        }
-
-        &-button button {
+        &-button button{
             cursor: pointer;
             font-size: 14px;
             font-weight: 700;
@@ -136,7 +93,7 @@
             color: #333;
 
             &:hover {
-                background-color: $dark-grey-color-2;
+                background-color: #f8fafb;
             }
         }
 
@@ -151,20 +108,16 @@
     }
 }
 
-.playground-api-docs {
+.playgroundApiDocs {
     display: flex;
     flex-direction: column;
-
-    @media (max-width: 1078px) {
-        width: 100%;
-    }
 }
 
 #content {
     display: block;
 }
 
-.btn-authenticate {
+.btnAuthenticate {
     width: 118px;
     height: 42px;
     padding: 10px 16px;
@@ -180,19 +133,16 @@
     font-weight: 700;
 }
 
-.playground-box {
+.playgroundBox {
     border-radius: 6px;
     border: none;
     padding: 24px 24px 82px 24px;
     margin-bottom: 40px;
     position: relative;
 
-    .playground-console {
+    .playgroundConsole {
         width: 100%;
 
-        @media (max-width: 992px) {
-            max-height: 400px;
-        }
         .progress {
             margin: 0 auto;
         }
@@ -220,27 +170,24 @@
         }
     }
 
-    .inline-label {
+    .inlineLabel {
         position: absolute;
         top: 17px;
         left: 30px;
         font-size: 10px;
         padding: 2px 4px;
 
-        @media (max-width: 480px) {
-            top: 16px;
-            left: 23px;
-        }
+       
     }
 
-    .json-btn-wrapper {
+    .jsonBtnWrapper {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         margin: 26px 0 40px;
 
-        .btn-submit {
+        .btnSubmit {
             background-color: #151717;
             border: #6e6e6e 2px solid;
             color: white;
@@ -252,7 +199,7 @@
         }
 
         #playground-reset-btn {
-            .btn-reset {
+            .btnReset {
                 color: white;
                 font-weight: bold;
                 font-size: 14px;
@@ -275,32 +222,96 @@
         background-color: #0e0e0e;
         color: #c2c2c2;
         resize: none;
-
-        @media (max-width: 480px) {
-            font-size: 14px;
-        }
     }
 }
 
-.playground-req-schema{
+.playgroundReqSchema{
     margin-bottom: 10px;
 }
 
-.playground-res-schema{
+.playgroundResSchema{
     margin: 10px 0;
 }
 
-@media (max-width: 992px) {
-    .playground-content {
-        padding: 80px 5px;
+.apiRequest {
+    display: flex;
+    flex-wrap: nowrap;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    border: 0.5px solid #252525b8;
+}
+.select2 {
+    width: 100% !important;
+    color: #999999;
+    border: solid 1px #D6DADB !important;
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 28px;
+
+}
+.option {
+    border: none;
+    border-radius: 3.5px !important;
+    border: solid 1px #D6DADB !important;
+    color: #999999 !important;
+
+}
+
+[data-state~="responsive.desktopLaptopM"] {
+    .playground{
+        .playgroundPageWrapper{
+            display: flex;
+            flex-direction: row;
+    }
+    }
+    .apiToken{
+        flex-direction: column-reverse;
     }
 }
 
-.select2{
-    width: 124% !important;
-  }
-  .select2-container--default
-  .select2-selection--single
-  .select2-selection__rendered {
-  color: #000;
-  }
+[data-state*="responsive.mobile"]{
+        .headerTitle h1{
+            font-size: 32px;
+        }
+        .playgroundApiJson{
+            width: 100%;
+        }
+        .apiToken{
+            fieldset{
+                    margin-top: 24px;
+                    flex-wrap: nowrap;
+                }
+        }
+        .cta{
+            width: 100%;
+            margin-bottom: 24px;
+        }
+        .playgroundApiDocs{
+            width: 100%;
+        }
+        .playgroundBox{
+            .playgroundConsole{
+                    max-height: 400px;
+            }
+            .inlineLabel{
+                    top: 16px;
+                    left: 23px;
+            }
+            textarea{
+                font-size: 14px;
+            }
+        }
+        .playgroundContent {
+            padding: 80px 5px;
+            width: 100%;
+        }
+        .playground{
+            .playgroundPageWrapper{
+                flex-direction: column;
+        }
+        }
+}

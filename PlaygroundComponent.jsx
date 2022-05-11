@@ -5,11 +5,9 @@ import SchemaWrapper from "./SchemaWrapper";
 import TokenInputField from "./TokenInputField";
 import React, { useEffect, useRef, useState } from "react";
 import { playground_requests } from "./Playground_Requests";
-import { send } from "./send";
 import Title from "./Title";
 import data_get_api_token from "./data-app-registration";
-import { receive } from "./receive"
-import style from "./PlaygroundComponent.module.scss";
+import styles from "./PlaygroundComponent.module.scss";
 
 export const PlaygroundComponent = () => {
     const [current_api, setCurrentAPI] = useState(api)
@@ -23,36 +21,17 @@ export const PlaygroundComponent = () => {
       selected_value: "Select API Call - Version 3",
       token: ""
     })
-  
+
     useEffect(() => {
-      const onHashChanged = () => {
-        setTextData(relevant_text_data => {
-          const data_object = {
-            ...relevant_text_data,
-            selected_value: window.location.hash.slice(1)
-          }
-          sessionStorage.setItem("session_data", JSON.stringify(data_object))
-          return data_object
+      if (text_data.selected_value && text_data.selected_value !== "Select API Call - Version 3") {
+        import(`./config/v3/${text_data.selected_value}/send.json`).then((data) => {
+          setRequestInfo(data);
+        })
+        import(`./config/v3/${text_data.selected_value}/receive.json`).then((data) => {
+          setResponseInfo(data);
         })
       }
-      const sessionStorage_data = sessionStorage.getItem("session_data")
-      const session_data_object =
-        sessionStorage_data !== null ? JSON.parse(sessionStorage_data) : text_data
-      setTextData({ ...session_data_object })
-      window.addEventListener("hashchange", onHashChanged)
-      return () => {
-        setTextData(relevant_text_data => {
-          const data_object = {
-            request: "",
-            selected_value: "",
-            token: relevant_text_data.token
-          }
-          sessionStorage.setItem("session_data", JSON.stringify(data_object))
-          return data_object
-        })
-        window.removeEventListener("hashchange", onHashChanged)
-      }
-    }, [])
+    },[text_data.selected_value]);
   
     const sendRequest = React.useCallback(() => {
       if (
@@ -108,30 +87,18 @@ export const PlaygroundComponent = () => {
       [setTextData, sendRequest]
     )
   
-    const setInfo = selected => {
-      const request_data = JSON.stringify(send.find(
-        el => Object.keys(el.properties)[0] === selected
-      ))
-      const response_data = JSON.stringify(receive.find(
-        el => Object.keys(el.properties)[0] === selected
-      ))
-      setRequestInfo(request_data)
-      setResponseInfo(response_data)
-    }
-  
     const handleSelectChange = React.useCallback(
-      e => {
-        e.preventDefault()
+      event => {
+        event.preventDefault()
         const request_body = playground_requests.find(
-          el => el.name === e.currentTarget.value
+          el => el.name === event.currentTarget.value
         )
         const new_text_data = {
           ...text_data,
-          selected_value: e.currentTarget.value,
+          selected_value: event.currentTarget.value,
           request: JSON.stringify(request_body?.body, null, 4)
         }
         setTextData({ ...new_text_data })
-        setInfo(new_text_data.selected_value)
   
         sessionStorage.setItem(
           "session_data",
@@ -160,38 +127,37 @@ export const PlaygroundComponent = () => {
     }
   
     return (
-      <div className={`${style["playground-page-wrapper"]}`}>
-        <div className={`${style["playground-api-json"]}`}>
+      <div className={styles.playgroundPageWrapper}>
+        <div className={styles.playgroundApiJson}>
           <SelectRequestInput
             selected_value={text_data.selected_value}
             handleChange={handleSelectChange}
           />
-          <div className={`${style["api-token"]}`}>
+          <div className={styles.apiToken}>
             <TokenInputField
               sendTokenToJSON={handleAuthenticateClick}
               token={text_data.token}
             />
-            <div className={style["vertical-separator"]} />
-            <div className={style["cta"]}>
-              <Title headerSize="h3" className={style["title"]}>
+            <div/>
+            <div className={styles.cta}>
+              <Title headerSize="h3" className={styles.title}>
                 {data_get_api_token.textFocus}
               </Title>
-              <div className={style["cta-button"]}>
+              <div className={styles["cta-button"]}>
                 {data_get_api_token.button}
               </div>
             </div>
           </div>
           <RequestJSONBox {...json_box_props} />
         </div>
-        <div id="playground" className={style["playground-api-docs"]}>
-          <div className={style["playground-req-schema"]}>
+        <div id="playground" className={styles.playgroundApiDocs}>
+          <div className={styles.playgroundReqSchema}>
             <SchemaWrapper info={request_info} />
           </div>
-          <div className={style["playground-res-schema"]}>
+          <div className={styles.playgroundResSchema}>
             <SchemaWrapper info={response_info} />
           </div>
         </div>
       </div>
     )
   }
-  

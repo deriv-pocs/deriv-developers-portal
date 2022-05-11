@@ -1,4 +1,4 @@
-import style from "./PlaygroundComponent.module.scss";
+import styles from "./PlaygroundComponent.module.scss";
 import React, { useEffect } from "react";
 import { playground_requests } from "./Playground_Requests";
 
@@ -11,15 +11,15 @@ const SelectRequestInput = ({ handleChange, selected_value }) => {
     useEffect(() => {
       window.location.hash = request_body ? request_body.name : ""
     }, [selected_value])
-  
+    
     return (
-      <fieldset className={style["api-request"]}>
+      <fieldset className={styles.apiRequest}>
         <select
-          className={style["select2"]}
+          className={styles.select2}
           onChange={handleChange}
           defaultValue={default_value}
         >
-          <option disabled>{default_value}</option>
+          <option disabled className={styles.option}>{default_value}</option>
           <optgroup label="All calls">
             {playground_requests.map(el => (
               <option value={el.name} key={el.name}>
@@ -29,6 +29,14 @@ const SelectRequestInput = ({ handleChange, selected_value }) => {
           </optgroup>
         </select>
       </fieldset>
+      //   <Select
+      //     // className={style["select2"]}
+      //     onChange={handleChange}
+      //     defaultValue={request_body}
+      //     options ={optionsArray}
+
+      //  / >
+       
     )
   }
   

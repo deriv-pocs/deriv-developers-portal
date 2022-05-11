@@ -11,15 +11,15 @@ const ApiExplorer = () => {
     <Sidebar />
     <div
           id="content"
-          className={`${style["playground-content"]}`}
+          className={`${style.playgroundContent}`}
       >
-          <div className={style["header-title"]}>
+          <div className={style.headerTitle}>
               <Title headerSize="h1" className="">
                   API Explorer
               </Title>
           </div>
-          <div className={`${style["page-wrapper"]}`}>
-              <div className={style["playground"]}>
+          <div className={style.pageWrapper}>
+              <div className={style.playground}>
                   <PlaygroundComponent />
               </div>
           </div>

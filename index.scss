@@ -84,10 +84,9 @@ p {
   border: 1px solid var(--gray-02);
 }
 .doc-content{
-  padding: 188px 80px;
+  padding: 188px 50px;
   display: flex;
   min-height: 95vh;
-  justify-content: space-between;
 }
 button:focus {
   outline: none;

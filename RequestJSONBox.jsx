@@ -31,20 +31,20 @@ const RequestJSONBox = ({
     return (
       <div
         className={
-          isAppRegistration ? style["form-content"] : style["playground-box"]
+          isAppRegistration ? style.formContent : style.playgroundBox
         }
       >
         {isAppRegistration ? (
-          <div className={style["app-registration-subheader"]}>Request JSON</div>
+          <div className={style.appRegistrationSubheader}>Request JSON</div>
         ) : (
-          <label className={style["inline-label"]}>Request JSON</label>
+          <label className={style.inlineLabel}>Request JSON</label>
         )}
         <textarea
           id="playground-request"
           className={
             isAppRegistration
-              ? `${style["textarea-request"]} ${style["registration-request"]}`
-              : `${style["textarea-request"]} ${style["playground-request"]}`
+              ? `${style.textareaRequest} ${style.registrationRequest}`
+              : `${style.textareaRequest} ${style.playgroundRequest}`
           }
           placeholder={"Request JSON"}
           ref={request_input}
@@ -65,7 +65,7 @@ const RequestJSONBox = ({
         {messages.length > 1 && (
           <div
             id="playground-console"
-            className={style["playground-console"]}
+            className={style.playgroundConsole}
             ref={messagesRef}
           >
             {messages?.map((message, index) => (

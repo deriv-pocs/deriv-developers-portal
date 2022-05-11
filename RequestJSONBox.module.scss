@@ -1,11 +1,11 @@
 @import "./colors.module";
-.playground-box {
+.playgroundBox {
     border-radius: 6px;
     border: none;
     padding: 24px 15px;
     position: relative;
 
-    .inline-label {
+    .inlineLabel {
         position: absolute;
         top: 39px;
         left: 30px;
@@ -15,7 +15,7 @@
     }
 }
 
-.form-content {
+.formContent {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +26,7 @@
         width: 100%;
     }
 
-    .app-registration-subheader {
+    .appRegistrationSubheader {
         align-self: flex-start;
         margin-bottom: 16px;
         font-size: 24px;
@@ -36,13 +36,13 @@
     }
 }
 
-.textarea-request {
+.textareaRequest {
     width: 100%;
     border-radius: 4px;
     resize: none;
 }
 
-.playground-request {
+.playgroundRequest {
     min-height: 200px;
     padding: 10px 12px;
     border: none;
@@ -50,21 +50,21 @@
     border: 1px solid #d6dadb;
 }
 
-.registration-request {
+.registrationRequest {
     min-height: 119px;
     padding: 10px;
     border: solid 1px $light-grey-color;
     font-size: 16px;
 }
 
-.json-btn-wrapper {
+.jsonBtnWrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin: 26px 0 40px;
 
-    .btn-reset button {
+    .btnReset button {
         cursor: pointer;
         width: fit-content;
         height: fit-content;
@@ -74,14 +74,14 @@
         font-weight: 700;
     }
 
-    .btn-reset-playground button {
+    .btnResetPlayground button {
         background-color: $black-color-1;
         color: $white-color;
         padding: 10px 16px;
         border: $dark-grey-color-1 2px solid;
     }
 
-    .gray-btn-submit button{
+    .grayBtnSubmit button{
         padding: 8px 16px;
         border: solid 2px $dark-grey-color;
         background-color: $white-color;
@@ -91,7 +91,7 @@
         color: $black-color;
     }
 
-    .btn-submit button {
+    .btnSubmit button {
         cursor: pointer;
         width: fit-content;
         height: fit-content;
@@ -112,7 +112,7 @@
     }
 }
 
-.playground-console {
+.playgroundConsole {
     margin-top: 2px;
     max-height: 60vh;
     overflow-y: auto;

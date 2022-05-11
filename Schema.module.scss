@@ -1,94 +1,142 @@
 @import "./colors.module";
 
-.schema-role{
-  margin: 4px;
-  padding: 8px;
+.schemaRole{
+  font-size: 14px;
+  line-height: 1.43;
+  color: #21d169;
+  border: none;
+  margin: 8px 8px 0 0;
+  padding: 6px 8px;
+  white-space: nowrap;
   border-radius: 4px;
-  color: $blue-color;
-  background-color: $dark-grey-color-5;
+  background-color: rgba(0,255,104,.16);
 }
 
-.schema-code{
+.schemaCode{
   color: $white-color;
   font-size: 14px;
 }
 
-.schema-sub-text{
+.schemaSubext{
   font-size: 14px;
 }
 
-.schema-header{
-  padding: 10px 20px;
-  background-color:  $dark-grey-color-4;
-  border-radius: 4px 4px 0 0;
+.schemaHeader{
+  padding: 24px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border: none;
+  background: #151717;
 
-  .schema-title{
+  .schemaTitle{
    font-size: 24px;
+   color: #fff;
   }
 
-  .schema-description{
+  .schemaDescription{
     padding: 5px 0;
     display: flex;
     justify-content: space-between;
+    color: #fff;
 
-    .schema-auth-required{
+    .schemaAuthRequired{
       width:40%;
     }
   }
 }
 
-.schema-body{
-  line-height: 35px;
-  padding: 10px 20px;
-  border-radius: 0 0 4px 4px;
-  background-color: $black-color-1;
+.schemaBody{
+  background-color: #282a35;
+  padding: 28px 23px;
 
-  .schema-body-signature{
+  .schemaBodySignature{
     display: flex;
     flex-direction: column;
 
-    .schema-body-header{
+    .schemaBodyHeader{
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      color: #fff;
+      font-size: 16px;
+      margin: 0px 8px 0 0;
+      font-weight: 700;
 
-      .schema-body-type{
-        width: 220px;
-        color: $blue-color-2;
-        margin: 4px 0;
-        font-size: 14px;
-      }
-
-      .schema-enums{
+      .schemaBodyType{
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        width: 60%;
+        font-size: 14px;
+        font-weight: 400;
+        align-items: center;
+        padding-left: 6px;
+        color: #21d169
       }
 
-      .schema-items{
-        color: $green-color-2
+      .schemaEnums{
+        font-size: 14px;
+        line-height: 1.43;
+        color: #21d169;
+        border: none;
+        padding: 6px 8px;
+        white-space: nowrap;
+        border-radius: 4px;
+        background-color: rgba(0,255,104,.16);
       }
 
-      .schema-regex-container{
+      .schemaItems{
+        color: $green-color-2;
+        font-size : 14px;
+        line-height: 1.43;
+        color: #21d169;
+        border: none;
+        margin: 8px 8px 0 0;
+        padding: 6px 8px;
+        white-space: nowrap;
+        border-radius: 4px
+      }
+
+      .schemaRegexContainer{
         width: 50%;
         display: flex;
         flex-direction: row;
 
-        .schema-body-pattern{
+        .schemaBodyPattern{
           width: 100%;
           font-size: 11px;
           color: $green-color-1;
           margin: 0 10px;
         }
 
-        .schema-pattern-type{
+        .schemaPatternType{
           color: $green-color-2;
         }
       }
     }
 
-    .schema-body-description{
-      padding: 20px 0;
+    .schemaBodyDescription{
+      color: #c2c2c2;
+      float: left;
+      max-width: 600px;
+      width: 100%;
+      margin-top: 3px;
+      font-size: 14px;
+      line-height: 2;
+      
     }
+    .schemaRole{
+    background-color: rgba(255,255,255,.16);
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 2.5;
+    color: #fff;
+    margin: 0 6px 0 0;
+    padding: 6px 8px;
+  }
+  }
+  .enumFlex{
+    display: flex;
+    padding: 0 5px;
+    flex-wrap: wrap;
   }
 }

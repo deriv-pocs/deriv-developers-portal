@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import React from "react";
-import style from "./Schema.module.scss";
+import styles from "./Schema.module.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type SchemaBodyProps = {
-  properties: unknown;
+  properties: Object;
 }
 
 type CodeStringProps = {
@@ -11,20 +12,20 @@ type CodeStringProps = {
 }
 
 const Properities: React.FC<SchemaBodyProps> = ({ properties }) => {
-  const names = Object.keys(properties || null);
+    const names = properties ? Object.keys(properties) : [];
 
   const CodeString: React.FC<CodeStringProps> = ({ description }) => {
       const highlightCode = description.split(" ").map((desc, index) => {
           return (/`([^`]*)`/.test(desc)) ?
               <span
-                  className={`${style["schema-role"]} ${style["schema-code"]}`}
+                  className={`${styles.schemaRole} ${styles.schemaCode}`}
                   key={index}
               >{`${desc.slice(1, desc.length - 1)}`}
               </span>
               : ` ${desc} `;
       });
       return (
-          <div className={style["schema-body-description"]}>{highlightCode}</div>
+          <div className={styles.schemaBodyDescription}>{highlightCode}</div>
       );
   }
 
@@ -33,18 +34,18 @@ const Properities: React.FC<SchemaBodyProps> = ({ properties }) => {
           const { type, description, pattern, enum: _enum } = properties[name];
 
           return (
-              <div className={style["schema-body-signature"]} key={idx}>
-                  <div className={style["schema-body-header"]}>
+              <div className={styles.schemaBodySignature} key={idx}>
+                  <div className={styles.schemaBodyHeader}>
                       <p><strong>{name}</strong></p>
-                      {_enum ? <div className={style["schema-body-type"]}>{type}
-                          <div className={style["schema-enums"]}>{_enum.map((el: string, i: number) => <div
-                              className={`${style["schema-role"]} ${style["schema-code"]} ${style["schema-enums"]}`}
+                      {_enum ? <div className={styles.schemaBodyType}>{type}
+                          <div className={styles.enumFlex}>{_enum.map((el: string, i: number) => <div
+                              className={`${styles.schemaType} ${styles.schemaCode} ${styles.schemaEnums}`}
                               key={i}>{el}</div>)}
                           </div>
                       </div> : null}
-                      {pattern ? <div className={style["schema-regex-container"]}>
-                          <div className={style["schema-pattern-type"]}>{type}</div>
-                          <div className={style["schema-body-pattern"]}>{pattern}</div>
+                      {pattern ? <div className={styles.schemaRegexContainer}>
+                          <div className={styles.schemaPatternType}>{type}</div>
+                          <div className={styles.schemaBodyPattern}>{pattern}</div>
                       </div> : null}
                   </div>
                   <CodeString description={description}/>
@@ -58,7 +59,7 @@ const Properities: React.FC<SchemaBodyProps> = ({ properties }) => {
 
 const SchemaBody: React.FC<SchemaBodyProps> = ({ properties }) => {
   return (
-      <div className={style["schema-body"]}>
+      <div className={styles.schemaBody}>
           <Properities properties={properties}/>
       </div>
   );
