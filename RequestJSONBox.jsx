@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from "react";
 import style from "./RequestJSONBox.module.scss";
 import ConsoleMessage from './ConsoleMessage'
 import "./appid"
-// import  "./PlaygroundComponent";
 
 const RequestJSONBox = ({
     request_example,

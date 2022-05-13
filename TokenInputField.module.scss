@@ -41,11 +41,7 @@
             color: var(--black-03);
             background-color: var(--white-01);
             margin-bottom: 0;
-            padding: 4px;
-
-            @media (max-width: 1500px) {
-                left: 6.8vw;
-            }
+            padding: 4px;  
         }
 
         .api-token-input-registration {
@@ -73,6 +69,16 @@
             -moz-border-radius: 4px;
             -ms-border-radius: 4px;
             -o-border-radius: 4px;
+        }
+    }
+}
+
+[data-state~="responsive.desktopLaptopL"]{
+    .api-token-fieldset{
+        .api-token-wrapper{
+            .helper-label{
+                left: 6.8vw;
+            }
         }
     }
 }

@@ -21,10 +21,6 @@
     justify-content: center;
     width: 80%;
 
-    @media (max-width: 390px) {
-        width: 100%;
-    }
-
     .appRegistrationSubheader {
         align-self: flex-start;
         margin-bottom: 16px;
@@ -116,4 +112,10 @@
     max-height: 60vh;
     overflow-y: auto;
     width: 100%;
+}
+
+[data-state~="responsive.mobileM"]{
+    .formContent{
+        width: 100%;
+    }
 }
