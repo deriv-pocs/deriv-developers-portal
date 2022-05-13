@@ -2,7 +2,7 @@ import { useSelector } from '@xstate/react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRegisterOrUpdateApp } from '../../custom_hooks/useRegisterOrUpdate';
-import { isUpdateModeSelector } from '../../selectors';
+import { isUpdateModeSelector, isRegisterTabIdleSelector } from '../../selectors';
 import { stateService, updatingRow } from '../../stateSignal';
 import { token1 } from '../../storageSignals';
 import Button from '../Button/Button';
@@ -26,8 +26,9 @@ export default function AppRegistrationForm() {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm<FormData>({ mode: 'onBlur' });
     const { registerApp, isLoading, error } = useRegisterOrUpdateApp();
     const isUpdateMode = useSelector(stateService, isUpdateModeSelector);
+    const isOnRegisterTab = useSelector(stateService, isRegisterTabIdleSelector);
     useEffect(() => {
-        reset();
+        if (isOnRegisterTab) reset();
         if (isUpdateMode) {
             const {
                 name,
@@ -47,7 +48,8 @@ export default function AppRegistrationForm() {
             setValue('payments_scope', scopes.includes('payments') ? true : false);
             setValue('admin_scope', scopes.includes('admin') ? true : false);
         }
-    }, [isUpdateMode]);
+    }, [isUpdateMode, isOnRegisterTab]);
+
     const registerButtonMessage = isUpdateMode ? 'Update application' : 'Register new application';
 
     return (
@@ -89,7 +91,6 @@ export default function AppRegistrationForm() {
                                 />
                                 <label>API token (Required)</label>
                             </div>
-                            <p className={styles.helperText}>max. 50 characters</p>
                             {errors.api_token_input && <span className="error-message">{errors.api_token_input.message}</span>}
                             <div className="api-token-warning" />
                             <div className="first">
@@ -145,6 +146,8 @@ export default function AppRegistrationForm() {
                                             id="app_markup_percentage"
                                             className="last"
                                             placeholder=" "
+                                            // eslint-disable-next-line
+                                            onWheel={(e:any) => e.target.blur()}
                                         />
                                         <label>Markup percentage</label>
                                     </div>
@@ -166,14 +169,14 @@ export default function AppRegistrationForm() {
                                         "app_redirect_uri", {
                                         required: {
                                             value: true,
-                                            message: "A redirect URL is required.",
+                                            message: "A Website URL is required.",
                                         }, 
                                         maxLength: {
                                             value: 255,
                                             message: "Your website URL cannot exceed more than 255 characters."
                                         },
                                         pattern: {
-                                            value: /^[a-z][a-z0-9.+\-]*:\/\/[0-9a-zA-Z\.-]+[\%\/\w \.-]*$/,
+                                            value: /^[a-z][a-z0-9.+-]*:\/\/[0-9a-zA-Z.-]+[%/\w .-]*$/,
                                             message: "Please correct your link formatting. (example: https://www.deriv.com)"
                                         }
                                     })}
@@ -181,12 +184,12 @@ export default function AppRegistrationForm() {
                                         type="text"
                                         placeholder=" "
                                     />
-                                    <label>Website URL</label>
+                                    <label>Website URL (Required)</label>
                                 </div>
                                 <p className={styles.helperText}>*Please note that this URL will be used as the OAuth redirect
                                     URL for the OAuth authorisation</p>
-                                {errors.app_redirect_uri && <span className="error-message">{errors.app_redirect_uri.message}</span>}
                             </div>
+                            {errors.app_redirect_uri && <span className="error-message">{errors.app_redirect_uri.message}</span>}
                             <div className="input-container">
                                 <div className={styles.customTextInput} id="custom-text-input">
                                     <input {...register(
@@ -196,7 +199,7 @@ export default function AppRegistrationForm() {
                                             message: "Your verification URL cannot exceed more than 255 characters."
                                         },
                                         pattern: {
-                                            value: /^[a-z][a-z0-9.+\-]*:\/\/[0-9a-zA-Z\.-]+[\%\/\w \.-]*$/,
+                                            value: /^[a-z][a-z0-9.+-]*:\/\/[0-9a-zA-Z.-]+[%/\w .-]*$/,
                                             message: "Please correct your link formatting. (example: https://www.deriv.com)"
                                         }
                                     })}
@@ -206,8 +209,8 @@ export default function AppRegistrationForm() {
                                     />
                                     <label>Verification URL</label>
                                 </div>
-                                {errors.app_verification_uri && <span className="error-message">{errors.app_verification_uri.message}</span>}
                             </div>
+                            {errors.app_verification_uri && <span className="error-message">{errors.app_verification_uri.message}</span>}
                         </fieldset>
                         <div className={styles.scopes} id="register_scopes">
                             <div>
@@ -221,7 +224,8 @@ export default function AppRegistrationForm() {
                                 </div>
                                 <p>Bear in mind that you generally need only {" "}
                                     <b>'Trade'</b> and {" "}
-                                    <b>'Trading information'</b> access.
+                                    <b>'Trading information'</b> access. {" "}
+                                    <b>'Admin'</b> access is usually not required.
                                 </p>
                             </div>
                             <div className={styles.scopesField}>
