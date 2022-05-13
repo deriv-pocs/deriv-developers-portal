@@ -3,7 +3,7 @@ import RequestJSONBox from "./RequestJSONBox";
 import SelectRequestInput from "./SelectRequestInput";
 import SchemaWrapper from "./SchemaWrapper";
 import TokenInputField from "./TokenInputField";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState,useCallback } from "react";
 import { playground_requests } from "./Playground_Requests";
 import Title from "./Title";
 import data_get_api_token from "./data-app-registration";
@@ -23,7 +23,8 @@ export const PlaygroundComponent = () => {
     })
 
     useEffect(() => {
-      if (text_data.selected_value && text_data.selected_value !== "Select API Call - Version 3") {
+      const placeholder = text_data.selected_value === "Select API Call - Version 3"
+      if (text_data.selected_value && !placeholder) {
         import(`./config/v3/${text_data.selected_value}/send.json`).then((data) => {
           setRequestInfo(data);
         })
@@ -33,7 +34,7 @@ export const PlaygroundComponent = () => {
       }
     },[text_data.selected_value]);
   
-    const sendRequest = React.useCallback(() => {
+    const sendRequest = useCallback(() => {
       if (
         !request_input.current?.value &&
         text_data.selected_value === "Select API Call - Version 3"
@@ -41,11 +42,10 @@ export const PlaygroundComponent = () => {
         alert("Invalid JSON!")
         return
       }
-      const _request =
-        request_input.current?.value && JSON.parse(request_input.current?.value)
-      // We have to update api instance if websockets connection is closed as a result of reset:
+      const _request = request_input.current?.value && JSON.parse(request_input.current?.value)
+      const is_current_api_ready = current_api.connection.readyState === 1
       let relevant_api = current_api
-      if (current_api.connection.readyState !== 1 && is_initial_socket) {
+      if (!is_current_api_ready && is_initial_socket) {
         relevant_api = generateDerivApiInstance()
         setIsInitialSocket(false)
       } else if (current_api.connection.readyState !== 1 && !is_initial_socket) {
@@ -72,7 +72,7 @@ export const PlaygroundComponent = () => {
       setCurrentAPI(relevant_api)
     }, [current_api, request_input, messages, is_initial_socket, text_data])
   
-    const handleAuthenticateClick = React.useCallback(
+    const handleAuthenticateClick = useCallback(
       inserted_token => {
         const new_text_data = {
           token: inserted_token,
@@ -87,7 +87,7 @@ export const PlaygroundComponent = () => {
       [setTextData, sendRequest]
     )
   
-    const handleSelectChange = React.useCallback(
+    const handleSelectChange = useCallback(
       event => {
         event.preventDefault()
         const request_body = playground_requests.find(
@@ -111,7 +111,7 @@ export const PlaygroundComponent = () => {
       [text_data]
     )
   
-    const handleTextAreaInput = React.useCallback(
+    const handleTextAreaInput = useCallback(
       e => setTextData({ ...text_data, request: e.target.value }),
       [text_data]
     )

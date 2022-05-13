@@ -1,9 +1,7 @@
-@import "./colors.module";
-
 .schemaRole{
   font-size: 14px;
   line-height: 1.43;
-  color: #21d169;
+  color: var(--green-03);
   border: none;
   margin: 8px 8px 0 0;
   padding: 6px 8px;
@@ -13,7 +11,7 @@
 }
 
 .schemaCode{
-  color: $white-color;
+  color: var(--white-01);
   font-size: 14px;
 }
 
@@ -26,18 +24,18 @@
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   border: none;
-  background: #151717;
+  background: var(--black-04);
 
   .schemaTitle{
    font-size: 24px;
-   color: #fff;
+   color: var(--white-01);
   }
 
   .schemaDescription{
     padding: 5px 0;
     display: flex;
     justify-content: space-between;
-    color: #fff;
+    color: var(--white-01);
 
     .schemaAuthRequired{
       width:40%;
@@ -57,7 +55,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      color: #fff;
+      color: var(--white-01);
       font-size: 16px;
       margin: 0px 8px 0 0;
       font-weight: 700;
@@ -69,13 +67,13 @@
         font-weight: 400;
         align-items: center;
         padding-left: 6px;
-        color: #21d169
+        color: var(--green-03)
       }
 
       .schemaEnums{
         font-size: 14px;
         line-height: 1.43;
-        color: #21d169;
+        color: var(--green-03);
         border: none;
         padding: 6px 8px;
         white-space: nowrap;
@@ -84,10 +82,10 @@
       }
 
       .schemaItems{
-        color: $green-color-2;
+        color: var(--green-02);
         font-size : 14px;
         line-height: 1.43;
-        color: #21d169;
+        color: var(--green-03);
         border: none;
         margin: 8px 8px 0 0;
         padding: 6px 8px;
@@ -103,18 +101,18 @@
         .schemaBodyPattern{
           width: 100%;
           font-size: 11px;
-          color: $green-color-1;
+          color:  var(--green-01);
           margin: 0 10px;
         }
 
         .schemaPatternType{
-          color: $green-color-2;
+          color: var(--green-02);
         }
       }
     }
 
     .schemaBodyDescription{
-      color: #c2c2c2;
+      color: var(--copy-color);
       float: left;
       max-width: 600px;
       width: 100%;
@@ -129,7 +127,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 2.5;
-    color: #fff;
+    color: var(--white-01);
     margin: 0 6px 0 0;
     padding: 6px 8px;
   }

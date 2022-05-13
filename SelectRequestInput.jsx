@@ -28,15 +28,7 @@ const SelectRequestInput = ({ handleChange, selected_value }) => {
             ))}
           </optgroup>
         </select>
-      </fieldset>
-      //   <Select
-      //     // className={style["select2"]}
-      //     onChange={handleChange}
-      //     defaultValue={request_body}
-      //     options ={optionsArray}
-
-      //  / >
-       
+      </fieldset>   
     )
   }
   

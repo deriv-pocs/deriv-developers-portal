@@ -14,7 +14,7 @@ const ApiExplorer = () => {
           className={`${style.playgroundContent}`}
       >
           <div className={style.headerTitle}>
-              <Title headerSize="h1" className="">
+              <Title headerSize="h1">
                   API Explorer
               </Title>
           </div>
